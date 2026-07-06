@@ -46,17 +46,18 @@
       "sale": "sale",
       "recommended": "recommended",
       "btn": "Buy Now",
+      "access": "access",
       "items": [
         {
           "name": "Basic",
           "price": 125,
           "sale_price": 100,
-          "desc": "All course lessons for self-paced learning",
+          "desc": "6 modules for self-paced start",
           "features": [
-            "9 modules, 33 lessons",
-            "Lifetime access to materials",
+            "6 modules (intro, design basics, elements, infographics, animation, Figma)",
             "Basic presentation templates",
-            "Access to resource library (links, tools)"
+            "Resource library (links, tools)",
+            "3 months access"
           ]
         },
         {
@@ -64,28 +65,27 @@
           "price": 220,
           "sale_price": 150,
           "recommended": true,
-          "desc": "Best choice for maximum results",
+          "desc": "All modules with premium materials",
           "features": [
-            "Everything in the Basic plan",
+            "All 9 modules (incl. AI, niche strategies, personal brand)",
             "Premium templates & mockups",
             "Homework assignments with review",
-            "Community chat & feedback",
             "Bonus: icon packs, fonts, Figma plugins",
-            "Certificate of completion"
+            "Certificate",
+            "1 year access"
           ]
         },
         {
           "name": "VIP",
           "price": 490,
           "sale_price": 300,
-          "desc": "Personal mentorship & 1-on-1 support",
+          "desc": "Full lifetime access with support",
           "features": [
             "Everything in the Standard plan",
-            "Personal mentorship by the author",
-            "1-on-1 presentation review",
-            "Portfolio & client-finding assistance",
+            "Lifetime access to materials",
             "Priority Telegram support",
-            "Personalized certificate"
+            "Portfolio & client-finding assistance",
+            "Certificate"
           ]
         }
       ]

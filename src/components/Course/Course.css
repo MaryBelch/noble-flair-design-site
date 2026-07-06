@@ -472,19 +472,12 @@
 }
 
 .course__tariff-badge[data-tariff="базовий"],
-.course__tariff-badge[data-tariff="basic"] {
-  color: var(--color-text-primary);
-}
-
+.course__tariff-badge[data-tariff="basic"],
 .course__tariff-badge[data-tariff="стандарт"],
-.course__tariff-badge[data-tariff="standard"] {
-  color: var(--gold-main, #c9a84c);
-}
-
+.course__tariff-badge[data-tariff="standard"],
 .course__tariff-badge[data-tariff="вип"],
 .course__tariff-badge[data-tariff="vip"] {
-  color: var(--gold, #c9a84c);
-  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  color: var(--gold-main, #c9a84c);
 }
 
 .course__tariff-pricing {
