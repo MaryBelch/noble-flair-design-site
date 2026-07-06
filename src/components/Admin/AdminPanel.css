@@ -1,0 +1,134 @@
+.admin-panel {
+  padding-top: 100px;
+  padding-bottom: 60px;
+}
+
+.admin-panel__loading,
+.admin-panel__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+  font-size: 1rem;
+}
+
+.admin-panel__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #0d0d0d;
+}
+
+.admin-panel__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-panel__table th {
+  text-align: left;
+  padding: 1rem 1.25rem;
+  color: var(--gold, #c9a84c);
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+  background: #111;
+}
+
+.admin-panel__table td {
+  padding: 0.85rem 1.25rem;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-panel__table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-panel__table tr:hover td {
+  background: rgba(201, 168, 76, 0.03);
+}
+
+.admin-panel__date {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.admin-panel__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+}
+
+.admin-panel__badge--active {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+}
+
+.admin-panel__actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.admin-panel__btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+.admin-panel__btn--grant {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.admin-panel__btn--grant:hover {
+  background: rgba(46, 204, 113, 0.35);
+}
+
+.admin-panel__btn--revoke {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.admin-panel__btn--revoke:hover {
+  background: rgba(231, 76, 60, 0.35);
+}
+
+.admin-panel__btn--role {
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold, #c9a84c);
+}
+
+.admin-panel__btn--role:hover {
+  background: rgba(201, 168, 76, 0.3);
+}
+
+.admin-panel__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .admin-panel__table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .admin-panel__table th {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .admin-panel__btn {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+}

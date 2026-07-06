@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import { useAuth } from '../../context/AuthContext';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
+import AuthModal from '../Auth/AuthModal';
 import './Course.css';
 
 function getLessonLabel(count, locale) {
@@ -18,9 +20,12 @@ function getLessonLabel(count, locale) {
 
 export default function Course() {
   const { t, tp, locale } = useTranslation();
+  const { user, loading: authLoading, hasAccess, isAdmin } = useAuth();
   const ref = useRef(null);
   const [submitted, setSubmitted] = useState(false);
   const [openModule, setOpenModule] = useState(null);
+  const [showAuth, setShowAuth] = useState(false);
+  const [selectedLesson, setSelectedLesson] = useState(null);
   const modules = tp('course.modules') || [];
 
   useEffect(() => {
@@ -64,7 +69,78 @@ export default function Course() {
     }
   }, [modules.length]);
 
+  const handleLessonClick = (moduleIndex, lessonIndex, lessonTitle) => {
+    if (authLoading) return;
+    if (!user) {
+      setShowAuth(true);
+      return;
+    }
+    if (!hasAccess && !isAdmin) return;
+    setSelectedLesson({ moduleIndex, lessonIndex, title: lessonTitle });
+  };
+
   if (!modules.length) return null;
+
+  // If a lesson is selected, show LessonView
+  if (selectedLesson) {
+    const module = modules[selectedLesson.moduleIndex];
+    const lessonContent = module?.lessons?.[selectedLesson.lessonIndex] || selectedLesson.title;
+    return (
+      <section id="course" className="section course" ref={ref}>
+        <div className="container">
+          <div className="course__back-bar">
+            <button
+              className="course__back-btn"
+              onClick={() => setSelectedLesson(null)}
+            >
+              ← Назад до модулів
+            </button>
+            <span className="course__back-bar-title">
+              {module?.title} — {selectedLesson.title}
+            </span>
+          </div>
+          <div className="course__lesson-view fade-in visible">
+            <h2 className="course__lesson-title">{selectedLesson.title}</h2>
+            <div className="course__lesson-body">
+              <p style={{ color: '#888' }}>
+                {t('course.lesson_placeholder')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const renderLessonItem = (lesson, moduleIndex, lessonIndex) => {
+    const locked = !user || (!hasAccess && !isAdmin);
+
+    if (locked) {
+      return (
+        <li
+          key={lessonIndex}
+          className="course__module-lesson course__module-lesson--locked"
+          onClick={() => handleLessonClick(moduleIndex, lessonIndex, lesson)}
+        >
+          <span className="course__lesson-bullet">
+            {!user ? '🔒' : '🔒'}
+          </span>
+          <span>{lesson}</span>
+        </li>
+      );
+    }
+
+    return (
+      <li
+        key={lessonIndex}
+        className="course__module-lesson course__module-lesson--open"
+        onClick={() => handleLessonClick(moduleIndex, lessonIndex, lesson)}
+      >
+        <span className="course__lesson-bullet">✦</span>
+        <span>{lesson}</span>
+      </li>
+    );
+  };
 
   return (
     <section id="course" className="section course" ref={ref}>
@@ -78,6 +154,26 @@ export default function Course() {
           </div>
 
           <div className="course__modules fade-in">
+            {/* Access banner */}
+            {!authLoading && !user && (
+              <div className="course__access-banner">
+                <p>{t('course.login_prompt')}</p>
+                <Button variant="outline-animated" onClick={() => setShowAuth(true)}>
+                  {t('course.login_btn')}
+                </Button>
+              </div>
+            )}
+            {!authLoading && user && !hasAccess && !isAdmin && (
+              <div className="course__access-banner course__access-banner--pay">
+                <p>{t('course.pay_prompt')}</p>
+                <Button variant="outline-animated" onClick={() =>
+                  window.open('https://t.me/noble_flair_design_bot', '_blank')
+                }>
+                  {t('course.pay_btn')}
+                </Button>
+              </div>
+            )}
+
             <div className="course__modules-list">
               {modules.map((mod, i) => (
                 <div
@@ -109,12 +205,7 @@ export default function Course() {
                   </button>
                   <div className="course__module-body">
                     <ul className="course__module-lessons">
-                      {mod.lessons.map((lesson, j) => (
-                        <li key={j} className="course__module-lesson">
-                          <span className="course__lesson-bullet">✦</span>
-                          <span>{lesson}</span>
-                        </li>
-                      ))}
+                      {mod.lessons.map((lesson, j) => renderLessonItem(lesson, i, j))}
                     </ul>
                   </div>
                 </div>
@@ -151,6 +242,8 @@ export default function Course() {
             </div>
           </div>
         </div>
+
+        {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       </div>
     </section>
   );

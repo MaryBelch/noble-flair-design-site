@@ -36,6 +36,11 @@
     "placeholder_name": "Ваше ім'я",
     "placeholder_email": "Email або Telegram",
     "submit": "Відправити",
+    "login_prompt": "Увійдіть, щоб отримати доступ до уроків курсу",
+    "login_btn": "Увійти",
+    "pay_prompt": "Оплатіть курс, щоб отримати доступ до всіх уроків",
+    "pay_btn": "Оплатити курс",
+    "lesson_placeholder": "Тут буде контент уроку. Марина, додайте текст, відео та файли в Firestore.",
     "modules": [
       {
         "title": "Вступний модуль",

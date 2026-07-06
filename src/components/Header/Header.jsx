@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import { useAuth } from '../../context/AuthContext';
+import AuthModal from '../Auth/AuthModal';
 import './Header.css';
 
 export default function Header() {
   const { t, locale, changeLocale, SUPPORTED_LOCALES } = useTranslation();
+  const { user, userDoc, loading, logout, isAdmin } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -52,6 +56,32 @@ export default function Header() {
         </nav>
 
         <div className="header__right">
+          <div className="header__auth">
+            {loading ? null : user ? (
+              <div className="header__user">
+                <span className="header__user-name" title={user.email}>
+                  {userDoc?.name || user.email?.split('@')[0] || 'User'}
+                </span>
+                {isAdmin && (
+                  <a href="#admin" className="header__admin-link gold-border-hover">
+                    Адмін
+                  </a>
+                )}
+                <button className="header__logout-btn" onClick={logout} title="Вийти">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <button className="header__login-btn" onClick={() => setShowAuth(true)}>
+                Увійти
+              </button>
+            )}
+          </div>
+
           <div className="header__lang">
             {SUPPORTED_LOCALES.map((l) => (
               <button
@@ -74,6 +104,8 @@ export default function Header() {
             <span />
           </button>
         </div>
+
+        {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       </div>
     </header>
   );

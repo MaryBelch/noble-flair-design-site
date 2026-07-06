@@ -36,6 +36,11 @@
     "placeholder_name": "Your name",
     "placeholder_email": "Email or Telegram",
     "submit": "Send",
+    "login_prompt": "Sign in to access the course lessons",
+    "login_btn": "Sign In",
+    "pay_prompt": "Purchase the course to get access to all lessons",
+    "pay_btn": "Purchase Course",
+    "lesson_placeholder": "Lesson content will appear here. Add text, video and files in Firestore.",
     "modules": [
       {
         "title": "Intro Module",
