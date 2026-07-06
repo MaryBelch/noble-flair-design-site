@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
 import AuthModal from '../Auth/AuthModal';
@@ -26,6 +28,8 @@ export default function Course() {
   const [openModule, setOpenModule] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState(null);
+  const [lessonData, setLessonData] = useState(null);
+  const [lessonLoading, setLessonLoading] = useState(false);
   const modules = tp('course.modules') || [];
 
   useEffect(() => {
@@ -77,35 +81,115 @@ export default function Course() {
     }
     if (!hasAccess && !isAdmin) return;
     setSelectedLesson({ moduleIndex, lessonIndex, title: lessonTitle });
+    setLessonData(null);
+    setLessonLoading(true);
   };
+
+  // Fetch lesson content from Firestore when a lesson is selected
+  useEffect(() => {
+    if (!selectedLesson) return;
+
+    const lessonId = `mod-${selectedLesson.moduleIndex}-lesson-${selectedLesson.lessonIndex}`;
+
+    async function fetchLesson() {
+      try {
+        const snap = await getDoc(doc(db, 'lessons', lessonId));
+        if (snap.exists()) {
+          setLessonData(snap.data());
+        } else {
+          setLessonData(null);
+        }
+      } catch (err) {
+        console.error('Error fetching lesson:', err);
+        setLessonData(null);
+      } finally {
+        setLessonLoading(false);
+      }
+    }
+
+    fetchLesson();
+  }, [selectedLesson]);
+
+  // Simple markdown-to-HTML converter for basic formatting
+  function renderContent(text) {
+    if (!text) return '';
+    // Escape HTML first
+    let html = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    // Bold: **text**
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // Italic: *text*
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    // Lines starting with - or •
+    html = html.replace(/^[-•] (.+)$/gm, '<span class="course__lesson-li">• $1</span>');
+    // Lines starting with numbers.
+    html = html.replace(/^(\d+)\. (.+)$/gm, '<span class="course__lesson-li">$1. $2</span>');
+    // Double newlines → paragraphs
+    html = html.replace(/\n\n+/g, '</p><p>');
+    // Single newlines → <br>
+    html = html.replace(/\n/g, '<br>');
+    return `<p>${html}</p>`;
+  }
 
   if (!modules.length) return null;
 
   // If a lesson is selected, show LessonView
   if (selectedLesson) {
     const module = modules[selectedLesson.moduleIndex];
-    const lessonContent = module?.lessons?.[selectedLesson.lessonIndex] || selectedLesson.title;
+    const content = lessonData?.content?.[locale];
+    const videoUrl = lessonData?.videoUrl;
+    const files = lessonData?.files || [];
+
     return (
       <section id="course" className="section course" ref={ref}>
         <div className="container">
           <div className="course__back-bar">
             <button
               className="course__back-btn"
-              onClick={() => setSelectedLesson(null)}
+              onClick={() => { setSelectedLesson(null); setLessonData(null); }}
             >
-              ← Назад до модулів
+              ← {module?.title}
             </button>
             <span className="course__back-bar-title">
-              {module?.title} — {selectedLesson.title}
+              {selectedLesson.title}
             </span>
           </div>
           <div className="course__lesson-view fade-in visible">
             <h2 className="course__lesson-title">{selectedLesson.title}</h2>
             <div className="course__lesson-body">
-              <p style={{ color: '#888' }}>
-                {t('course.lesson_placeholder')}
-              </p>
+              {lessonLoading ? (
+                <p style={{ color: '#888' }}>Завантаження...</p>
+              ) : content ? (
+                <div
+                  className="course__lesson-content"
+                  dangerouslySetInnerHTML={{ __html: renderContent(content) }}
+                />
+              ) : (
+                <p style={{ color: '#888' }}>
+                  {t('course.lesson_placeholder')}
+                </p>
+              )}
             </div>
+            {videoUrl && (
+              <div className="course__lesson-video">
+                <h4>🎬 Відео до уроку</h4>
+                <video controls src={videoUrl} style={{ width: '100%', maxWidth: 720, borderRadius: 8 }} />
+              </div>
+            )}
+            {files.length > 0 && (
+              <div className="course__lesson-files">
+                <h4>📎 Матеріали до уроку</h4>
+                <ul>
+                  {files.map((f, fi) => (
+                    <li key={fi}>
+                      <a href={f.url} target="_blank" rel="noopener noreferrer">{f.name}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </section>

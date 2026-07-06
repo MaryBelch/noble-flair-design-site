@@ -266,6 +266,68 @@
   line-height: 1.8;
 }
 
+.course__lesson-content {
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+
+.course__lesson-content p {
+  margin-bottom: 16px;
+}
+
+.course__lesson-content strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.course__lesson-content .course__lesson-li {
+  display: block;
+  padding-left: 8px;
+  margin-bottom: 6px;
+}
+
+.course__lesson-video {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.course__lesson-video h4,
+.course__lesson-files h4 {
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.course__lesson-files {
+  margin-top: 16px;
+  padding: 20px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.course__lesson-files ul {
+  list-style: none;
+  padding: 0;
+}
+
+.course__lesson-files li {
+  padding: 6px 0;
+}
+
+.course__lesson-files a {
+  color: var(--gold-main);
+  text-decoration: none;
+}
+
+.course__lesson-files a:hover {
+  text-decoration: underline;
+}
+
 /* Form */
 .course__form-wrapper {
   display: flex;
