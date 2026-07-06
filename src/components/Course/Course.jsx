@@ -31,6 +31,7 @@ export default function Course() {
   const [lessonLoading, setLessonLoading] = useState(false);
   const modules = tp('course.modules') || [];
 
+  // Show fade-in elements regardless of observer (belt-and-suspenders)
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -45,8 +46,17 @@ export default function Course() {
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+
+    // Backup: show all fade-in after 800ms even if observer never fires
+    const timer = setTimeout(() => {
+      el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
+    }, 800);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [modules.length]);
 
   const toggleModule = (index) => {
     setOpenModule(openModule === index ? null : index);
@@ -118,8 +128,6 @@ export default function Course() {
     html = html.replace(/\n/g, '<br>');
     return `<p>${html}</p>`;
   }
-
-  if (!modules.length) return null;
 
   // If a lesson is selected, show LessonView
   if (selectedLesson) {
