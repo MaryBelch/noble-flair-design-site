@@ -7,12 +7,12 @@ import { getFirestore } from 'firebase/firestore';
 // ║  Firebase Console → Project Settings → Web App      ║
 // ╚══════════════════════════════════════════════════════╝
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT.firebasestorage.app',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: 'AIzaSyBYmhyQ8WjUUgE2IN7eKCVQ9V6zFIO7XqY',
+  authDomain: 'noble-flair-app.firebaseapp.com',
+  projectId: 'noble-flair-app',
+  storageBucket: 'noble-flair-app.firebasestorage.app',
+  messagingSenderId: '884435593575',
+  appId: '1:884435593575:web:90aa1e19f9b93ae655e7c2',
 };
 
 const app = initializeApp(firebaseConfig);
