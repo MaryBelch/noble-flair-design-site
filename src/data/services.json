@@ -1,17 +1,17 @@
 [
   {
-    "id": "presentations",
-    "icon": "📊",
-    "title_key": "services.presentations",
-    "desc_key": "services.presentations_desc",
+    "id": "design",
+    "icon": "🎨",
+    "title_key": "services.design",
+    "desc_key": "services.design_desc",
     "image": "/images/services/presentations.jpg"
   },
   {
-    "id": "banners",
-    "icon": "🎨",
-    "title_key": "services.banners",
-    "desc_key": "services.banners_desc",
-    "image": "/images/services/banners.jpg"
+    "id": "websites",
+    "icon": "🌐",
+    "title_key": "services.websites",
+    "desc_key": "services.websites_desc",
+    "image": "/images/services/websites.jpg"
   },
   {
     "id": "printing",

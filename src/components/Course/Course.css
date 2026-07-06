@@ -572,6 +572,76 @@
   color: #1a1a1a;
 }
 
+/* ── Sale countdown timer ── */
+.course__countdown {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.course__countdown-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.course__countdown-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 12px;
+  padding: 10px 20px;
+}
+
+.course__countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 44px;
+}
+
+.course__countdown-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold, #c9a84c);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.course__countdown-text {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.course__countdown-sep {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  margin-top: -6px;
+}
+
+/* ── FREE tag ── */
+.course__free-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
   .course__module-header {
     padding: 16px 18px;

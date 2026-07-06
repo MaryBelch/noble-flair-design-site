@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { resetPassword } from '../../firebase/auth';
 import Button from '../UI/Button';
 import './AuthModal.css';
 
 export default function AuthModal({ onClose }) {
   const { login, register } = useAuth();
-  const [mode, setMode] = useState('login'); // 'login' | 'register'
+  const [mode, setMode] = useState('login'); // 'login' | 'register' | 'reset'
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +33,11 @@ export default function AuthModal({ onClose }) {
           return;
         }
         await register(name, email, password);
+      } else if (mode === 'reset') {
+        await resetPassword(email);
+        setResetSent(true);
+        setBusy(false);
+        return;
       } else {
         await login(email, password);
       }
@@ -40,15 +47,18 @@ export default function AuthModal({ onClose }) {
       if (code === 'auth/email-already-in-use') setError('Ця пошта вже зареєстрована');
       else if (code === 'auth/user-not-found' || code === 'auth/invalid-credential') setError('Неправильна пошта або пароль');
       else if (code === 'auth/wrong-password') setError('Неправильний пароль');
+      else if (code === 'auth/invalid-email') setError('Неправильний формат пошти');
+      else if (code === 'auth/too-many-requests') setError('Забагато спроб. Спробуйте пізніше.');
       else setError(err.message || 'Сталася помилка');
     } finally {
       setBusy(false);
     }
   };
 
-  const switchMode = () => {
-    setMode(mode === 'login' ? 'register' : 'login');
+  const switchMode = (newMode) => {
+    setMode(newMode);
     setError('');
+    setResetSent(false);
   };
 
   return (
@@ -61,7 +71,7 @@ export default function AuthModal({ onClose }) {
         </button>
 
         <h2 className="auth-modal__title gold-text">
-          {mode === 'login' ? 'Вхід' : 'Реєстрація'}
+          {mode === 'login' ? 'Вхід' : mode === 'register' ? 'Реєстрація' : 'Скинути пароль'}
         </h2>
 
         <form className="auth-modal__form" onSubmit={handleSubmit}>
@@ -75,22 +85,36 @@ export default function AuthModal({ onClose }) {
               required
             />
           )}
-          <input
-            type="email"
-            placeholder="Email"
-            className="auth-modal__input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Пароль"
-            className="auth-modal__input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          {mode !== 'reset' && (
+            <input
+              type="email"
+              placeholder="Email"
+              className="auth-modal__input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          )}
+          {mode === 'reset' && (
+            <input
+              type="email"
+              placeholder="Ваш Email"
+              className="auth-modal__input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          )}
+          {mode !== 'reset' && (
+            <input
+              type="password"
+              placeholder="Пароль"
+              className="auth-modal__input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          )}
           {mode === 'register' && (
             <input
               type="password"
@@ -103,17 +127,52 @@ export default function AuthModal({ onClose }) {
           )}
 
           {error && <p className="auth-modal__error">{error}</p>}
+          {resetSent && (
+            <p className="auth-modal__success">
+              Лист для скидання пароля надіслано на {email}. Перевірте пошту.
+            </p>
+          )}
 
-          <Button variant="primary" type="submit" disabled={busy} className="auth-modal__btn">
-            {busy ? 'Зачекайте...' : mode === 'login' ? 'Увійти' : 'Зареєструватися'}
-          </Button>
+          {!resetSent && (
+            <Button variant="primary" type="submit" disabled={busy} className="auth-modal__btn">
+              {busy
+                ? 'Зачекайте...'
+                : mode === 'login'
+                  ? 'Увійти'
+                  : mode === 'register'
+                    ? 'Зареєструватися'
+                    : 'Надіслати лист'}
+            </Button>
+          )}
+
+          {resetSent && (
+            <Button variant="primary" onClick={() => switchMode('login')} className="auth-modal__btn">
+              Повернутися до входу
+            </Button>
+          )}
         </form>
 
         <p className="auth-modal__switch">
-          {mode === 'login' ? (
-            <>Ще немає акаунту? <button onClick={switchMode} className="auth-modal__link">Зареєструватися</button></>
-          ) : (
-            <>Вже є акаунт? <button onClick={switchMode} className="auth-modal__link">Увійти</button></>
+          {mode === 'login' && (
+            <>
+              Ще немає акаунту?{' '}
+              <button onClick={() => switchMode('register')} className="auth-modal__link">Зареєструватися</button>
+              <br />
+              <button onClick={() => switchMode('reset')} className="auth-modal__link" style={{ marginTop: 8, fontSize: '0.85rem', opacity: 0.7 }}>
+                Забули пароль?
+              </button>
+            </>
+          )}
+          {mode === 'register' && (
+            <>
+              Вже є акаунт?{' '}
+              <button onClick={() => switchMode('login')} className="auth-modal__link">Увійти</button>
+            </>
+          )}
+          {mode === 'reset' && (
+            <button onClick={() => switchMode('login')} className="auth-modal__link">
+              Повернутися до входу
+            </button>
           )}
         </p>
       </div>

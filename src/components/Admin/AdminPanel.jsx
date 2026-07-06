@@ -4,6 +4,8 @@ import { getAllUsers, updateUserDoc } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import './AdminPanel.css';
 
+const TARIFF_LABELS = { basic: 'Базовий', standard: 'Стандарт', vip: 'ВИП' };
+
 export default function AdminPanel() {
   const { user, isAdmin } = useAuth();
   const [users, setUsers] = useState([]);
@@ -40,15 +42,53 @@ export default function AdminPanel() {
     if (visible && isAdmin) loadUsers();
   }, [visible, isAdmin, loadUsers]);
 
-  const toggleAccess = async (uid, current) => {
+  const setTariff = async (uid, tariff) => {
     setSaving((s) => ({ ...s, [uid]: true }));
+    const now = new Date();
+    let accessExpiresAt = null;
+    if (tariff === 'basic') {
+      accessExpiresAt = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+    } else if (tariff === 'standard') {
+      accessExpiresAt = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+    }
     try {
-      await updateUserDoc(uid, { hasCourseAccess: !current });
+      await updateUserDoc(uid, {
+        tariff,
+        hasCourseAccess: true,
+        accessGrantedAt: now.toISOString(),
+        accessExpiresAt: accessExpiresAt ? accessExpiresAt.toISOString() : null,
+      });
       setUsers((prev) =>
-        prev.map((u) => (u.id === uid ? { ...u, hasCourseAccess: !current } : u))
+        prev.map((u) =>
+          u.id === uid ? { ...u, tariff, hasCourseAccess: true, accessGrantedAt: now, accessExpiresAt } : u
+        )
       );
     } catch (err) {
-      console.error('Error updating access:', err);
+      console.error('Error setting tariff:', err);
+    } finally {
+      setSaving((s) => ({ ...s, [uid]: false }));
+    }
+  };
+
+  const revokeAccess = async (uid) => {
+    setSaving((s) => ({ ...s, [uid]: true }));
+    try {
+      await updateUserDoc(uid, {
+        hasCourseAccess: false,
+        tariff: null,
+        accessGrantedAt: null,
+        accessExpiresAt: null,
+        progress: {},
+      });
+      setUsers((prev) =>
+        prev.map((u) =>
+          u.id === uid
+            ? { ...u, hasCourseAccess: false, tariff: null, accessGrantedAt: null, accessExpiresAt: null }
+            : u
+        )
+      );
+    } catch (err) {
+      console.error('Error revoking access:', err);
     } finally {
       setSaving((s) => ({ ...s, [uid]: false }));
     }
@@ -102,6 +142,7 @@ export default function AdminPanel() {
                   <th>Ім'я</th>
                   <th>Email</th>
                   <th>Зареєстровано</th>
+                  <th>Тариф</th>
                   <th>Доступ</th>
                   <th>Роль</th>
                   <th>Дії</th>
@@ -114,23 +155,59 @@ export default function AdminPanel() {
                     <td>{u.email}</td>
                     <td className="admin-panel__date">{formatDate(u.createdAt)}</td>
                     <td>
+                      {u.tariff ? (
+                        <span className="admin-panel__badge admin-panel__badge--active">
+                          {TARIFF_LABELS[u.tariff] || u.tariff}
+                        </span>
+                      ) : (
+                        <span style={{ color: '#666', fontSize: '0.85rem' }}>—</span>
+                      )}
+                    </td>
+                    <td>
                       <span className={`admin-panel__badge ${u.hasCourseAccess ? 'admin-panel__badge--active' : ''}`}>
                         {u.hasCourseAccess ? '✓ Доступ є' : '✗ Немає'}
                       </span>
+                      {u.accessExpiresAt && (
+                        <span style={{ display: 'block', fontSize: '0.75rem', color: '#888', marginTop: 4 }}>
+                          до {formatDate(u.accessExpiresAt)}
+                        </span>
+                      )}
                     </td>
                     <td>{u.role === 'admin' ? 'Адмін' : 'Користувач'}</td>
                     <td className="admin-panel__actions">
-                      <button
-                        className={`admin-panel__btn ${u.hasCourseAccess ? 'admin-panel__btn--revoke' : 'admin-panel__btn--grant'}`}
-                        onClick={() => toggleAccess(u.id, u.hasCourseAccess)}
-                        disabled={saving[u.id]}
-                      >
-                        {saving[u.id]
-                          ? '...'
-                          : u.hasCourseAccess
-                            ? 'Забрати доступ'
-                            : 'Надати доступ'}
-                      </button>
+                      {!u.tariff ? (
+                        <>
+                          <button
+                            className="admin-panel__btn admin-panel__btn--grant"
+                            onClick={() => setTariff(u.id, 'basic')}
+                            disabled={saving[u.id]}
+                          >
+                            {saving[u.id] ? '...' : 'Базовий'}
+                          </button>
+                          <button
+                            className="admin-panel__btn admin-panel__btn--grant"
+                            onClick={() => setTariff(u.id, 'standard')}
+                            disabled={saving[u.id]}
+                          >
+                            {saving[u.id] ? '...' : 'Стандарт'}
+                          </button>
+                          <button
+                            className="admin-panel__btn admin-panel__btn--grant"
+                            onClick={() => setTariff(u.id, 'vip')}
+                            disabled={saving[u.id]}
+                          >
+                            {saving[u.id] ? '...' : 'ВИП'}
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          className="admin-panel__btn admin-panel__btn--revoke"
+                          onClick={() => revokeAccess(u.id)}
+                          disabled={saving[u.id]}
+                        >
+                          {saving[u.id] ? '...' : 'Відкликати'}
+                        </button>
+                      )}
                       <button
                         className="admin-panel__btn admin-panel__btn--role"
                         onClick={() => toggleRole(u.id, u.role)}

@@ -10,6 +10,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -31,8 +32,22 @@ export default function Header() {
 
   const handleNavClick = (href) => {
     setMobileOpen(false);
-    // smooth scroll already handled by CSS
   };
+
+  /** Calculate remaining access days */
+  const getRemainingDays = () => {
+    if (!userDoc?.accessExpiresAt) return null;
+    const expires = userDoc.accessExpiresAt.toDate
+      ? userDoc.accessExpiresAt.toDate()
+      : new Date(userDoc.accessExpiresAt);
+    const diff = expires.getTime() - Date.now();
+    if (diff <= 0) return 0;
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
+
+  const tariffLabels = { basic: 'Базовий', standard: 'Стандарт', vip: 'ВИП' };
+  const tariffColors = { basic: '#2ecc71', standard: '#c9a84c', vip: '#e74c3c' };
+  const remainingDays = getRemainingDays();
 
   return (
     <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
@@ -59,9 +74,55 @@ export default function Header() {
           <div className="header__auth">
             {loading ? null : user ? (
               <div className="header__user">
-                <span className="header__user-name" title={user.email}>
-                  {userDoc?.name || user.email?.split('@')[0] || 'User'}
-                </span>
+                <div className="header__user-info" onClick={() => setShowProfile(!showProfile)}>
+                  <span className="header__user-name" title={user.email}>
+                    {userDoc?.name || user.email?.split('@')[0] || 'User'}
+                  </span>
+                  {userDoc?.tariff && (
+                    <span
+                      className="header__user-tariff"
+                      style={{ borderColor: tariffColors[userDoc.tariff] || '#888' }}
+                    >
+                      {tariffLabels[userDoc.tariff] || userDoc.tariff}
+                    </span>
+                  )}
+                </div>
+
+                {showProfile && (
+                  <div className="header__profile-dropdown">
+                    {userDoc?.tariff && (
+                      <div className="header__profile-row">
+                        <span className="header__profile-label">Тариф:</span>
+                        <span className="header__profile-value">
+                          {tariffLabels[userDoc.tariff] || userDoc.tariff}
+                        </span>
+                      </div>
+                    )}
+                    {(userDoc?.tariff && tariffLabels[userDoc.tariff] !== 'ВИП') && remainingDays !== null && (
+                      <div className="header__profile-row">
+                        <span className="header__profile-label">Доступ:</span>
+                        <span className={`header__profile-value ${remainingDays <= 14 ? 'header__profile-value--warning' : ''}`}>
+                          {remainingDays > 0 ? `${remainingDays} дн.` : 'Закінчився'}
+                        </span>
+                      </div>
+                    )}
+                    {userDoc?.tariff === 'vip' && (
+                      <div className="header__profile-row">
+                        <span className="header__profile-label">Доступ:</span>
+                        <span className="header__profile-value" style={{ color: '#2ecc71' }}>Назавжди</span>
+                      </div>
+                    )}
+                    <div className="header__profile-row">
+                      <span className="header__profile-label">Email:</span>
+                      <span className="header__profile-value" style={{ fontSize: '0.8rem' }}>{user.email}</span>
+                    </div>
+                    {isAdmin && (
+                      <a href="#admin" className="header__profile-admin-link">Адмін-панель</a>
+                    )}
+                    <button className="header__profile-logout" onClick={logout}>Вийти</button>
+                  </div>
+                )}
+
                 {isAdmin && (
                   <a href="#admin" className="header__admin-link gold-border-hover">
                     Адмін

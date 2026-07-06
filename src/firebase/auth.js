@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from './config';
 import { createUserDoc } from './firestore';
@@ -21,4 +22,8 @@ export async function loginUser(email, password) {
 
 export function logoutUser() {
   return signOut(auth);
+}
+
+export async function resetPassword(email) {
+  await sendPasswordResetEmail(auth, email);
 }

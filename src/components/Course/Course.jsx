@@ -3,6 +3,7 @@ import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
+import { markLessonViewed } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
 import AuthModal from '../Auth/AuthModal';
@@ -20,18 +21,61 @@ function getLessonLabel(count, locale) {
   return 'уроків';
 }
 
+/** Return days until sale ends, for countdown display */
+function useSaleCountdown(endDate) {
+  const [remaining, setRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, ended: false });
+
+  useEffect(() => {
+    function tick() {
+      const diff = endDate.getTime() - Date.now();
+      if (diff <= 0) {
+        setRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0, ended: true });
+        return;
+      }
+      const totalSec = Math.floor(diff / 1000);
+      setRemaining({
+        days: Math.floor(totalSec / 86400),
+        hours: Math.floor((totalSec % 86400) / 3600),
+        minutes: Math.floor((totalSec % 3600) / 60),
+        seconds: totalSec % 60,
+        ended: false,
+      });
+    }
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [endDate]);
+
+  return remaining;
+}
+
+// Sale ends July 31, 2026 at midnight
+const SALE_END = new Date('2026-07-31T23:59:59+03:00');
+
 export default function Course() {
   const { t, tp, locale } = useTranslation();
-  const { user, loading: authLoading, hasAccess, isAdmin } = useAuth();
+  const { user, userDoc, loading: authLoading, hasAccess, isAdmin } = useAuth();
   const ref = useRef(null);
   const [openModule, setOpenModule] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [lessonData, setLessonData] = useState(null);
   const [lessonLoading, setLessonLoading] = useState(false);
+  const [progress, setProgress] = useState({}); // { "mod-0-lesson-0": true, ... }
   const modules = tp('course.modules') || [];
+  const countdown = useSaleCountdown(SALE_END);
 
-  // Show fade-in elements regardless of observer (belt-and-suspenders)
+  // Load user progress from Firestore
+  useEffect(() => {
+    if (!user || !userDoc) {
+      setProgress({});
+      return;
+    }
+    const p = userDoc.progress || {};
+    setProgress(p);
+  }, [user, userDoc]);
+
+  // Show fade-in elements
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -47,7 +91,6 @@ export default function Course() {
 
     observer.observe(el);
 
-    // Backup: show all fade-in after 800ms even if observer never fires
     const timer = setTimeout(() => {
       el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
     }, 800);
@@ -69,7 +112,19 @@ export default function Course() {
     }
   }, [modules.length]);
 
+  /** Check if a specific lesson is the free trial (first lesson of first module) */
+  const isFreeLesson = (moduleIndex, lessonIndex) => moduleIndex === 0 && lessonIndex === 0;
+
   const handleLessonClick = (moduleIndex, lessonIndex, lessonTitle) => {
+    // Free trial lesson — always accessible
+    if (isFreeLesson(moduleIndex, lessonIndex)) {
+      setSelectedLesson({ moduleIndex, lessonIndex, title: lessonTitle });
+      setLessonData(null);
+      setLessonLoading(true);
+      markAsViewed(moduleIndex, lessonIndex);
+      return;
+    }
+
     if (authLoading) return;
     if (!user) {
       setShowAuth(true);
@@ -79,6 +134,17 @@ export default function Course() {
     setSelectedLesson({ moduleIndex, lessonIndex, title: lessonTitle });
     setLessonData(null);
     setLessonLoading(true);
+    markAsViewed(moduleIndex, lessonIndex);
+  };
+
+  /** Save viewed lesson to Firestore and local state */
+  const markAsViewed = (moduleIndex, lessonIndex) => {
+    const lessonId = `mod-${moduleIndex}-lesson-${lessonIndex}`;
+    setProgress((prev) => ({ ...prev, [lessonId]: true }));
+    // Save to Firestore if user is logged in
+    if (user) {
+      markLessonViewed(user.uid, lessonId).catch(() => {});
+    }
   };
 
   // Fetch lesson content from Firestore when a lesson is selected
@@ -109,22 +175,15 @@ export default function Course() {
   // Simple markdown-to-HTML converter for basic formatting
   function renderContent(text) {
     if (!text) return '';
-    // Escape HTML first
     let html = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
-    // Bold: **text**
     html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    // Italic: *text*
     html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-    // Lines starting with - or •
     html = html.replace(/^[-•] (.+)$/gm, '<span class="course__lesson-li">• $1</span>');
-    // Lines starting with numbers.
     html = html.replace(/^(\d+)\. (.+)$/gm, '<span class="course__lesson-li">$1. $2</span>');
-    // Double newlines → paragraphs
     html = html.replace(/\n\n+/g, '</p><p>');
-    // Single newlines → <br>
     html = html.replace(/\n/g, '<br>');
     return `<p>${html}</p>`;
   }
@@ -135,6 +194,7 @@ export default function Course() {
     const content = lessonData?.content?.[locale];
     const videoUrl = lessonData?.videoUrl;
     const files = lessonData?.files || [];
+    const isFree = isFreeLesson(selectedLesson.moduleIndex, selectedLesson.lessonIndex);
 
     return (
       <section id="course" className="section course" ref={ref}>
@@ -147,11 +207,15 @@ export default function Course() {
               ← {module?.title}
             </button>
             <span className="course__back-bar-title">
-              {selectedLesson.title}
+              {isFree && <span className="course__free-tag">FREE</span>}
+              {' '}{selectedLesson.title}
             </span>
           </div>
           <div className="course__lesson-view fade-in visible">
-            <h2 className="course__lesson-title">{selectedLesson.title}</h2>
+            <h2 className="course__lesson-title">
+              {isFree && <span className="course__free-tag" style={{ fontSize: '0.7rem', verticalAlign: 'middle', marginRight: 12 }}>FREE</span>}
+              {selectedLesson.title}
+            </h2>
             <div className="course__lesson-body">
               {lessonLoading ? (
                 <p style={{ color: '#888' }}>Завантаження...</p>
@@ -162,7 +226,9 @@ export default function Course() {
                 />
               ) : (
                 <p style={{ color: '#888' }}>
-                  {t('course.lesson_placeholder')}
+                  {isFree
+                    ? '🎉 Це безкоштовний пробний урок! Контент з\'явиться незабаром.'
+                    : t('course.lesson_placeholder')}
                 </p>
               )}
             </div>
@@ -190,8 +256,16 @@ export default function Course() {
     );
   }
 
+  const getLessonId = (moduleIndex, lessonIndex) => `mod-${moduleIndex}-lesson-${lessonIndex}`;
+
+  const isLessonViewed = (moduleIndex, lessonIndex) => {
+    return !!progress[getLessonId(moduleIndex, lessonIndex)];
+  };
+
   const renderLessonItem = (lesson, moduleIndex, lessonIndex) => {
-    const locked = !user || (!hasAccess && !isAdmin);
+    const freeLesson = isFreeLesson(moduleIndex, lessonIndex);
+    const viewed = isLessonViewed(moduleIndex, lessonIndex);
+    const locked = !freeLesson && (!user || (!hasAccess && !isAdmin));
 
     if (locked) {
       return (
@@ -214,8 +288,13 @@ export default function Course() {
         className="course__module-lesson course__module-lesson--open"
         onClick={() => handleLessonClick(moduleIndex, lessonIndex, lesson)}
       >
-        <span className="course__lesson-bullet">✦</span>
-        <span>{lesson}</span>
+        <span className="course__lesson-bullet">
+          {viewed ? '✓' : '✦'}
+        </span>
+        <span>
+          {freeLesson && <span className="course__free-tag">FREE</span>}{' '}
+          {lesson}
+        </span>
       </li>
     );
   };
@@ -236,6 +315,9 @@ export default function Course() {
             {!authLoading && !user && (
               <div className="course__access-banner">
                 <p>{t('course.login_prompt')}</p>
+                <p style={{ fontSize: '0.85rem', marginBottom: 14, color: 'var(--color-text-muted)' }}>
+                  🎉 Спробуйте безкоштовний перший урок!
+                </p>
                 <Button variant="outline-animated" onClick={() => setShowAuth(true)}>
                   {t('course.login_btn')}
                 </Button>
@@ -266,7 +348,12 @@ export default function Course() {
                       <span className="course__module-number">
                         {i === 0 ? t('course.modules.0.title') : `Модуль ${i}`}
                       </span>
-                      <h4 className="course__module-title">{mod.title}</h4>
+                      <h4 className="course__module-title">
+                        {i === 0 && (
+                          <span className="course__free-tag" style={{ marginRight: 6 }}>FREE</span>
+                        )}
+                        {mod.title}
+                      </h4>
                     </div>
                     <div className="course__module-meta">
                       <span className="course__module-count">
@@ -291,10 +378,38 @@ export default function Course() {
             </div>
           </div>
 
-          {/* Tariffs */}
+          {/* Tariffs with countdown */}
           {selectedLesson === null && (
             <div className="course__tariffs fade-in">
               <h3 className="course__tariffs-title">{t('course.tariffs.title')}</h3>
+
+              {!countdown.ended && (
+                <div className="course__countdown">
+                  <span className="course__countdown-label">⏳ Знижка діє ще:</span>
+                  <div className="course__countdown-timer">
+                    <div className="course__countdown-unit">
+                      <span className="course__countdown-value">{String(countdown.days).padStart(2, '0')}</span>
+                      <span className="course__countdown-text">дн</span>
+                    </div>
+                    <span className="course__countdown-sep">:</span>
+                    <div className="course__countdown-unit">
+                      <span className="course__countdown-value">{String(countdown.hours).padStart(2, '0')}</span>
+                      <span className="course__countdown-text">год</span>
+                    </div>
+                    <span className="course__countdown-sep">:</span>
+                    <div className="course__countdown-unit">
+                      <span className="course__countdown-value">{String(countdown.minutes).padStart(2, '0')}</span>
+                      <span className="course__countdown-text">хв</span>
+                    </div>
+                    <span className="course__countdown-sep">:</span>
+                    <div className="course__countdown-unit">
+                      <span className="course__countdown-value">{String(countdown.seconds).padStart(2, '0')}</span>
+                      <span className="course__countdown-text">сек</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="course__tariffs-grid">
                 {(tp('course.tariffs.items') || []).map((tariff, i) => (
                   <div

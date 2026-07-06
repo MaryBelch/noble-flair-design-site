@@ -87,6 +87,14 @@
   margin: 0;
 }
 
+.auth-modal__success {
+  color: #2ecc71;
+  font-size: 0.85rem;
+  margin: 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
 .auth-modal__btn {
   margin-top: 0.5rem;
   width: 100%;

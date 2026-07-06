@@ -40,6 +40,13 @@ export async function getAllUsers() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+/** Mark a lesson as viewed by the user */
+export async function markLessonViewed(uid, lessonId) {
+  await setDoc(doc(db, 'users', uid), {
+    [`progress.${lessonId}`]: serverTimestamp(),
+  }, { merge: true });
+}
+
 /** Get a lesson document by ID */
 export async function getLessonDoc(lessonId) {
   const snap = await getDoc(doc(db, 'lessons', lessonId));

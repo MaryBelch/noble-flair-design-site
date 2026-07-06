@@ -10,6 +10,7 @@ import Vacancies from './components/Vacancies/Vacancies';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import AdminPanel from './components/Admin/AdminPanel';
+import Testimonials from './components/Testimonials/Testimonials';
 import './styles/global.css';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <About />
           <Course />
           <Services />
+          <Testimonials />
           <Portfolio />
           <Vacancies />
           <Contact />
