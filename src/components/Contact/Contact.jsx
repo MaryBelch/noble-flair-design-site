@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import './Contact.css';
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const ref = useRef(null);
   const [submitted, setSubmitted] = useState(false);
 
@@ -52,6 +52,24 @@ export default function Contact() {
         <div className="contact__content">
           <div className="contact__info fade-in">
             <p className="contact__description">{t('contact.description')}</p>
+
+            <div className="contact__brief-cta">
+              <p>
+                {locale === 'uk'
+                  ? '📋 Або заповніть бриф у Telegram — отримайте попередню вартість одразу'
+                  : locale === 'ru'
+                    ? '📋 Или заполните бриф в Telegram — получите предварительную стоимость сразу'
+                    : '📋 Or fill out a brief in Telegram — get a preliminary price instantly'}
+              </p>
+              <a
+                href="https://t.me/noble_flair_design_bot?start=brief"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact__brief-btn"
+              >
+                {locale === 'uk' ? 'Заповнити бриф' : locale === 'ru' ? 'Заполнить бриф' : 'Fill brief'} →
+              </a>
+            </div>
 
             <div className="contact__links">
               <a

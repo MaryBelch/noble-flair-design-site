@@ -14,7 +14,45 @@
   color: var(--color-text-secondary);
   font-weight: 300;
   line-height: 1.8;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+}
+
+/* Brief CTA */
+.contact__brief-cta {
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.contact__brief-cta p {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.contact__brief-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #c9a84c 0%, #a8852e 100%);
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.contact__brief-btn:hover {
+  opacity: 0.9;
+  color: #1a1a1a;
+  text-decoration: none;
 }
 
 .contact__links {
