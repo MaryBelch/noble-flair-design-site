@@ -24,7 +24,6 @@ export default function Course() {
   const { t, tp, locale } = useTranslation();
   const { user, loading: authLoading, hasAccess, isAdmin } = useAuth();
   const ref = useRef(null);
-  const [submitted, setSubmitted] = useState(false);
   const [openModule, setOpenModule] = useState(null);
   const [showAuth, setShowAuth] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState(null);
@@ -48,19 +47,6 @@ export default function Course() {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get('name');
-    const email = formData.get('email');
-
-    if (!name || !email) return;
-
-    setSubmitted(true);
-    window.open(`https://t.me/noble_flair_design_bot?start=course_${name}`, '_blank');
-    setTimeout(() => setSubmitted(false), 5000);
-  };
 
   const toggleModule = (index) => {
     setOpenModule(openModule === index ? null : index);
@@ -297,34 +283,42 @@ export default function Course() {
             </div>
           </div>
 
-          <div className="course__form-wrapper fade-in">
-            <div className="course__form-card">
-              <h3 className="course__form-title">{t('course.cta')}</h3>
-              {submitted ? (
-                <p className="course__form-success">{t('contact.form_success')}</p>
-              ) : (
-                <form className="course__form" onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder={t('course.placeholder_name')}
-                    className="course__form-input"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder={t('course.placeholder_email')}
-                    className="course__form-input"
-                    required
-                  />
-                  <Button variant="outline-animated" type="submit" className="course__form-btn">
-                    {t('course.submit')}
-                  </Button>
-                </form>
-              )}
+          {/* Tariffs */}
+          {selectedLesson === null && (
+            <div className="course__tariffs fade-in">
+              <h3 className="course__tariffs-title">{t('course.tariffs.title')}</h3>
+              <div className="course__tariffs-grid">
+                {(tp('course.tariffs.items') || []).map((tariff, i) => (
+                  <div className="course__tariff-card" key={i}>
+                    <div className="course__tariff-badge" data-tariff={tariff.name.toLowerCase()}>
+                      {tariff.name}
+                    </div>
+                    <div className="course__tariff-pricing">
+                      <span className="course__tariff-price-old">${tariff.price}</span>
+                      <span className="course__tariff-price-sale">${tariff.sale_price}</span>
+                      <span className="course__tariff-sale-label">{t('course.tariffs.sale')}</span>
+                    </div>
+                    <p className="course__tariff-desc">{tariff.desc}</p>
+                    <ul className="course__tariff-features">
+                      {tariff.features.map((f, fi) => (
+                        <li key={fi} className="course__tariff-feature">
+                          <span className="course__tariff-check">✦</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={`https://t.me/noble_flair_design_bot?start=t_${['bazoviy', 'standart', 'vip'][i]}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="course__tariff-btn"
+                    >
+                      {t('course.tariffs.btn')}
+                    </a>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}

@@ -386,6 +386,161 @@
   padding: 20px 0;
 }
 
+/* ── Tariffs section ── */
+.course__tariffs {
+  text-align: center;
+}
+
+.course__tariffs-title {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  font-size: 1.3rem;
+  color: var(--color-text-primary);
+  margin-bottom: 32px;
+}
+
+.course__tariffs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.course__tariff-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.course__tariff-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.course__tariff-badge {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.course__tariff-badge[data-tariff="базовий"],
+.course__tariff-badge[data-tariff="basic"] {
+  color: var(--color-text-primary);
+}
+
+.course__tariff-badge[data-tariff="стандарт"],
+.course__tariff-badge[data-tariff="standard"] {
+  color: var(--gold-main, #c9a84c);
+}
+
+.course__tariff-badge[data-tariff="вип"],
+.course__tariff-badge[data-tariff="vip"] {
+  color: var(--gold, #c9a84c);
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+.course__tariff-pricing {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+}
+
+.course__tariff-price-old {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.course__tariff-price-sale {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold, #c9a84c);
+  line-height: 1.2;
+}
+
+.course__tariff-sale-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-success, #2ecc71);
+  background: rgba(46, 204, 113, 0.1);
+  padding: 2px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.course__tariff-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.course__tariff-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  text-align: left;
+  flex: 1;
+}
+
+.course__tariff-feature {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.course__tariff-check {
+  color: var(--gold-main, #c9a84c);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.course__tariff-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(135deg, #c9a84c 0%, #a8852e 100%);
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.course__tariff-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
 @media (max-width: 768px) {
   .course__module-header {
     padding: 16px 18px;
@@ -397,6 +552,21 @@
 
   .course__module--open .course__module-body {
     padding: 0 18px 16px;
+  }
+
+  .course__tariffs-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .course__tariff-card {
+    padding: 24px 20px 28px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .course__tariff-price-sale {
+    font-size: 1.5rem;
   }
 
   .course__form-card {

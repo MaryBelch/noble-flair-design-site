@@ -41,6 +41,51 @@
     "pay_prompt": "Purchase the course to get access to all lessons",
     "pay_btn": "Purchase Course",
     "lesson_placeholder": "Lesson content will appear here. Add text, video and files in Firestore.",
+    "tariffs": {
+      "title": "Choose your plan",
+      "sale": "sale",
+      "btn": "Buy Now",
+      "items": [
+        {
+          "name": "Basic",
+          "price": 125,
+          "sale_price": 100,
+          "desc": "Full access to all course lessons",
+          "features": [
+            "9 modules, 33 lessons",
+            "Lifetime access to materials",
+            "Basic templates & resources"
+          ]
+        },
+        {
+          "name": "Standard",
+          "price": 220,
+          "sale_price": 150,
+          "desc": "Everything in Basic + extra materials",
+          "features": [
+            "9 modules, 33 lessons",
+            "Lifetime access to materials",
+            "Premium templates & resources",
+            "Homework assignments"
+          ]
+        },
+        {
+          "name": "VIP",
+          "price": 490,
+          "sale_price": 300,
+          "desc": "Everything in Standard + personal mentoring",
+          "features": [
+            "9 modules, 33 lessons",
+            "Lifetime access to materials",
+            "Premium templates & resources",
+            "Homework assignments",
+            "Personal mentoring by the author",
+            "Review & feedback",
+            "Certificate"
+          ]
+        }
+      ]
+    },
     "modules": [
       {
         "title": "Intro Module",
