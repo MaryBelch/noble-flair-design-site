@@ -38,19 +38,21 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, #c9a84c 0%, #a8852e 100%);
-  color: #1a1a1a;
+  background: transparent;
+  color: var(--gold-main);
+  border: 1.5px solid var(--gold-main);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
   padding: 10px 20px;
   border-radius: 8px;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
 }
 
 .contact__brief-btn:hover {
-  opacity: 0.9;
+  background: var(--gold-gradient);
+  border-color: transparent;
   color: #1a1a1a;
   text-decoration: none;
 }

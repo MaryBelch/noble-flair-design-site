@@ -68,27 +68,30 @@
 }
 
 .services__card-btn--brief {
-  background: linear-gradient(135deg, #c9a84c 0%, #a8852e 100%);
-  color: #1a1a1a;
-  border: none;
+  background: transparent;
+  color: var(--gold-main);
+  border: 1.5px solid var(--gold-main);
 }
 
 .services__card-btn--brief:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  background: var(--gold-gradient);
+  border-color: transparent;
   color: #1a1a1a;
+  transform: translateY(-1px);
   text-decoration: none;
 }
 
 .services__card-btn--contact {
-  background: none;
-  border: 1px solid var(--color-border);
+  background: transparent;
+  border: 1.5px solid var(--color-border);
   color: var(--color-text-secondary);
 }
 
 .services__card-btn--contact:hover {
-  border-color: var(--gold, #c9a84c);
-  color: var(--gold, #c9a84c);
+  background: var(--gold-gradient);
+  border-color: transparent;
+  color: #1a1a1a;
+  transform: translateY(-1px);
   text-decoration: none;
 }
 

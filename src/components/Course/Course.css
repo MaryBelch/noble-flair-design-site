@@ -440,9 +440,17 @@
 }
 
 .course__tariff-card--featured .course__tariff-btn {
-  background: linear-gradient(135deg, #d4b44a 0%, #b8942e 100%);
+  background: transparent;
+  color: var(--gold-main);
+  border: 1.5px solid var(--gold-main);
   font-size: 1rem;
   padding: 14px 0;
+}
+
+.course__tariff-card--featured .course__tariff-btn:hover {
+  background: var(--gold-gradient);
+  border-color: transparent;
+  color: #1a1a1a;
 }
 
 .course__tariff-recommended {
@@ -551,25 +559,26 @@
   display: block;
   width: 100%;
   padding: 12px 0;
-  background: linear-gradient(135deg, #c9a84c 0%, #a8852e 100%);
-  color: #1a1a1a;
+  background: transparent;
+  color: var(--gold-main);
+  border: 1.5px solid var(--gold-main);
+  border-radius: var(--radius-sm);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
-  border: none;
-  border-radius: var(--radius-sm);
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
+  transition: all 0.2s;
   letter-spacing: 0.02em;
 }
 
 .course__tariff-btn:hover {
-  opacity: 0.9;
+  background: var(--gold-gradient);
+  border-color: transparent;
+  color: #1a1a1a;
   transform: scale(1.02);
   text-decoration: none;
-  color: #1a1a1a;
 }
 
 /* ── Sale countdown timer ── */
