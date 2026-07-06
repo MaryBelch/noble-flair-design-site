@@ -37,10 +37,10 @@ export default function Hero() {
         </h1>
         <p className="hero__description hero__animate">{t('hero.description')}</p>
         <div className="hero__actions hero__animate">
-          <Button variant="primary" href="#course">
+          <Button variant="outline-animated" href="#course">
             {t('hero.cta_course')}
           </Button>
-          <Button variant="outline" href="#portfolio">
+          <Button variant="outline-animated" href="#portfolio">
             {t('hero.cta_portfolio')}
           </Button>
         </div>

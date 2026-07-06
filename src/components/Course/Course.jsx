@@ -2,14 +2,45 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
+import courseData from '../../data/course.json';
 import './Course.css';
 
-const MODULE_COUNT = 4;
+function ModuleCard({ mod, index, isOpen, onToggle }) {
+  return (
+    <div className={`course__module ${isOpen ? 'course__module--open' : ''}`}>
+      <button className="course__module-header" onClick={() => onToggle(index)}>
+        <div className="course__module-header-left">
+          <span className="course__module-number">Модуль {mod.id || 'Безкоштовно'}</span>
+          <h4 className="course__module-title">{mod.title}</h4>
+        </div>
+        <div className="course__module-meta">
+          <span className="course__module-count">{mod.lessons.length} урок{mod.lessons.length > 1 ? 'ів' : ''}</span>
+          <span className={`course__module-arrow ${isOpen ? 'course__module-arrow--open' : ''}`}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </button>
+      <div className="course__module-body">
+        <ul className="course__module-lessons">
+          {mod.lessons.map((lesson, i) => (
+            <li key={i} className="course__module-lesson">
+              <span className="course__lesson-bullet">✦</span>
+              <span>{lesson}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 export default function Course() {
   const { t } = useTranslation();
   const ref = useRef(null);
   const [submitted, setSubmitted] = useState(false);
+  const [openModule, setOpenModule] = useState(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -21,14 +52,12 @@ export default function Course() {
           el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
-
-  const modules = Array.from({ length: MODULE_COUNT }, (_, i) => i + 1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,12 +69,20 @@ export default function Course() {
 
     const text = encodeURIComponent(`🙋 Заявка на курс «Мистецтво презентацій»\nІм'я: ${name}\nКонтакт: ${email}`);
     setSubmitted(true);
-
-    // Open Telegram with pre-filled message
     window.open(`https://t.me/noble_flair_design_bot?start=course_${name}`, '_blank');
-
     setTimeout(() => setSubmitted(false), 5000);
   };
+
+  const toggleModule = (index) => {
+    setOpenModule(openModule === index ? null : index);
+  };
+
+  // Open first module by default
+  useEffect(() => {
+    if (courseData.length > 0 && openModule === null) {
+      setOpenModule(0);
+    }
+  }, []);
 
   return (
     <section id="course" className="section course" ref={ref}>
@@ -59,16 +96,15 @@ export default function Course() {
           </div>
 
           <div className="course__modules fade-in">
-            <h3 className="course__modules-title">{t('course.program_title')}</h3>
-            <div className="course__modules-grid">
-              {modules.map((m) => (
-                <div key={m} className="course__module">
-                  <div className="course__module-number">0{m}</div>
-                  <div className="course__module-content">
-                    <h4>{t(`course.module${m}_title`)}</h4>
-                    <p>{t(`course.module${m}_desc`)}</p>
-                  </div>
-                </div>
+            <div className="course__modules-list">
+              {courseData.map((mod, i) => (
+                <ModuleCard
+                  key={mod.id}
+                  mod={mod}
+                  index={i}
+                  isOpen={openModule === i}
+                  onToggle={toggleModule}
+                />
               ))}
             </div>
           </div>
@@ -94,7 +130,7 @@ export default function Course() {
                     className="course__form-input"
                     required
                   />
-                  <Button variant="primary" type="submit" className="course__form-btn">
+                  <Button variant="outline-animated" type="submit" className="course__form-btn">
                     {t('course.submit')}
                   </Button>
                 </form>

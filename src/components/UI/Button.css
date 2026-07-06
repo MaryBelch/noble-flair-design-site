@@ -37,6 +37,38 @@
   transform: translateY(-2px);
 }
 
+/* Outline with animated fill on hover */
+.btn--outline-animated {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  color: var(--gold-main);
+  border: 1.5px solid var(--gold-main);
+  z-index: 1;
+  isolation: isolate;
+}
+
+.btn--outline-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold-gradient);
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn--outline-animated:hover {
+  color: var(--color-bg);
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn--outline-animated:hover::before {
+  transform: translateX(0);
+}
+
 .btn--ghost {
   background: transparent;
   color: var(--color-text-secondary);
