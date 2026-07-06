@@ -1,78 +1,107 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../UI/Toast';
 import { saveContactMessage } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
 import './Contact.css';
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
+
 export default function Contact() {
   const { t, locale } = useTranslation();
   const { user } = useAuth();
-  const ref = useRef(null);
+  const addToast = useToast();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [sending, setSending] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const lastSubmit = useRef(0);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const validate = (data) => {
+    const errs = {};
+    if (!data.name || data.name.trim().length < 2) {
+      errs.name = locale === 'uk' ? "Ім'я має бути мінімум 2 символи"
+        : locale === 'ru' ? 'Имя должно быть минимум 2 символа'
+        : 'Name must be at least 2 characters';
+    }
+    if (!data.contact || !EMAIL_RE.test(data.contact)) {
+      errs.contact = locale === 'uk' ? 'Введіть коректний email'
+        : locale === 'ru' ? 'Введите корректный email'
+        : 'Enter a valid email address';
+    }
+    return errs;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const name = formData.get('name');
-    const contact = formData.get('contact');
-    const message = formData.get('message');
+    const data = {
+      name: formData.get('name'),
+      contact: formData.get('contact'),
+      message: formData.get('message'),
+    };
 
-    if (!name || !contact) return;
+    const errs = validate(data);
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
+    // Rate limiting (client-side)
+    const now = Date.now();
+    if (now - lastSubmit.current < RATE_LIMIT_MS) {
+      addToast(
+        locale === 'uk' ? 'Зачекайте 30 секунд перед наступним повідомленням'
+          : locale === 'ru' ? 'Подождите 30 секунд перед следующим сообщением'
+          : 'Please wait 30 seconds before sending another message',
+        'warning'
+      );
+      return;
+    }
 
     setSending(true);
     setError(false);
 
     try {
-      // Save to Firestore
       await saveContactMessage({
-        name,
-        contact,
-        message: message || '',
+        name: data.name,
+        contact: data.contact,
+        message: data.message || '',
         locale,
         userId: user?.uid || null,
         userEmail: user?.email || null,
       });
 
       // Also send to Telegram bot as before
-      const text = encodeURIComponent(
-        `✉️ Нове повідомлення з сайту\nІм'я: ${name}\nКонтакт: ${contact}\nПовідомлення: ${message || '—'}`
-      );
-      window.open(`https://t.me/noble_flair_design_bot?start=contact_${encodeURIComponent(name)}`, '_blank');
+      window.open(`https://t.me/noble_flair_design_bot?start=contact_${encodeURIComponent(data.name)}`, '_blank');
 
+      lastSubmit.current = Date.now();
       setSubmitted(true);
+      addToast(
+        locale === 'uk' ? 'Повідомлення надіслано!'
+          : locale === 'ru' ? 'Сообщение отправлено!'
+          : 'Message sent!',
+        'success'
+      );
       e.target.reset();
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       console.error('Error saving message:', err);
       setError(true);
+      addToast(
+        locale === 'uk' ? 'Помилка відправлення. Спробуйте пізніше.'
+          : locale === 'ru' ? 'Ошибка отправки. Попробуйте позже.'
+          : 'Send error. Try again later.',
+        'error'
+      );
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <section id="contact" className="section contact" ref={ref}>
+    <section id="contact" className="section contact">
       <div className="container">
         <SectionTitle titleKey="contact.title" subtitleKey="contact.subtitle" />
 
@@ -156,27 +185,35 @@ export default function Contact() {
               ) : error ? (
                 <p className="contact__form-error">{t('contact.form_error')}</p>
               ) : (
-                <form className="contact__form" onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder={t('contact.form_name')}
-                    className="contact__form-input"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="contact"
-                    placeholder={t('contact.form_email')}
-                    className="contact__form-input"
-                    required
-                  />
-                  <textarea
-                    name="message"
-                    placeholder={t('contact.form_message')}
-                    className="contact__form-input contact__form-textarea"
-                    rows={4}
-                  />
+                <form className="contact__form" onSubmit={handleSubmit} noValidate>
+                  <div className="contact__form-field">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder={locale === 'uk' ? "Ваше ім'я" : locale === 'ru' ? 'Ваше имя' : 'Your name'}
+                      className={`contact__form-input${fieldErrors.name ? ' contact__form-input--error' : ''}`}
+                      required
+                    />
+                    {fieldErrors.name && <span className="contact__field-error">{fieldErrors.name}</span>}
+                  </div>
+                  <div className="contact__form-field">
+                    <input
+                      type="email"
+                      name="contact"
+                      placeholder={locale === 'uk' ? 'Ваш Email' : locale === 'ru' ? 'Ваш Email' : 'Your email'}
+                      className={`contact__form-input${fieldErrors.contact ? ' contact__form-input--error' : ''}`}
+                      required
+                    />
+                    {fieldErrors.contact && <span className="contact__field-error">{fieldErrors.contact}</span>}
+                  </div>
+                  <div className="contact__form-field">
+                    <textarea
+                      name="message"
+                      placeholder={t('contact.form_message')}
+                      className="contact__form-input contact__form-textarea"
+                      rows={4}
+                    />
+                  </div>
                   <Button variant="primary" type="submit" className="contact__form-btn" disabled={sending}>
                     {sending ? '...' : t('contact.form_submit')}
                   </Button>

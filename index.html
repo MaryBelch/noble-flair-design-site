@@ -10,6 +10,18 @@
     <meta name="author" content="Noble Flair Design" />
     <meta name="robots" content="index, follow" />
 
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      script-src 'self' 'unsafe-eval' https://*.firebaseio.com https://*.firebaseapp.com https://apis.google.com;
+      connect-src 'self' https://*.firebaseio.com https://*.firebaseapp.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.googleapis.com;
+      img-src 'self' data: https://ui-avatars.com;
+      frame-src 'self' https://*.firebaseapp.com;
+      manifest-src 'self';
+    " />
+
     <!-- Open Graph / Social -->
     <meta property="og:title" content="Noble Flair Design — Дизайн-студія преміального рівня" />
     <meta property="og:description" content="Дизайн презентацій, розробка сайтів, поліграфія, навчання та ексклюзивні прикраси з епоксидної смоли." />
@@ -17,20 +29,33 @@
     <meta property="og:url" content="https://marybelch.github.io/noble-flair-design-site/" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:site_name" content="Noble Flair Design" />
+    <meta property="og:image" content="https://marybelch.github.io/noble-flair-design-site/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- hreflang for multilingual SEO -->
+    <link rel="alternate" href="https://marybelch.github.io/noble-flair-design-site/" hreflang="uk" />
+    <link rel="alternate" href="https://marybelch.github.io/noble-flair-design-site/?lang=ru" hreflang="ru" />
+    <link rel="alternate" href="https://marybelch.github.io/noble-flair-design-site/?lang=en" hreflang="en" />
+    <link rel="alternate" href="https://marybelch.github.io/noble-flair-design-site/" hreflang="x-default" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Noble Flair Design — Дизайн-студія" />
     <meta name="twitter:description" content="Преміальний дизайн презентацій, сайтів, поліграфії та навчання." />
+    <meta name="twitter:image" content="https://marybelch.github.io/noble-flair-design-site/og-image.svg" />
 
     <meta name="theme-color" content="#0a0a0a" />
     <title>Noble Flair Design — Дизайн-студія преміального рівня</title>
 
-    <!-- Preload fonts -->
+    <!-- PWA -->
     <link rel="manifest" href="/noble-flair-design-site/manifest.json" />
 
+    <!-- Preload fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" as="style" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/noble-flair-design-site/sitemap.xml" />
   </head>
   <body>
     <div id="root"></div>

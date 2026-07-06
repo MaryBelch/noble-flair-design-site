@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import './Testimonials.css';
 
@@ -67,28 +68,8 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   const { t, locale } = useTranslation();
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    const timer = setTimeout(() => {
-      el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-    }, 1000);
-    return () => {
-      observer.disconnect();
-      clearTimeout(timer);
-    };
-  }, []);
+  const sectionRef = useScrollReveal([]);
+  const [current, setCurrent] = useState(0);
 
   const getText = (item) => {
     if (locale === 'uk' && item.text_uk) return item.text_uk;
@@ -102,8 +83,18 @@ export default function Testimonials() {
     return item.role_en || item.role_uk;
   };
 
+  const goNext = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  }, []);
+
+  const item = TESTIMONIALS[current];
+
   return (
-    <section id="testimonials" className="section testimonials" ref={ref}>
+    <section id="testimonials" className="section testimonials" ref={sectionRef}>
       <div className="container">
         <SectionTitle
           titleKey={null}
@@ -111,25 +102,51 @@ export default function Testimonials() {
           forceTitle="Відгуки"
           forceSubtitle="Що кажуть наші клієнти"
         />
-        <div className="testimonials__grid fade-in">
-          {TESTIMONIALS.map((item, i) => (
-            <div className="testimonials__card" key={i}>
-              <div className="testimonials__stars">★★★★★</div>
-              <p className="testimonials__text">{getText(item)}</p>
-              <div className="testimonials__author">
-                <img
-                  src={avatarUrl(item.name)}
-                  alt={item.name}
-                  className="testimonials__avatar"
-                  loading="lazy"
-                />
-                <div>
-                  <div className="testimonials__name">{item.name}</div>
-                  <div className="testimonials__role">{getRole(item)}</div>
-                </div>
+        <div className="testimonials__carousel fade-in">
+          {/* Progress dots */}
+          <div className="testimonials__dots">
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                className={`testimonials__dot ${i === current ? 'testimonials__dot--active' : ''}`}
+                onClick={() => setCurrent(i)}
+                aria-label={t('testimonial') + ` ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Card */}
+          <div className="testimonials__card" key={current}>
+            <div className="testimonials__stars">★★★★★</div>
+            <p className="testimonials__text">{getText(item)}</p>
+            <div className="testimonials__author">
+              <img
+                src={avatarUrl(item.name)}
+                alt={item.name}
+                className="testimonials__avatar"
+                loading="lazy"
+              />
+              <div>
+                <div className="testimonials__name">{item.name}</div>
+                <div className="testimonials__role">{getRole(item)}</div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Nav arrows */}
+          <div className="testimonials__nav">
+            <button className="testimonials__nav-btn" onClick={goPrev} aria-label="Previous">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <span className="testimonials__counter">{current + 1}/{TESTIMONIALS.length}</span>
+            <button className="testimonials__nav-btn" onClick={goNext} aria-label="Next">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import './FAQ.css';
 
@@ -13,37 +14,16 @@ const FAQ_DATA = [
 ];
 
 export default function FAQ() {
-  const { t, locale } = useTranslation();
-  const ref = useRef(null);
+  const { t } = useTranslation();
+  const sectionRef = useScrollReveal([]);
   const [openIndex, setOpenIndex] = useState(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(el);
-    const timer = setTimeout(() => {
-      el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-    }, 1000);
-    return () => {
-      observer.disconnect();
-      clearTimeout(timer);
-    };
-  }, []);
 
   const toggle = (i) => {
     setOpenIndex(openIndex === i ? null : i);
   };
 
   return (
-    <section id="faq" className="section faq" ref={ref}>
+    <section id="faq" className="section faq" ref={sectionRef}>
       <div className="container">
         <SectionTitle
           titleKey="faq.title"

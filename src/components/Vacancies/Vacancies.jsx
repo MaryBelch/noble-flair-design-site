@@ -1,32 +1,15 @@
-import { useEffect, useRef } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
 import './Vacancies.css';
 
 export default function Vacancies() {
   const { t } = useTranslation();
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useScrollReveal([]);
 
   return (
-    <section id="vacancies" className="section vacancies" ref={ref}>
+    <section id="vacancies" className="section vacancies" ref={sectionRef}>
       <div className="container">
         <SectionTitle titleKey="vacancies.title" subtitleKey="vacancies.subtitle" />
 

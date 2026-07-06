@@ -35,9 +35,17 @@
       margin-bottom: 32px;
       line-height: 1.6;
     }
-    a {
-      display: inline-block;
-      padding: 12px 32px;
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 24px;
       background: linear-gradient(135deg, #D4AF37, #B8892F);
       color: #0a0a0a;
       text-decoration: none;
@@ -47,6 +55,15 @@
       transition: opacity 0.2s;
     }
     a:hover { opacity: 0.85; }
+    .btn--outline {
+      background: transparent;
+      color: #D4AF37;
+      border: 1.5px solid #D4AF37;
+    }
+    .btn--outline:hover {
+      background: rgba(212, 175, 55, 0.1);
+      opacity: 1;
+    }
   </style>
   <!-- SPA redirect for GitHub Pages -->
   <script>
@@ -63,8 +80,17 @@
 <body>
   <div class="container">
     <h1>404</h1>
-    <p>Сторінку не знайдено.<br />Page not found.</p>
-    <a href="/noble-flair-design-site/">На головну</a>
+    <p>
+      Сторінку не знайдено / Page not found<br />
+      <span style="font-size:0.85rem; opacity:0.6">
+        Можливо, сторінка була переміщена або видалена
+      </span>
+    </p>
+    <div class="links">
+      <a class="btn" href="/noble-flair-design-site/">🏠 На головну</a>
+      <a class="btn btn--outline" href="/noble-flair-design-site/#course">📚 Курс</a>
+      <a class="btn btn--outline" href="/noble-flair-design-site/#contact">✉️ Контакти</a>
+    </div>
   </div>
 </body>
 </html>

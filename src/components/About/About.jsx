@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import './About.css';
 
@@ -8,6 +9,7 @@ function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
   const ref = useRef(null);
   const hasRun = useRef(false);
 
+  // Separate observer for the counter animation (starts on first intersection)
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -20,7 +22,6 @@ function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
           const step = (now) => {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            // ease-out quad
             const eased = 1 - (1 - progress) * (1 - progress);
             setCount(Math.floor(eased * end));
             if (progress < 1) requestAnimationFrame(step);
@@ -44,24 +45,7 @@ function AnimatedCounter({ end, suffix = '', duration = 2000 }) {
 
 export default function About() {
   const { t } = useTranslation();
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useScrollReveal([]);
 
   const features = [
     { key: 'feature1' },
@@ -76,7 +60,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="section about" ref={ref}>
+    <section id="about" className="section about" ref={sectionRef}>
       <div className="container">
         <SectionTitle titleKey="about.title" subtitleKey="about.subtitle" />
 
@@ -86,7 +70,6 @@ export default function About() {
             <p>{t('about.text2')}</p>
           </div>
 
-          {/* Stats counters */}
           <div className="about__stats fade-in">
             {stats.map((s, i) => (
               <div key={i} className="about__stat">

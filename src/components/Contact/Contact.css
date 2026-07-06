@@ -127,6 +127,12 @@
   gap: 12px;
 }
 
+.contact__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .contact__form-input {
   padding: 14px 16px;
   background: var(--color-bg);
@@ -144,6 +150,21 @@
 
 .contact__form-input::placeholder {
   color: var(--color-text-muted);
+}
+
+.contact__form-input--error {
+  border-color: #e74c3c;
+}
+
+.contact__form-input--error:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.15);
+}
+
+.contact__field-error {
+  font-size: 0.78rem;
+  color: #e74c3c;
+  padding-left: 4px;
 }
 
 .contact__form-textarea {

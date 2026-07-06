@@ -74,6 +74,8 @@ export async function saveContactMessage(data) {
     contact: data.contact,
     message: data.message || '',
     locale: data.locale || '',
+    userId: data.userId || null,
+    userEmail: data.userEmail || null,
     read: false,
     createdAt: serverTimestamp(),
   });

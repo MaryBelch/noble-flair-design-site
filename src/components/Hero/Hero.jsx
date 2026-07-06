@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import Button from '../UI/Button';
 import './Hero.css';
 
@@ -7,7 +8,7 @@ const TYPING_SPEED = 60;
 
 export default function Hero() {
   const { t, locale } = useTranslation();
-  const sectionRef = useRef(null);
+  const sectionRef = useScrollReveal([locale], 0.15);
   const bgRef = useRef(null);
   const contentRef = useRef(null);
   const [displayedText, setDisplayedText] = useState('');
@@ -64,26 +65,6 @@ export default function Hero() {
   const handleMouseLeave = useCallback(() => {
     if (!contentRef.current) return;
     contentRef.current.style.transform = 'translate(0, 0)';
-  }, []);
-
-  /* ── Entrance animation via IntersectionObserver ── */
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.hero__animate').forEach((child, i) => {
-            setTimeout(() => child.classList.add('visible'), i * 200);
-          });
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
   }, []);
 
   return (

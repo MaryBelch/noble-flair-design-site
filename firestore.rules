@@ -1,0 +1,59 @@
+rules_version = 2;
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Users ──
+    match /users/{userId} {
+      // User can read/write only their own doc
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // Admin can read/write any user doc
+      allow read, write: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ── Lessons ──
+    match /lessons/{lessonId} {
+      // Any authenticated user with course access can read
+      allow read: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.hasCourseAccess == true;
+
+      // Only admins can write
+      allow write: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ── Messages ──
+    match /messages/{messageId} {
+      // Anyone can create a message (contact form)
+      allow create: if true;
+
+      // Only admins can read/update messages
+      allow read, update: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+
+      // No delete
+      allow delete: if false;
+    }
+
+    // ── Payments ──
+    match /payments/{paymentId} {
+      // Users can read their own payments
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+
+      // Admins can read all
+      allow read: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+
+      // Only admin or cloud function can write
+      allow write: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ── Deny all else ──
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

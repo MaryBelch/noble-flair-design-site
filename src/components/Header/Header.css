@@ -66,6 +66,10 @@
   color: var(--gold-main);
 }
 
+.header__link--active {
+  color: var(--gold-main);
+}
+
 /* Right section */
 .header__right {
   display: flex;

@@ -1,37 +1,19 @@
-import { useEffect, useRef } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
-import Button from '../UI/Button';
 import services from '../../data/services.json';
 import './Services.css';
 
 export default function Services() {
   const { t, locale } = useTranslation();
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useScrollReveal([]);
 
   const briefLink = (serviceId) => {
     return `https://t.me/noble_flair_design_bot?start=brief_${serviceId}`;
   };
 
   return (
-    <section id="services" className="section services" ref={ref}>
+    <section id="services" className="section services" ref={sectionRef}>
       <div className="container">
         <SectionTitle titleKey="services.title" subtitleKey="services.subtitle" />
 

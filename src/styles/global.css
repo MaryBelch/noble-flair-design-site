@@ -111,6 +111,24 @@ input, textarea {
   color: var(--color-bg);
 }
 
+/* Скип-ссылка (доступность) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 8px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--gold-main);
+  color: #0a0a0a;
+  font-weight: 600;
+  border-radius: 0 0 6px 6px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* Скроллбар */
 ::-webkit-scrollbar {
   width: 8px;

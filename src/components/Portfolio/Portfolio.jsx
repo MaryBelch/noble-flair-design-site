@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import portfolio from '../../data/portfolio.json';
 import './Portfolio.css';
@@ -31,7 +32,7 @@ function PlaceholderImage({ category, title }) {
 
 export default function Portfolio() {
   const { t } = useTranslation();
-  const ref = useRef(null);
+  const sectionRef = useScrollReveal([]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [filtered, setFiltered] = useState(portfolio);
 
@@ -43,25 +44,8 @@ export default function Portfolio() {
     }
   }, [activeCategory]);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll('.fade-in').forEach((child) => child.classList.add('visible'));
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="portfolio" className="section portfolio" ref={ref}>
+    <section id="portfolio" className="section portfolio" ref={sectionRef}>
       <div className="container">
         <SectionTitle titleKey="portfolio.title" subtitleKey="portfolio.subtitle" />
 

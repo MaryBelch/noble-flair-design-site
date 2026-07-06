@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marybelch.github.io/noble-flair-design-site/sitemap.xml

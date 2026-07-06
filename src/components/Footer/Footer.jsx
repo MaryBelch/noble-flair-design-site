@@ -1,11 +1,13 @@
 import { useTranslation } from '../../context/I18nContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import './Footer.css';
 
 export default function Footer() {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
+  const sectionRef = useScrollReveal([]);
 
   return (
-    <footer className="footer">
+    <footer className="footer" ref={sectionRef}>
       <div className="container footer__inner">
         <div className="footer__brand">
           <a href="#hero" className="footer__logo">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../Auth/AuthModal';
@@ -20,11 +20,47 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
+  const navItems = [
+    { key: 'home', href: '#hero' },
+    { key: 'about', href: '#about' },
+    { key: 'course', href: '#course' },
+    { key: 'services', href: '#services' },
+    { key: 'portfolio', href: '#portfolio' },
+    { key: 'faq', href: '#faq' },
+    { key: 'vacancies', href: '#vacancies' },
+    { key: 'contact', href: '#contact' },
+  ];
+
+  const localeLabels = { uk: 'UA', ru: 'RU', en: 'EN' };
+
+  /* ── Scroll event for header background ── */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /* ── Active nav link via IntersectionObserver ── */
+  useEffect(() => {
+    const sectionEls = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-72px 0px -50% 0px' }
+    );
+
+    sectionEls.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   /* ── Close mobile nav on resize past breakpoint ── */
@@ -36,6 +72,19 @@ export default function Header() {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  /* ── Close profile on click outside ── */
+  useEffect(() => {
+    if (!showProfile) return;
+    const handler = (e) => {
+      if (!e.target.closest('.header__profile-dropdown') && !e.target.closest('.header__user-info')) {
+        setShowProfile(false);
+      }
+    };
+    // Delay to avoid the same click that opened it
+    setTimeout(() => document.addEventListener('click', handler), 0);
+    return () => document.removeEventListener('click', handler);
+  }, [showProfile]);
+
   /* ── Swipe left to close mobile nav ── */
   useEffect(() => {
     if (!mobileOpen) return;
@@ -44,7 +93,7 @@ export default function Header() {
     const onTouchStart = (e) => { startX = e.touches[0].clientX; };
     const onTouchEnd = (e) => {
       const dx = e.changedTouches[0].clientX - startX;
-      if (dx < -60) setMobileOpen(false); // swipe left
+      if (dx < -60) setMobileOpen(false);
     };
 
     document.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -64,19 +113,6 @@ export default function Header() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
-
-  const navItems = [
-    { key: 'home', href: '#hero' },
-    { key: 'about', href: '#about' },
-    { key: 'course', href: '#course' },
-    { key: 'services', href: '#services' },
-    { key: 'portfolio', href: '#portfolio' },
-    { key: 'faq', href: '#faq' },
-    { key: 'vacancies', href: '#vacancies' },
-    { key: 'contact', href: '#contact' },
-  ];
-
-  const localeLabels = { uk: 'UA', ru: 'RU', en: 'EN' };
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -115,13 +151,14 @@ export default function Header() {
           aria-hidden="true"
         />
 
-        <nav className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`}>
+        <nav className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`} aria-label="Main navigation">
           {navItems.map((item) => (
             <a
               key={item.key}
               href={item.href}
-              className="header__link gold-border-hover"
+              className={`header__link gold-border-hover ${activeSection === item.href.slice(1) ? 'header__link--active' : ''}`}
               onClick={(e) => handleNavClick(e, item.href)}
+              aria-current={activeSection === item.href.slice(1) ? 'page' : undefined}
             >
               {t(`nav.${item.key}`)}
             </a>
@@ -132,7 +169,7 @@ export default function Header() {
           <div className="header__auth">
             {loading ? null : user ? (
               <div className="header__user">
-                <div className="header__user-info" onClick={() => setShowProfile(!showProfile)}>
+                <div className="header__user-info" onClick={() => setShowProfile((p) => !p)}>
                   <span className="header__user-name" title={user.email}>
                     {userDoc?.name || user.email?.split('@')[0] || 'User'}
                   </span>
@@ -175,7 +212,9 @@ export default function Header() {
                       <span className="header__profile-value" style={{ fontSize: '0.8rem' }}>{user.email}</span>
                     </div>
                     {isAdmin && (
-                      <a href="#admin" className="header__profile-admin-link">Адмін-панель</a>
+                      <a href="#admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)}>
+                        Адмін-панель
+                      </a>
                     )}
                     <button className="header__profile-logout" onClick={logout}>Вийти</button>
                   </div>
@@ -216,7 +255,8 @@ export default function Header() {
           <button
             className={`header__burger ${mobileOpen ? 'header__burger--open' : ''}`}
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileOpen}
           >
             <span />
             <span />

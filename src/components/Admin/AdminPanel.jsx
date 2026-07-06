@@ -57,6 +57,10 @@ export default function AdminPanel() {
     }
   }, [visible, isAdmin, loadUsers, loadMessages]);
 
+  const confirmAction = (action) => {
+    return window.confirm(`Ви впевнені, що хочете ${action}?`);
+  };
+
   /* ── User actions ── */
 
   const setTariff = async (uid, tariff) => {
@@ -88,6 +92,7 @@ export default function AdminPanel() {
   };
 
   const revokeAccess = async (uid) => {
+    if (!confirmAction('відкликати доступ')) return;
     setSaving((s) => ({ ...s, [uid]: true }));
     try {
       await updateUserDoc(uid, {
@@ -112,6 +117,7 @@ export default function AdminPanel() {
   };
 
   const toggleRole = async (uid, currentRole) => {
+    if (!confirmAction(`змінити роль з "${currentRole === 'admin' ? 'адмін' : 'користувач'}" на "${currentRole === 'admin' ? 'користувач' : 'адмін'}"`)) return;
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
     setSaving((s) => ({ ...s, [uid]: true }));
     try {
