@@ -6,6 +6,7 @@
     "services": "Services",
     "portfolio": "Portfolio",
     "vacancies": "Vacancies",
+    "faq": "FAQ",
     "contact": "Contact"
   },
   "hero": {
@@ -25,7 +26,10 @@
     "feature2_title": "Premium Quality",
     "feature2_desc": "We use the best materials and modern techniques",
     "feature3_title": "Full Cycle",
-    "feature3_desc": "From idea to implementation — we handle everything"
+    "feature3_desc": "From idea to implementation — we handle everything",
+    "stat1": "years of experience",
+    "stat2": "projects completed",
+    "stat3": "students & clients"
   },
   "course": {
     "title": "Course: The Art of Presentations",
@@ -200,6 +204,22 @@
     "open_title": "Open Positions",
     "no_open": "There are no open vacancies at the moment, but you can still send us your resume — we will review it when a position opens up.",
     "cta": "Send Resume"
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Everything you want to know about the course",
+    "course_format_q": "How does the course work?",
+    "course_format_a": "The course is fully online. You get access to video lessons, text content, and supplementary materials on the platform. Learn at your own pace — access to materials is gradually unlocked.",
+    "duration_q": "How long does the course take?",
+    "duration_a": "The course takes 4-6 weeks with regular study of 2-3 hours per week. You can go faster or slower — there are no time constraints within your plan.",
+    "tools_q": "What software do I need?",
+    "tools_a": "PowerPoint or Google Slides is sufficient for most lessons. A dedicated module covers Figma — and it's free. All links and resources are provided within the course.",
+    "certificate_q": "Do you provide a certificate?",
+    "certificate_a": "Yes, upon completing the course you receive an electronic certificate. For the Standard and VIP plans, the certificate is included in the price.",
+    "support_q": "Is there support during the course?",
+    "support_a": "Yes! All students have access to a Telegram chat. The VIP plan includes priority support with personal mentorship.",
+    "refund_q": "Can I get a refund?",
+    "refund_a": "We stand by the quality of our course. If after the first three lessons you find it's not for you — we'll refund the full amount within 14 days."
   },
   "contact": {
     "title": "Contact",

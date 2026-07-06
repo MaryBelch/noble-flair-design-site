@@ -3,6 +3,11 @@ import { useTranslation } from '../../context/I18nContext';
 import SectionTitle from '../UI/SectionTitle';
 import './Testimonials.css';
 
+function avatarUrl(name) {
+  const encoded = encodeURIComponent(name);
+  return `https://ui-avatars.com/api/?name=${encoded}&background=D4AF37&color=0a0a0a&bold=true&size=128&font-size=0.4&format=svg`;
+}
+
 const TESTIMONIALS = [
   {
     name: 'Ольга Коваленко',
@@ -24,7 +29,7 @@ const TESTIMONIALS = [
   },
   {
     name: 'Наталія Романюк',
-    role_uk: 'Власниця б’юті-студії',
+    role_uk: 'Власниця б\'юті-студії',
     role_ru: 'Владелица бьюти-студии',
     role_en: 'Beauty studio owner',
     text_uk: 'Довго шукала, хто зробить мені сайт, і дуже рада, що звернулась саме сюди. Сайт вийшов легкий, сучасний, клієнти кажуть, що все інтуїтивно зрозуміло. Запитів на запис стало значно більше! Окреме спасибі за підтримку після запуску — все працює ідеально.',
@@ -112,9 +117,12 @@ export default function Testimonials() {
               <div className="testimonials__stars">★★★★★</div>
               <p className="testimonials__text">{getText(item)}</p>
               <div className="testimonials__author">
-                {item.avatar && (
-                  <img src={item.avatar} alt={item.name} className="testimonials__avatar" />
-                )}
+                <img
+                  src={avatarUrl(item.name)}
+                  alt={item.name}
+                  className="testimonials__avatar"
+                  loading="lazy"
+                />
                 <div>
                   <div className="testimonials__name">{item.name}</div>
                   <div className="testimonials__role">{getRole(item)}</div>

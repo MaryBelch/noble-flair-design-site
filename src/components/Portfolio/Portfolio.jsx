@@ -6,6 +6,29 @@ import './Portfolio.css';
 
 const CATEGORIES = ['all', 'presentations', 'banners', 'printing', 'epoxy'];
 
+const GRADIENTS = {
+  presentations: 'linear-gradient(135deg, #D4AF37 0%, #8B6914 50%, #3d2b0a 100%)',
+  banners: 'linear-gradient(135deg, #2a1f5e 0%, #6B3FA0 50%, #2a1f5e 100%)',
+  printing: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a6a 50%, #1a3a3a 100%)',
+  epoxy: 'linear-gradient(135deg, #3d0f3d 0%, #8B146A 50%, #3d0f3d 100%)',
+};
+
+function PlaceholderImage({ category, title }) {
+  const { t } = useTranslation();
+  const catLabel = t(`portfolio.${category}`);
+  return (
+    <div
+      className="portfolio__item-placeholder"
+      style={{ background: GRADIENTS[category] || GRADIENTS.presentations }}
+    >
+      <div className="portfolio__placeholder-content">
+        <span className="portfolio__placeholder-cat">{catLabel}</span>
+        <span className="portfolio__placeholder-title">{title}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Portfolio() {
   const { t } = useTranslation();
   const ref = useRef(null);
@@ -62,13 +85,7 @@ export default function Portfolio() {
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <div className="portfolio__item-image">
-                <div className="portfolio__item-placeholder">
-                  <span className="portfolio__item-icon">
-                    {item.category === 'presentations' ? '📊' :
-                     item.category === 'banners' ? '🎨' :
-                     item.category === 'printing' ? '🖨️' : '💎'}
-                  </span>
-                </div>
+                <PlaceholderImage category={item.category} title={item.title} />
                 <div className="portfolio__item-overlay">
                   <span className="portfolio__item-view">↗</span>
                 </div>

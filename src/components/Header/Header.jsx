@@ -24,6 +24,7 @@ export default function Header() {
     { key: 'course', href: '#course' },
     { key: 'services', href: '#services' },
     { key: 'portfolio', href: '#portfolio' },
+    { key: 'faq', href: '#faq' },
     { key: 'vacancies', href: '#vacancies' },
     { key: 'contact', href: '#contact' },
   ];

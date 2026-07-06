@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#0a0a0a"/>
-  <text x="16" y="23" font-family="serif" font-size="20" font-weight="bold" fill="url(#gold)" text-anchor="middle">N</text>
+  <rect width="32" height="32" rx="6" fill="#0a0a0a"/>
   <defs>
     <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#C9A84C"/>
-      <stop offset="50%" style="stop-color:#F7D968"/>
-      <stop offset="100%" style="stop-color:#C9A84C"/>
+      <stop offset="0%" stop-color="#F5D67A"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B8892F"/>
     </linearGradient>
   </defs>
+  <text x="16" y="23" font-family="serif" font-size="21" font-weight="700" fill="url(#gold)" text-anchor="middle">NF</text>
 </svg>
