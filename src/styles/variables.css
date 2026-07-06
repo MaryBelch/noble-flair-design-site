@@ -5,12 +5,12 @@
   --color-bg-card: #1a1a1a;
   --color-bg-hover: #242424;
 
-  /* Золотой градиент */
-  --gold-gradient: linear-gradient(135deg, #C9A84C, #F7D968, #C9A84C);
-  --gold-gradient-hover: linear-gradient(135deg, #DAB85C, #FFE978, #DAB85C);
-  --gold-light: #F7D968;
-  --gold-main: #C9A84C;
-  --gold-dark: #A8882C;
+  /* Золотой градиент — насичені, теплі тони */
+  --gold-gradient: linear-gradient(135deg, #D4AF37, #F5D67A, #D4AF37);
+  --gold-gradient-hover: linear-gradient(135deg, #DFB843, #FFDF8C, #DFB843);
+  --gold-light: #F5D67A;
+  --gold-main: #D4AF37;
+  --gold-dark: #B8892F;
 
   /* Текст */
   --color-text-primary: #ffffff;
@@ -42,7 +42,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 4px 20px rgba(201, 168, 76, 0.15);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
 
   /* Анимации */
   --transition-fast: 0.2s ease;

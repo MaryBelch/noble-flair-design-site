@@ -46,7 +46,7 @@ export default function Header() {
   };
 
   const tariffLabels = { basic: 'Базовий', standard: 'Стандарт', vip: 'ВИП' };
-  const tariffColors = { basic: '#2ecc71', standard: '#c9a84c', vip: '#e74c3c' };
+  const tariffColors = { basic: '#2ecc71', standard: '#D4AF37', vip: '#e74c3c' };
   const remainingDays = getRemainingDays();
 
   return (

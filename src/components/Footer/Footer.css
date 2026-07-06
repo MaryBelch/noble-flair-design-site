@@ -85,7 +85,7 @@
 .footer__social-links a:hover {
   border-color: var(--gold-main);
   color: var(--gold-main);
-  background: rgba(201, 168, 76, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .footer__bottom {

@@ -17,7 +17,7 @@
 
 .auth-modal {
   background: #111;
-  border: 1px solid var(--gold, #c9a84c);
+  border: 1px solid var(--gold, #D4AF37);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   width: 100%;
@@ -78,7 +78,7 @@
 }
 
 .auth-modal__input:focus {
-  border-color: var(--gold, #c9a84c);
+  border-color: var(--gold, #D4AF37);
 }
 
 .auth-modal__error {
@@ -110,7 +110,7 @@
 .auth-modal__link {
   background: none;
   border: none;
-  color: var(--gold, #c9a84c);
+  color: var(--gold, #D4AF37);
   cursor: pointer;
   font-size: 0.9rem;
   text-decoration: underline;
@@ -118,5 +118,5 @@
 }
 
 .auth-modal__link:hover {
-  color: #f7d968;
+  color: #F5D67A;
 }

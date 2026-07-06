@@ -36,7 +36,7 @@
 }
 
 .btn--outline:hover {
-  background: rgba(201, 168, 76, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   transform: translateY(-2px);
 }
 

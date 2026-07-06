@@ -26,9 +26,9 @@
   font-size: 0.9rem;
   font-weight: 500;
   padding: 12px 20px;
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: var(--radius-sm);
-  background: rgba(201, 168, 76, 0.05);
+  background: rgba(212, 175, 55, 0.05);
 }
 
 /* Modules accordion */
@@ -50,7 +50,7 @@
 }
 
 .course__module--open {
-  border-color: rgba(201, 168, 76, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
 }
 
 .course__module-header {
@@ -158,8 +158,8 @@
 }
 
 .course__module-lesson--open:hover {
-  background: rgba(201, 168, 76, 0.08);
-  color: var(--gold, #c9a84c);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--gold, #D4AF37);
 }
 
 .course__module-lesson--locked {
@@ -188,9 +188,9 @@
   text-align: center;
   padding: 20px 24px;
   margin-bottom: 20px;
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: var(--radius-md);
-  background: rgba(201, 168, 76, 0.05);
+  background: rgba(212, 175, 55, 0.05);
 }
 
 .course__access-banner p {
@@ -232,8 +232,8 @@
 }
 
 .course__back-btn:hover {
-  border-color: var(--gold, #c9a84c);
-  color: var(--gold, #c9a84c);
+  border-color: var(--gold, #D4AF37);
+  color: var(--gold, #D4AF37);
 }
 
 .course__back-bar-title {
@@ -419,14 +419,14 @@
 }
 
 .course__tariff-card:hover {
-  border-color: rgba(201, 168, 76, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .course__tariff-card--featured {
-  border-color: rgba(201, 168, 76, 0.4);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.08), 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.08), 0 4px 20px rgba(0, 0, 0, 0.2);
   transform: scale(1.04);
   position: relative;
   z-index: 2;
@@ -434,8 +434,8 @@
 }
 
 .course__tariff-card--featured:hover {
-  border-color: rgba(201, 168, 76, 0.6);
-  box-shadow: 0 0 40px rgba(201, 168, 76, 0.15), 0 8px 32px rgba(0, 0, 0, 0.25);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), 0 8px 32px rgba(0, 0, 0, 0.25);
   transform: scale(1.04) translateY(-4px);
 }
 
@@ -458,7 +458,7 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #c9a84c, #a8852e);
+  background: linear-gradient(135deg, #D4AF37, #B8892F);
   color: #1a1a1a;
   font-size: 0.7rem;
   font-weight: 700;
@@ -467,7 +467,7 @@
   padding: 4px 16px;
   border-radius: 20px;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .course__tariff-badge {
@@ -485,7 +485,7 @@
 .course__tariff-badge[data-tariff="standard"],
 .course__tariff-badge[data-tariff="вип"],
 .course__tariff-badge[data-tariff="vip"] {
-  color: var(--gold-main, #c9a84c);
+  color: var(--gold, #D4AF37);
 }
 
 .course__tariff-pricing {
@@ -506,7 +506,7 @@
 .course__tariff-price-sale {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--gold, #c9a84c);
+  color: var(--gold, #D4AF37);
   line-height: 1.2;
 }
 
@@ -549,7 +549,7 @@
 }
 
 .course__tariff-check {
-  color: var(--gold-main, #c9a84c);
+  color: var(--gold, #D4AF37);
   font-size: 0.55rem;
   flex-shrink: 0;
   opacity: 0.8;
@@ -599,8 +599,8 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: rgba(201, 168, 76, 0.08);
-  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 12px;
   padding: 10px 20px;
 }
@@ -615,7 +615,7 @@
 .course__countdown-value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--gold, #c9a84c);
+  color: var(--gold, #D4AF37);
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
 }
