@@ -13,7 +13,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="section services" ref={sectionRef}>
+    <section id="services" className="section services" ref={sectionRef} role="region" aria-label={t('services.title')}>
       <div className="container">
         <SectionTitle titleKey="services.title" subtitleKey="services.subtitle" />
 
@@ -24,7 +24,7 @@ export default function Services() {
               className="services__card fade-in card-hover"
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
-              <div className="services__card-icon">{service.icon}</div>
+              <div className="services__card-icon" aria-hidden="true">{service.icon}</div>
               <h3 className="services__card-title">{t(service.title_key)}</h3>
               <p className="services__card-desc">{t(service.desc_key)}</p>
               <div className="services__card-actions">

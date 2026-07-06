@@ -23,14 +23,10 @@ export default function Contact() {
   const validate = (data) => {
     const errs = {};
     if (!data.name || data.name.trim().length < 2) {
-      errs.name = locale === 'uk' ? "Ім'я має бути мінімум 2 символи"
-        : locale === 'ru' ? 'Имя должно быть минимум 2 символа'
-        : 'Name must be at least 2 characters';
+      errs.name = t('contact.form_name_error');
     }
     if (!data.contact || !EMAIL_RE.test(data.contact)) {
-      errs.contact = locale === 'uk' ? 'Введіть коректний email'
-        : locale === 'ru' ? 'Введите корректный email'
-        : 'Enter a valid email address';
+      errs.contact = t('contact.form_email_error');
     }
     return errs;
   };
@@ -51,12 +47,7 @@ export default function Contact() {
     // Rate limiting (client-side)
     const now = Date.now();
     if (now - lastSubmit.current < RATE_LIMIT_MS) {
-      addToast(
-        locale === 'uk' ? 'Зачекайте 30 секунд перед наступним повідомленням'
-          : locale === 'ru' ? 'Подождите 30 секунд перед следующим сообщением'
-          : 'Please wait 30 seconds before sending another message',
-        'warning'
-      );
+      addToast(t('contact.form_rate_limit'), 'warning');
       return;
     }
 
@@ -78,30 +69,20 @@ export default function Contact() {
 
       lastSubmit.current = Date.now();
       setSubmitted(true);
-      addToast(
-        locale === 'uk' ? 'Повідомлення надіслано!'
-          : locale === 'ru' ? 'Сообщение отправлено!'
-          : 'Message sent!',
-        'success'
-      );
+      addToast(t('contact.form_success'), 'success');
       e.target.reset();
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
       console.error('Error saving message:', err);
       setError(true);
-      addToast(
-        locale === 'uk' ? 'Помилка відправлення. Спробуйте пізніше.'
-          : locale === 'ru' ? 'Ошибка отправки. Попробуйте позже.'
-          : 'Send error. Try again later.',
-        'error'
-      );
+      addToast(t('contact.form_error'), 'error');
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <section id="contact" className="section contact">
+    <section id="contact" className="section contact" role="region" aria-label={t('contact.title')}>
       <div className="container">
         <SectionTitle titleKey="contact.title" subtitleKey="contact.subtitle" />
 
@@ -110,20 +91,14 @@ export default function Contact() {
             <p className="contact__description">{t('contact.description')}</p>
 
             <div className="contact__brief-cta">
-              <p>
-                {locale === 'uk'
-                  ? '📋 Або заповніть бриф у Telegram — отримайте попередню вартість одразу'
-                  : locale === 'ru'
-                    ? '📋 Или заполните бриф в Telegram — получите предварительную стоимость сразу'
-                    : '📋 Or fill out a brief in Telegram — get a preliminary price instantly'}
-              </p>
+              <p>{t('contact.brief_cta')}</p>
               <a
                 href="https://t.me/noble_flair_design_bot?start=brief"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__brief-btn"
               >
-                {locale === 'uk' ? 'Заповнити бриф' : locale === 'ru' ? 'Заполнить бриф' : 'Fill brief'} →
+                {t('contact.brief_btn')} →
               </a>
             </div>
 
@@ -134,7 +109,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="contact__link card-hover"
               >
-                <div className="contact__link-icon">
+                <div className="contact__link-icon" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.127.087.669.087.669l-1.188 6.113s-.176.523-.682.523a.834.834 0 0 1-.565-.277l-3.118-2.503-1.302.99a.44.44 0 0 1-.404.108l-.538-2.502-2.246-.78s-.308-.141-.316-.331c-.009-.19.262-.302.262-.302l8.909-3.27s.643-.26.643-.183z"/>
                   </svg>
@@ -151,7 +126,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="contact__link card-hover"
               >
-                <div className="contact__link-icon">
+                <div className="contact__link-icon" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                   </svg>
@@ -163,7 +138,7 @@ export default function Contact() {
               </a>
 
               <a href="mailto:noble.flair.design@gmail.com" className="contact__link card-hover">
-                <div className="contact__link-icon">
+                <div className="contact__link-icon" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
                     <path d="M2 4l10 8 10-8"/>
@@ -190,21 +165,25 @@ export default function Contact() {
                     <input
                       type="text"
                       name="name"
-                      placeholder={locale === 'uk' ? "Ваше ім'я" : locale === 'ru' ? 'Ваше имя' : 'Your name'}
+                      placeholder={t('contact.form_name_placeholder')}
                       className={`contact__form-input${fieldErrors.name ? ' contact__form-input--error' : ''}`}
+                      aria-invalid={fieldErrors.name ? 'true' : undefined}
+                      aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
                       required
                     />
-                    {fieldErrors.name && <span className="contact__field-error">{fieldErrors.name}</span>}
+                    {fieldErrors.name && <span className="contact__field-error" id="contact-name-error" role="alert">{fieldErrors.name}</span>}
                   </div>
                   <div className="contact__form-field">
                     <input
                       type="email"
                       name="contact"
-                      placeholder={locale === 'uk' ? 'Ваш Email' : locale === 'ru' ? 'Ваш Email' : 'Your email'}
+                      placeholder={t('contact.form_email_placeholder')}
                       className={`contact__form-input${fieldErrors.contact ? ' contact__form-input--error' : ''}`}
+                      aria-invalid={fieldErrors.contact ? 'true' : undefined}
+                      aria-describedby={fieldErrors.contact ? 'contact-email-error' : undefined}
                       required
                     />
-                    {fieldErrors.contact && <span className="contact__field-error">{fieldErrors.contact}</span>}
+                    {fieldErrors.contact && <span className="contact__field-error" id="contact-email-error" role="alert">{fieldErrors.contact}</span>}
                   </div>
                   <div className="contact__form-field">
                     <textarea

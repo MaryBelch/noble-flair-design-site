@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -9,16 +9,11 @@ import LessonView from './LessonView';
 import { ListSkeleton } from '../UI/Skeleton';
 import './Course.css';
 
-function getLessonLabel(count, locale) {
-  if (locale === 'en') return count === 1 ? 'lesson' : 'lessons';
-  if (locale === 'ru') {
-    if (count === 1) return 'урок';
-    if (count >= 2 && count <= 4) return 'урока';
-    return 'уроков';
-  }
-  if (count === 1) return 'урок';
-  if (count >= 2 && count <= 4) return 'уроки';
-  return 'уроків';
+/** Return the correct plural form of "lesson" using locale plural forms */
+function getLessonLabel(count, pluralForms = ['урок', 'уроки', 'уроків']) {
+  if (count === 1) return `${count} ${pluralForms[0]}`;
+  if (count >= 2 && count <= 4) return `${count} ${pluralForms[1]}`;
+  return `${count} ${pluralForms[2]}`;
 }
 
 /** Return days until sale ends, for countdown display */
@@ -55,7 +50,7 @@ const SALE_END = import.meta.env.VITE_SALE_END
   : new Date('2026-07-31T23:59:59+03:00');
 
 export default function Course() {
-  const { t, tp, locale } = useTranslation();
+  const { t, tp } = useTranslation();
   const { user, userDoc, loading: authLoading, hasAccess, isAdmin } = useAuth();
   const sectionRef = useScrollReveal([]);
   const [openModule, setOpenModule] = useState(null);
@@ -64,6 +59,7 @@ export default function Course() {
   const [progress, setProgress] = useState({});
   const [modulesReady, setModulesReady] = useState(false);
   const modules = tp('course.modules') || [];
+  const lessonPlural = tp('course.lesson_plural') || ['урок', 'уроки', 'уроків'];
   const countdown = useSaleCountdown(SALE_END);
 
   // Small delay to show skeleton before modules hydrate
@@ -143,7 +139,7 @@ export default function Course() {
           {viewed ? '✓' : '✦'}
         </span>
         <span>
-          {freeLesson && <span className="course__free-tag">FREE</span>}{' '}
+          {freeLesson && <span className="course__free-tag">{t('course.free_tag')}</span>}{' '}
           {lesson}
         </span>
       </li>
@@ -162,7 +158,7 @@ export default function Course() {
   }
 
   return (
-    <section id="course" className="section course" ref={sectionRef}>
+    <section id="course" className="section course" ref={sectionRef} role="region" aria-label={t('course.title')}>
       <div className="container">
         <SectionTitle titleKey="course.title" subtitleKey="course.subtitle" />
 
@@ -178,7 +174,7 @@ export default function Course() {
               <div className="course__access-banner">
                 <p>{t('course.login_prompt')}</p>
                 <p style={{ fontSize: '0.85rem', marginBottom: 14, color: 'var(--color-text-muted)' }}>
-                  🎉 Спробуйте безкоштовний перший урок!
+                  {t('course.free_trial')}
                 </p>
                 <Button variant="outline-animated" onClick={() => setShowAuth(true)}>
                   {t('course.login_btn')}
@@ -216,14 +212,14 @@ export default function Course() {
                         </span>
                         <h4 className="course__module-title">
                           {i === 0 && (
-                            <span className="course__free-tag" style={{ marginRight: 6 }}>FREE</span>
+                            <span className="course__free-tag" style={{ marginRight: 6 }}>{t('course.free_tag')}</span>
                           )}
                           {mod.title}
                         </h4>
                       </div>
                       <div className="course__module-meta">
                         <span className="course__module-count">
-                          {mod.lessons.length} {getLessonLabel(mod.lessons.length, locale)}
+                          {getLessonLabel(mod.lessons.length, lessonPlural)}
                         </span>
                         <span
                           className={`course__module-arrow ${openModule === i ? 'course__module-arrow--open' : ''}`}
@@ -251,26 +247,26 @@ export default function Course() {
 
             {!countdown.ended && (
               <div className="course__countdown">
-                <span className="course__countdown-label">⏳ Знижка діє ще:</span>
+                <span className="course__countdown-label">{t('course.countdown_label')}</span>
                 <div className="course__countdown-timer">
                   <div className="course__countdown-unit">
                     <span className="course__countdown-value">{String(countdown.days).padStart(2, '0')}</span>
-                    <span className="course__countdown-text">дн</span>
+                    <span className="course__countdown-text">{t('course.countdown_days')}</span>
                   </div>
                   <span className="course__countdown-sep">:</span>
                   <div className="course__countdown-unit">
                     <span className="course__countdown-value">{String(countdown.hours).padStart(2, '0')}</span>
-                    <span className="course__countdown-text">год</span>
+                    <span className="course__countdown-text">{t('course.countdown_hours')}</span>
                   </div>
                   <span className="course__countdown-sep">:</span>
                   <div className="course__countdown-unit">
                     <span className="course__countdown-value">{String(countdown.minutes).padStart(2, '0')}</span>
-                    <span className="course__countdown-text">хв</span>
+                    <span className="course__countdown-text">{t('course.countdown_minutes')}</span>
                   </div>
                   <span className="course__countdown-sep">:</span>
                   <div className="course__countdown-unit">
                     <span className="course__countdown-value">{String(countdown.seconds).padStart(2, '0')}</span>
-                    <span className="course__countdown-text">сек</span>
+                    <span className="course__countdown-text">{t('course.countdown_seconds')}</span>
                   </div>
                 </div>
               </div>

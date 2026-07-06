@@ -60,7 +60,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="section about" ref={sectionRef}>
+    <section id="about" className="section about" ref={sectionRef} role="region" aria-label={t('about.title')}>
       <div className="container">
         <SectionTitle titleKey="about.title" subtitleKey="about.subtitle" />
 

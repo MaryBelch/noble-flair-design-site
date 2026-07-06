@@ -7,6 +7,7 @@ import Loader from './components/UI/Loader';
 import ScrollToTop from './components/UI/ScrollToTop';
 import ProgressBar from './components/UI/ProgressBar';
 import ErrorBoundary from './components/UI/ErrorBoundary';
+import SWUpdateNotification from './components/UI/SWUpdateNotification';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
 
@@ -25,24 +26,75 @@ const Contact = lazy(() => import('./components/Contact/Contact'));
 const Footer = lazy(() => import('./components/Footer/Footer'));
 const AdminPanel = lazy(() => import('./components/Admin/AdminPanel'));
 
-/** JSON-LD structured data for local business / org */
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Noble Flair Design',
-  url: 'https://marybelch.github.io/noble-flair-design-site/',
-  description: 'Преміальна дизайн-студія. Розробка презентацій, сайтів, поліграфія та навчання.',
-  foundingDate: '2023',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer service',
-    email: 'noble.flair.design@gmail.com',
-    url: 'https://t.me/noble_flair_design_bot',
+/** JSON-LD structured data */
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Noble Flair Design',
+    url: 'https://marybelch.github.io/noble-flair-design-site/',
+    description: 'Преміальна дизайн-студія. Розробка презентацій, сайтів, поліграфія та навчання.',
+    foundingDate: '2023',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'noble.flair.design@gmail.com',
+      url: 'https://t.me/noble_flair_design_bot',
+    },
+    sameAs: [
+      'https://instagram.com/noble_flair_design',
+    ],
   },
-  sameAs: [
-    'https://instagram.com/noble_flair_design',
-  ],
-};
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'Мистецтво презентацій',
+    description: 'Навчіться створювати презентації, які запам\'ятовуються. Від композиції до подачі — повний курс з дизайну презентацій.',
+    provider: {
+      '@type': 'Organization',
+      name: 'Noble Flair Design',
+      sameAs: 'https://marybelch.github.io/noble-flair-design-site/',
+    },
+    offers: [
+      { '@type': 'Offer', name: 'Базовий', price: '100', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Стандарт', price: '150', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'ВИП', price: '300', priceCurrency: 'USD' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Noble Flair Design',
+    url: 'https://marybelch.github.io/noble-flair-design-site/',
+    inLanguage: ['uk', 'ru', 'en'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Як проходить навчання?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Курс повністю онлайн. Ви отримуєте доступ до відеоуроків, текстового контенту та додаткових матеріалів на платформі.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Скільки часу потрібно на курс?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Курс розрахований на 4-6 тижнів при регулярних заняттях по 2-3 години на тиждень.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Які програми потрібні?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Для більшості уроків достатньо PowerPoint або Google Slides. Окремий модуль присвячений Figma.' },
+      },
+      {
+        '@type': 'Question',
+        name: 'Чи видаєте ви сертифікат?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Так, після завершення курсу ви отримуєте електронний сертифікат.' },
+      },
+    ],
+  },
+];
 
 function SkipLink() {
   return (
@@ -80,7 +132,7 @@ function AppContent() {
           <Hero />
           <About />
           <Suspense fallback={null}><ErrorBoundary><Course /></ErrorBoundary></Suspense>
-          <Services />
+          <ErrorBoundary><Services /></ErrorBoundary>
           <Suspense fallback={null}><ErrorBoundary><Testimonials /></ErrorBoundary></Suspense>
           <Suspense fallback={null}><ErrorBoundary><Portfolio /></ErrorBoundary></Suspense>
           <Suspense fallback={null}><ErrorBoundary><FAQ /></ErrorBoundary></Suspense>
@@ -90,13 +142,17 @@ function AppContent() {
         <Suspense fallback={null}><ErrorBoundary><AdminPanel /></ErrorBoundary></Suspense>
         <Suspense fallback={null}><ErrorBoundary><Footer /></ErrorBoundary></Suspense>
         <ScrollToTop />
+        <SWUpdateNotification />
       </div>
 
       {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {structuredData.map((data, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        />
+      ))}
     </>
   );
 }

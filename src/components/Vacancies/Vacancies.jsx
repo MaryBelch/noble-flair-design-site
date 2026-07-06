@@ -9,7 +9,7 @@ export default function Vacancies() {
   const sectionRef = useScrollReveal([]);
 
   return (
-    <section id="vacancies" className="section vacancies" ref={sectionRef}>
+    <section id="vacancies" className="section vacancies" ref={sectionRef} role="region" aria-label={t('vacancies.title')}>
       <div className="container">
         <SectionTitle titleKey="vacancies.title" subtitleKey="vacancies.subtitle" />
 

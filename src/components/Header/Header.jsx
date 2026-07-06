@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../Auth/AuthModal';
@@ -21,6 +21,8 @@ export default function Header() {
   const [showAuth, setShowAuth] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const navRef = useRef(null);
+  const burgerRef = useRef(null);
 
   const navItems = [
     { key: 'home', href: '#hero' },
@@ -62,6 +64,45 @@ export default function Header() {
     sectionEls.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
+
+  /* ── Focus trap for mobile nav ── */
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    // Focus the first nav link when mobile menu opens
+    const firstLink = navRef.current?.querySelector('.header__link');
+    firstLink?.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false);
+        burgerRef.current?.focus();
+        return;
+      }
+
+      // Trap Tab focus within the nav
+      if (e.key === 'Tab') {
+        const focusable = navRef.current?.querySelectorAll(
+          'a, button, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable || focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
 
   /* ── Close mobile nav on resize past breakpoint ── */
   useEffect(() => {
@@ -137,7 +178,7 @@ export default function Header() {
   const remainingDays = getRemainingDays();
 
   return (
-    <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
+    <header className={`header ${scrolled ? 'header--scrolled' : ''}`} role="banner">
       <div className="container header__inner">
         <a href="#hero" className="header__logo" onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}>
           <span className="header__logo-text">NFD</span>
@@ -147,11 +188,20 @@ export default function Header() {
         {/* Overlay behind mobile nav */}
         <div
           className={`header__overlay ${mobileOpen ? 'header__overlay--visible' : ''}`}
-          onClick={() => setMobileOpen(false)}
+          onClick={() => {
+            setMobileOpen(false);
+            burgerRef.current?.focus();
+          }}
           aria-hidden="true"
+          tabIndex={-1}
         />
 
-        <nav className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`} aria-label="Main navigation">
+        <nav
+          ref={navRef}
+          className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`}
+          aria-label="Main navigation"
+          role="navigation"
+        >
           {navItems.map((item) => (
             <a
               key={item.key}
@@ -159,6 +209,7 @@ export default function Header() {
               className={`header__link gold-border-hover ${activeSection === item.href.slice(1) ? 'header__link--active' : ''}`}
               onClick={(e) => handleNavClick(e, item.href)}
               aria-current={activeSection === item.href.slice(1) ? 'page' : undefined}
+              tabIndex={mobileOpen ? 0 : undefined}
             >
               {t(`nav.${item.key}`)}
             </a>
@@ -184,9 +235,9 @@ export default function Header() {
                 </div>
 
                 {showProfile && (
-                  <div className="header__profile-dropdown">
+                  <div className="header__profile-dropdown" role="menu">
                     {userDoc?.tariff && (
-                      <div className="header__profile-row">
+                      <div className="header__profile-row" role="menuitem">
                         <span className="header__profile-label">Тариф:</span>
                         <span className="header__profile-value">
                           {tariffLabels[userDoc.tariff] || userDoc.tariff}
@@ -194,7 +245,7 @@ export default function Header() {
                       </div>
                     )}
                     {(userDoc?.tariff && tariffLabels[userDoc.tariff] !== 'ВИП') && remainingDays !== null && (
-                      <div className="header__profile-row">
+                      <div className="header__profile-row" role="menuitem">
                         <span className="header__profile-label">Доступ:</span>
                         <span className={`header__profile-value ${remainingDays <= 14 ? 'header__profile-value--warning' : ''}`}>
                           {remainingDays > 0 ? `${remainingDays} дн.` : 'Закінчився'}
@@ -202,21 +253,21 @@ export default function Header() {
                       </div>
                     )}
                     {userDoc?.tariff === 'vip' && (
-                      <div className="header__profile-row">
+                      <div className="header__profile-row" role="menuitem">
                         <span className="header__profile-label">Доступ:</span>
                         <span className="header__profile-value" style={{ color: '#2ecc71' }}>Назавжди</span>
                       </div>
                     )}
-                    <div className="header__profile-row">
+                    <div className="header__profile-row" role="menuitem">
                       <span className="header__profile-label">Email:</span>
                       <span className="header__profile-value" style={{ fontSize: '0.8rem' }}>{user.email}</span>
                     </div>
                     {isAdmin && (
-                      <a href="#admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)}>
+                      <a href="#admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)} role="menuitem">
                         Адмін-панель
                       </a>
                     )}
-                    <button className="header__profile-logout" onClick={logout}>Вийти</button>
+                    <button className="header__profile-logout" onClick={logout} role="menuitem">Вийти</button>
                   </div>
                 )}
 
@@ -225,8 +276,8 @@ export default function Header() {
                     Адмін
                   </a>
                 )}
-                <button className="header__logout-btn" onClick={logout} title="Вийти">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <button className="header__logout-btn" onClick={logout} title="Вийти" aria-label="Вийти">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                     <polyline points="16 17 21 12 16 7" />
                     <line x1="21" y1="12" x2="9" y2="12" />
@@ -235,17 +286,20 @@ export default function Header() {
               </div>
             ) : (
               <button className="header__login-btn" onClick={() => setShowAuth(true)}>
-                Увійти
+                {t('nav.login') || 'Увійти'}
               </button>
             )}
           </div>
 
-          <div className="header__lang">
+          <div className="header__lang" role="radiogroup" aria-label="Мова">
             {SUPPORTED_LOCALES.map((l) => (
               <button
                 key={l}
                 className={`header__lang-btn ${locale === l ? 'header__lang-btn--active' : ''}`}
                 onClick={() => changeLocale(l)}
+                role="radio"
+                aria-checked={locale === l}
+                aria-label={l === 'uk' ? 'Українська' : l === 'ru' ? 'Русский' : 'English'}
               >
                 {localeLabels[l]}
               </button>
@@ -253,14 +307,16 @@ export default function Header() {
           </div>
 
           <button
+            ref={burgerRef}
             className={`header__burger ${mobileOpen ? 'header__burger--open' : ''}`}
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? 'Закрити меню' : 'Відкрити меню'}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
           >
-            <span />
-            <span />
-            <span />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>
 

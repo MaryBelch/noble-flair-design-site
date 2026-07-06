@@ -23,7 +23,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="section faq" ref={sectionRef}>
+    <section id="faq" className="section faq" ref={sectionRef} role="region" aria-label={t('faq.title')}>
       <div className="container">
         <SectionTitle
           titleKey="faq.title"

@@ -11,6 +11,8 @@ export default function Hero() {
   const sectionRef = useScrollReveal([locale], 0.15);
   const bgRef = useRef(null);
   const contentRef = useRef(null);
+  const rafRef = useRef(null);
+  const scrollRef = useRef(0);
   const [displayedText, setDisplayedText] = useState('');
   const [typingDone, setTypingDone] = useState(false);
 
@@ -36,30 +38,45 @@ export default function Hero() {
     return () => clearTimeout(startTimeout);
   }, [t, locale]);
 
-  /* ── Scroll-based parallax on background ── */
+  /* ── Scroll-based parallax on background (rAF-throttled) ── */
   useEffect(() => {
     const bg = bgRef.current;
     if (!bg) return;
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const offset = scrollY * 0.35;
-      // Keep existing mouse transform by reading current transform
-      const currentTransform = bg.dataset.mouseTransform || '';
-      bg.style.transform = `translateY(${offset}px) ${currentTransform}`;
+      scrollRef.current = window.scrollY;
+      // Schedule rAF if not already pending
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          const offset = scrollRef.current * 0.35;
+          const currentTransform = bg.dataset.mouseTransform || '';
+          bg.style.transform = `translateY(${offset}px) ${currentTransform}`;
+          rafRef.current = null;
+        });
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
-  /* ── Mouse-based parallax on content ── */
+  /* ── Mouse-based parallax on content (rAF-throttled) ── */
   const handleMouseMove = useCallback((e) => {
     if (!contentRef.current) return;
-    const { clientX, clientY } = e;
-    const x = (clientX / window.innerWidth - 0.5) * 6;
-    const y = (clientY / window.innerHeight - 0.5) * 6;
-    contentRef.current.style.transform = `translate(${x}px, ${y}px)`;
+    if (rafRef.current) return; // skip if rAF is pending
+
+    rafRef.current = requestAnimationFrame(() => {
+      const { clientX, clientY } = e;
+      const x = (clientX / window.innerWidth - 0.5) * 6;
+      const y = (clientY / window.innerHeight - 0.5) * 6;
+      contentRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      rafRef.current = null;
+    });
   }, []);
 
   const handleMouseLeave = useCallback(() => {
@@ -72,6 +89,8 @@ export default function Hero() {
       id="hero"
       className="hero"
       ref={sectionRef}
+      role="region"
+      aria-label="Noble Flair Design"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -81,7 +100,7 @@ export default function Hero() {
       <div className="container hero__content" ref={contentRef}>
         <p className="hero__subtitle hero__animate">
           {displayedText}
-          <span className={`hero__cursor ${typingDone ? 'hero__cursor--blink' : ''}`}>|</span>
+          <span className={`hero__cursor ${typingDone ? 'hero__cursor--blink' : ''}`} aria-hidden="true">|</span>
         </p>
 
         <h1 className="hero__title hero__animate">

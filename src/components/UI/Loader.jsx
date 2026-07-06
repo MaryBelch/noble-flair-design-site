@@ -15,7 +15,7 @@ export default function Loader() {
   return (
     <div className={`loader ${hidden ? 'loader--hidden' : ''}`}>
       <div className="loader__content">
-        <div className="loader__ring" />
+        <div className="loader__ring" aria-hidden="true" />
         <span className="loader__text">Noble Flair Design</span>
       </div>
     </div>

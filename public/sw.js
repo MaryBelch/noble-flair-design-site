@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nfd-cache-v1';
+const CACHE_NAME = 'nfd-cache-v2';
 const ASSETS = [
   '/noble-flair-design-site/',
   '/noble-flair-design-site/index.html',
@@ -6,11 +6,13 @@ const ASSETS = [
   '/noble-flair-design-site/manifest.json',
 ];
 
-// Install: precache static assets
+// Install: precache static assets (don't skip waiting — let the old SW control
+// the page until the user consents to update)
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
+  // Don't call self.skipWaiting() — we wait for a SKIP_WAITING message
 });
 
 // Activate: clean old caches
@@ -43,4 +45,11 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => caches.match(event.request))
   );
+});
+
+// Listen for skip-waiting message from the page
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

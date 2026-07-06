@@ -14,6 +14,13 @@ const GRADIENTS = {
   epoxy: 'linear-gradient(135deg, #3d0f3d 0%, #8B146A 50%, #3d0f3d 100%)',
 };
 
+const ICONS = {
+  presentations: '📊',
+  banners: '🎯',
+  printing: '📄',
+  epoxy: '💎',
+};
+
 function PlaceholderImage({ category, title }) {
   const { t } = useTranslation();
   const catLabel = t(`portfolio.${category}`);
@@ -21,8 +28,11 @@ function PlaceholderImage({ category, title }) {
     <div
       className="portfolio__item-placeholder"
       style={{ background: GRADIENTS[category] || GRADIENTS.presentations }}
+      aria-label={`${catLabel}: ${title}`}
+      role="img"
     >
       <div className="portfolio__placeholder-content">
+        <span className="portfolio__placeholder-icon" aria-hidden="true">{ICONS[category] || '✨'}</span>
         <span className="portfolio__placeholder-cat">{catLabel}</span>
         <span className="portfolio__placeholder-title">{title}</span>
       </div>
@@ -35,13 +45,28 @@ export default function Portfolio() {
   const sectionRef = useScrollReveal([]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [filtered, setFiltered] = useState(portfolio);
+  const [animating, setAnimating] = useState(false);
+  const prevCategory = useRef('all');
 
   useEffect(() => {
-    if (activeCategory === 'all') {
-      setFiltered(portfolio);
-    } else {
-      setFiltered(portfolio.filter((item) => item.category === activeCategory));
-    }
+    // Animate out, then swap data, then animate in
+    if (activeCategory === prevCategory.current) return;
+
+    setAnimating(true);
+    const timeout = setTimeout(() => {
+      if (activeCategory === 'all') {
+        setFiltered(portfolio);
+      } else {
+        setFiltered(portfolio.filter((item) => item.category === activeCategory));
+      }
+      prevCategory.current = activeCategory;
+      // Small delay to trigger re-render before removing animation class
+      requestAnimationFrame(() => {
+        setAnimating(false);
+      });
+    }, 250);
+
+    return () => clearTimeout(timeout);
   }, [activeCategory]);
 
   return (
@@ -49,24 +74,31 @@ export default function Portfolio() {
       <div className="container">
         <SectionTitle titleKey="portfolio.title" subtitleKey="portfolio.subtitle" />
 
-        <div className="portfolio__filters fade-in">
+        <div className="portfolio__filters fade-in" role="tablist" aria-label="Категорії портфоліо">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               className={`portfolio__filter-btn ${activeCategory === cat ? 'portfolio__filter-btn--active' : ''}`}
               onClick={() => setActiveCategory(cat)}
+              role="tab"
+              aria-selected={activeCategory === cat}
+              aria-controls="portfolio-grid"
             >
               {t(`portfolio.${cat}`)}
             </button>
           ))}
         </div>
 
-        <div className="portfolio__grid">
+        <div
+          id="portfolio-grid"
+          className={`portfolio__grid ${animating ? 'portfolio__grid--animating' : ''}`}
+          role="tabpanel"
+        >
           {filtered.map((item, i) => (
             <div
               key={item.id}
-              className="portfolio__item fade-in"
-              style={{ transitionDelay: `${i * 0.1}s` }}
+              className="portfolio__item"
+              style={animating ? {} : { animationDelay: `${i * 0.06}s` }}
             >
               <div className="portfolio__item-image">
                 <PlaceholderImage category={item.category} title={item.title} />

@@ -3,17 +3,14 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
-// ╔══════════════════════════════════════════════════════╗
-// ║  Вставте сюди дані вашого Firebase проекту          ║
-// ║  Firebase Console → Project Settings → Web App      ║
-// ╚══════════════════════════════════════════════════════╝
+// Firebase config — reads from env vars with fallback to hardcoded values
 const firebaseConfig = {
-  apiKey: 'AIzaSyBYmhyQ8WjUUgE2IN7eKCVQ9V6zFIO7XqY',
-  authDomain: 'noble-flair-app.firebaseapp.com',
-  projectId: 'noble-flair-app',
-  storageBucket: 'noble-flair-app.firebasestorage.app',
-  messagingSenderId: '884435593575',
-  appId: '1:884435593575:web:90aa1e19f9b93ae655e7c2',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyBYmhyQ8WjUUgE2IN7eKCVQ9V6zFIO7XqY',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'noble-flair-app.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'noble-flair-app',
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'noble-flair-app.firebasestorage.app',
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '884435593575',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:884435593575:web:90aa1e19f9b93ae655e7c2',
 };
 
 const app = initializeApp(firebaseConfig);
