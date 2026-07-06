@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
+import { useAuth } from '../../context/AuthContext';
+import { saveContactMessage } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import Button from '../UI/Button';
 import './Contact.css';
 
 export default function Contact() {
   const { t, locale } = useTranslation();
+  const { user } = useAuth();
   const ref = useRef(null);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -26,7 +31,7 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const name = formData.get('name');
@@ -35,13 +40,35 @@ export default function Contact() {
 
     if (!name || !contact) return;
 
-    const text = encodeURIComponent(
-      `✉️ Нове повідомлення з сайту\nІм'я: ${name}\nКонтакт: ${contact}\nПовідомлення: ${message || '—'}`
-    );
-    setSubmitted(true);
-    window.open(`https://t.me/noble_flair_design_bot?start=contact_${encodeURIComponent(name)}`, '_blank');
-    e.target.reset();
-    setTimeout(() => setSubmitted(false), 5000);
+    setSending(true);
+    setError(false);
+
+    try {
+      // Save to Firestore
+      await saveContactMessage({
+        name,
+        contact,
+        message: message || '',
+        locale,
+        userId: user?.uid || null,
+        userEmail: user?.email || null,
+      });
+
+      // Also send to Telegram bot as before
+      const text = encodeURIComponent(
+        `✉️ Нове повідомлення з сайту\nІм'я: ${name}\nКонтакт: ${contact}\nПовідомлення: ${message || '—'}`
+      );
+      window.open(`https://t.me/noble_flair_design_bot?start=contact_${encodeURIComponent(name)}`, '_blank');
+
+      setSubmitted(true);
+      e.target.reset();
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      console.error('Error saving message:', err);
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -126,6 +153,8 @@ export default function Contact() {
               <h3 className="contact__form-title">{t('contact.form_submit')}</h3>
               {submitted ? (
                 <p className="contact__form-success">{t('contact.form_success')}</p>
+              ) : error ? (
+                <p className="contact__form-error">{t('contact.form_error')}</p>
               ) : (
                 <form className="contact__form" onSubmit={handleSubmit}>
                   <input
@@ -148,8 +177,8 @@ export default function Contact() {
                     className="contact__form-input contact__form-textarea"
                     rows={4}
                   />
-                  <Button variant="primary" type="submit" className="contact__form-btn">
-                    {t('contact.form_submit')}
+                  <Button variant="primary" type="submit" className="contact__form-btn" disabled={sending}>
+                    {sending ? '...' : t('contact.form_submit')}
                   </Button>
                 </form>
               )}

@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header/Header';
 import Loader from './components/UI/Loader';
 import ScrollToTop from './components/UI/ScrollToTop';
+import ProgressBar from './components/UI/ProgressBar';
 import './styles/global.css';
 
 // Eager-loaded sections
@@ -34,6 +35,7 @@ function AppContent() {
     <>
       {!ready && <Loader />}
       <div style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+        <ProgressBar />
         <Header />
         <main>
           <Hero />

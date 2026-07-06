@@ -11,6 +11,8 @@ import {
 } from 'firebase/firestore';
 import { db } from './config';
 
+/* ── User management ── */
+
 /** Create a user document on registration */
 export async function createUserDoc(uid, name, email) {
   await setDoc(doc(db, 'users', uid), {
@@ -40,6 +42,8 @@ export async function getAllUsers() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+/* ── Lessons ── */
+
 /** Mark a lesson as viewed by the user */
 export async function markLessonViewed(uid, lessonId) {
   await setDoc(doc(db, 'users', uid), {
@@ -58,4 +62,32 @@ export async function getAllLessons() {
   const q = query(collection(db, 'lessons'), orderBy('order', 'asc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/* ── Contact messages ── */
+
+/** Save a contact form submission to Firestore */
+export async function saveContactMessage(data) {
+  const ref = doc(collection(db, 'messages'));
+  await setDoc(ref, {
+    name: data.name,
+    contact: data.contact,
+    message: data.message || '',
+    locale: data.locale || '',
+    read: false,
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
+}
+
+/** Get all contact messages (admin only) */
+export async function getAllMessages() {
+  const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/** Mark a message as read */
+export async function markMessageRead(id) {
+  await updateDoc(doc(db, 'messages', id), { read: true });
 }

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Noble Flair Design</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .container { max-width: 480px; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      background: linear-gradient(135deg, #F5D67A, #D4AF37, #B8892F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    a {
+      display: inline-block;
+      padding: 12px 32px;
+      background: linear-gradient(135deg, #D4AF37, #B8892F);
+      color: #0a0a0a;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    a:hover { opacity: 0.85; }
+  </style>
+  <!-- SPA redirect for GitHub Pages -->
+  <script>
+    (function(l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function(s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+      }
+    }(window.location));
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p>Сторінку не знайдено.<br />Page not found.</p>
+    <a href="/noble-flair-design-site/">На головну</a>
+  </div>
+</body>
+</html>

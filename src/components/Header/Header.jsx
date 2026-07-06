@@ -4,6 +4,15 @@ import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../Auth/AuthModal';
 import './Header.css';
 
+/** Smooth-scroll to a section with header offset */
+function scrollToSection(href) {
+  const target = document.querySelector(href);
+  if (!target) return;
+  const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 70;
+  const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export default function Header() {
   const { t, locale, changeLocale, SUPPORTED_LOCALES } = useTranslation();
   const { user, userDoc, loading, logout, isAdmin } = useAuth();
@@ -18,6 +27,44 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  /* ── Close mobile nav on resize past breakpoint ── */
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 900) setMobileOpen(false);
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  /* ── Swipe left to close mobile nav ── */
+  useEffect(() => {
+    if (!mobileOpen) return;
+    let startX = 0;
+
+    const onTouchStart = (e) => { startX = e.touches[0].clientX; };
+    const onTouchEnd = (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx < -60) setMobileOpen(false); // swipe left
+    };
+
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchend', onTouchEnd, { passive: true });
+    return () => {
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [mobileOpen]);
+
+  /* ── Lock body scroll when mobile nav is open ── */
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const navItems = [
     { key: 'home', href: '#hero' },
     { key: 'about', href: '#about' },
@@ -31,8 +78,11 @@ export default function Header() {
 
   const localeLabels = { uk: 'UA', ru: 'RU', en: 'EN' };
 
-  const handleNavClick = (href) => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
     setMobileOpen(false);
+    setShowProfile(false);
+    scrollToSection(href);
   };
 
   /** Calculate remaining access days */
@@ -53,10 +103,17 @@ export default function Header() {
   return (
     <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
       <div className="container header__inner">
-        <a href="#hero" className="header__logo" onClick={() => setMobileOpen(false)}>
+        <a href="#hero" className="header__logo" onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}>
           <span className="header__logo-text">NFD</span>
           <span className="header__logo-dot">.</span>
         </a>
+
+        {/* Overlay behind mobile nav */}
+        <div
+          className={`header__overlay ${mobileOpen ? 'header__overlay--visible' : ''}`}
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
 
         <nav className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`}>
           {navItems.map((item) => (
@@ -64,7 +121,7 @@ export default function Header() {
               key={item.key}
               href={item.href}
               className="header__link gold-border-hover"
-              onClick={() => handleNavClick(item.href)}
+              onClick={(e) => handleNavClick(e, item.href)}
             >
               {t(`nav.${item.key}`)}
             </a>

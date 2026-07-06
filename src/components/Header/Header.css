@@ -253,6 +253,11 @@
   background: rgba(212, 175, 55, 0.1);
 }
 
+/* ── Mobile overlay ── */
+.header__overlay {
+  display: none;
+}
+
 /* Burger */
 .header__burger {
   display: none;
@@ -286,6 +291,24 @@
 }
 
 @media (max-width: 900px) {
+  .header__overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .header__overlay--visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
   .header__nav {
     position: fixed;
     top: var(--header-height);
@@ -302,6 +325,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all var(--transition-base);
+    z-index: 999;
   }
 
   .header__nav--open {
