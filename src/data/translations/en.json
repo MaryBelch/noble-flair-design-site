@@ -44,44 +44,48 @@
     "tariffs": {
       "title": "Choose your plan",
       "sale": "sale",
+      "recommended": "recommended",
       "btn": "Buy Now",
       "items": [
         {
           "name": "Basic",
           "price": 125,
           "sale_price": 100,
-          "desc": "Full access to all course lessons",
+          "desc": "All course lessons for self-paced learning",
           "features": [
             "9 modules, 33 lessons",
             "Lifetime access to materials",
-            "Basic templates & resources"
+            "Basic presentation templates",
+            "Access to resource library (links, tools)"
           ]
         },
         {
           "name": "Standard",
           "price": 220,
           "sale_price": 150,
-          "desc": "Everything in Basic + extra materials",
+          "recommended": true,
+          "desc": "Best choice for maximum results",
           "features": [
-            "9 modules, 33 lessons",
-            "Lifetime access to materials",
-            "Premium templates & resources",
-            "Homework assignments"
+            "Everything in the Basic plan",
+            "Premium templates & mockups",
+            "Homework assignments with review",
+            "Community chat & feedback",
+            "Bonus: icon packs, fonts, Figma plugins",
+            "Certificate of completion"
           ]
         },
         {
           "name": "VIP",
           "price": 490,
           "sale_price": 300,
-          "desc": "Everything in Standard + personal mentoring",
+          "desc": "Personal mentorship & 1-on-1 support",
           "features": [
-            "9 modules, 33 lessons",
-            "Lifetime access to materials",
-            "Premium templates & resources",
-            "Homework assignments",
-            "Personal mentoring by the author",
-            "Review & feedback",
-            "Certificate"
+            "Everything in the Standard plan",
+            "Personal mentorship by the author",
+            "1-on-1 presentation review",
+            "Portfolio & client-finding assistance",
+            "Priority Telegram support",
+            "Personalized certificate"
           ]
         }
       ]

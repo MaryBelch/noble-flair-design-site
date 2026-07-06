@@ -424,6 +424,44 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
+.course__tariff-card--featured {
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.08), 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.04);
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #1d1a12 0%, #1a1a1a 100%);
+}
+
+.course__tariff-card--featured:hover {
+  border-color: rgba(201, 168, 76, 0.6);
+  box-shadow: 0 0 40px rgba(201, 168, 76, 0.15), 0 8px 32px rgba(0, 0, 0, 0.25);
+  transform: scale(1.04) translateY(-4px);
+}
+
+.course__tariff-card--featured .course__tariff-btn {
+  background: linear-gradient(135deg, #d4b44a 0%, #b8942e 100%);
+  font-size: 1rem;
+  padding: 14px 0;
+}
+
+.course__tariff-recommended {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #c9a84c, #a8852e);
+  color: #1a1a1a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(201, 168, 76, 0.3);
+}
+
 .course__tariff-badge {
   font-size: 1.1rem;
   font-weight: 700;
@@ -563,6 +601,14 @@
     padding: 24px 20px 28px;
     max-width: 400px;
     margin: 0 auto;
+  }
+
+  .course__tariff-card--featured {
+    transform: none;
+  }
+
+  .course__tariff-card--featured:hover {
+    transform: translateY(-4px);
   }
 
   .course__tariff-price-sale {

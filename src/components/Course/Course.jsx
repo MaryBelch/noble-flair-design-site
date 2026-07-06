@@ -297,7 +297,13 @@ export default function Course() {
               <h3 className="course__tariffs-title">{t('course.tariffs.title')}</h3>
               <div className="course__tariffs-grid">
                 {(tp('course.tariffs.items') || []).map((tariff, i) => (
-                  <div className="course__tariff-card" key={i}>
+                  <div
+                    className={`course__tariff-card${tariff.recommended ? ' course__tariff-card--featured' : ''}`}
+                    key={i}
+                  >
+                    {tariff.recommended && (
+                      <span className="course__tariff-recommended">{t('course.tariffs.recommended')}</span>
+                    )}
                     <div className="course__tariff-badge" data-tariff={tariff.name.toLowerCase()}>
                       {tariff.name}
                     </div>
