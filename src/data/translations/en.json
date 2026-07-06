@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "course": "Course",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "vacancies": "Vacancies",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Design Studio",
+    "title": "Noble Flair Design",
+    "description": "Bringing elegance to every detail. Presentation design, printing, education, and exclusive epoxy resin jewelry.",
+    "cta_course": "Learn About Course",
+    "cta_portfolio": "Portfolio"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "We create design with soul",
+    "text1": "Noble Flair Design is a space where elegance and individuality are born. We specialize in presentation design, advertising materials, and printing.",
+    "text2": "Our mission is to help you shine. Through education, ready-made design solutions, or unique epoxy resin jewelry — we are with you at every step.",
+    "feature1_title": "Individual Approach",
+    "feature1_desc": "Every project is unique, just like our approach to it",
+    "feature2_title": "Premium Quality",
+    "feature2_desc": "We use the best materials and modern techniques",
+    "feature3_title": "Full Cycle",
+    "feature3_desc": "From idea to implementation — we handle everything"
+  },
+  "course": {
+    "title": "Course: The Art of Presentations",
+    "subtitle": "Turn your ideas into a visual masterpiece",
+    "description": "Learn to create presentations that leave a lasting impression. From composition to delivery — a complete presentation design course for beginners and professionals.",
+    "program_title": "Course Program",
+    "module1_title": "Composition Basics",
+    "module1_desc": "Colors, fonts, grids — the foundation of visual harmony",
+    "module2_title": "Working with Content",
+    "module2_desc": "Structuring information, storytelling, infographics",
+    "module3_title": "Brand Identity",
+    "module3_desc": "Creating visual identity for business",
+    "module4_title": "Animation & Delivery",
+    "module4_desc": "How to make your presentation lively and convincing",
+    "cta": "Enroll in Course",
+    "status": "The course is in development. Leave your details to get notified about the launch!",
+    "price": "Price TBD",
+    "placeholder_name": "Your name",
+    "placeholder_email": "Email or Telegram",
+    "submit": "Send"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "What we offer",
+    "presentations": "Presentation Design",
+    "presentations_desc": "Professional presentations for business, startups, conferences, and education. From stylish slides to full visual support.",
+    "banners": "Banner Ads",
+    "banners_desc": "Eye-catching banners for social media, ad campaigns, and business promotion. Adapted for all formats.",
+    "printing": "Design & Printing",
+    "printing_desc": "Business cards, flyers, brochures, invitations. Full cycle: design + printing + delivery across Ukraine.",
+    "epoxy": "Epoxy Resin Jewelry",
+    "epoxy_desc": "Unique handmade jewelry pieces. Pendants, earrings, bracelets — every detail crafted with love.",
+    "cta": "Order Now"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Our works",
+    "all": "All",
+    "presentations": "Presentations",
+    "banners": "Banners",
+    "printing": "Business Cards & Print",
+    "epoxy": "Jewelry"
+  },
+  "vacancies": {
+    "title": "Vacancies",
+    "subtitle": "Join the Noble Flair Design team",
+    "description": "We are always looking for talented people. If you are a designer, manager, or creative individual — write to us!",
+    "open_title": "Open Positions",
+    "no_open": "There are no open vacancies at the moment, but you can still send us your resume — we will review it when a position opens up.",
+    "cta": "Send Resume"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Get in touch",
+    "description": "Ready to discuss your project? Write to us — we respond within 24 hours.",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "email": "Email",
+    "form_name": "Your name",
+    "form_email": "Email or Telegram",
+    "form_message": "Message",
+    "form_submit": "Send",
+    "form_success": "Thank you! We'll get back to you soon.",
+    "form_error": "Something went wrong. Try again later or message us on Telegram."
+  },
+  "footer": {
+    "rights": "© 2026 Noble Flair Design. All rights reserved.",
+    "tagline": "Design that inspires",
+    "navigation": "Navigation"
+  }
+}

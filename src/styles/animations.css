@@ -1,0 +1,118 @@
+/* Анимация появления секций при скролле */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Масштабирование при наведении на карточки */
+.card-hover {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Мерцание золотого */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-main) 0%,
+    var(--gold-light) 50%,
+    var(--gold-main) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 3s ease infinite;
+}
+
+/* Плавное появление снизу (для карточек) */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease forwards;
+}
+
+/* Золотая рамка при наведении */
+.gold-border-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-border-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-gradient);
+  transition: width var(--transition-base);
+}
+
+.gold-border-hover:hover::after {
+  width: 100%;
+}
+
+/* Пульсация */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease infinite;
+}

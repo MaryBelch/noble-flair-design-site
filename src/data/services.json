@@ -1,0 +1,30 @@
+[
+  {
+    "id": "presentations",
+    "icon": "📊",
+    "title_key": "services.presentations",
+    "desc_key": "services.presentations_desc",
+    "image": "/images/services/presentations.jpg"
+  },
+  {
+    "id": "banners",
+    "icon": "🎨",
+    "title_key": "services.banners",
+    "desc_key": "services.banners_desc",
+    "image": "/images/services/banners.jpg"
+  },
+  {
+    "id": "printing",
+    "icon": "🖨️",
+    "title_key": "services.printing",
+    "desc_key": "services.printing_desc",
+    "image": "/images/services/printing.jpg"
+  },
+  {
+    "id": "epoxy",
+    "icon": "💎",
+    "title_key": "services.epoxy",
+    "desc_key": "services.epoxy_desc",
+    "image": "/images/services/epoxy.jpg"
+  }
+]

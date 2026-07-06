@@ -1,0 +1,142 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 30% 60%, rgba(201, 168, 76, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 70% 30%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding-top: 80px;
+}
+
+.hero__animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.hero__animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero__subtitle {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-main);
+  margin-bottom: 20px;
+}
+
+.hero__title {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.hero__description {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Scroll indicator */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.hero__scroll-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold-main), transparent);
+  animation: scrollLine 2s ease infinite;
+}
+
+@keyframes scrollLine {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleY(0.5);
+    transform-origin: top;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+
+  .hero__description {
+    font-size: 1rem;
+  }
+
+  .hero__scroll-indicator {
+    display: none;
+  }
+}
