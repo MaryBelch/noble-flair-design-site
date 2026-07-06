@@ -33,10 +33,89 @@
     "description": "Learn to create presentations that leave a lasting impression. From composition to delivery — a complete presentation design course for beginners and professionals.",
     "cta": "Enroll in Course",
     "status": "The course is in development. Leave your details to get notified about the launch!",
-    "price": "Price TBD",
     "placeholder_name": "Your name",
     "placeholder_email": "Email or Telegram",
-    "submit": "Send"
+    "submit": "Send",
+    "modules": [
+      {
+        "title": "Intro Module",
+        "lessons": [
+          "How to benefit from this course",
+          "My 'Second Brain' in Obsidian",
+          "Project Planning"
+        ]
+      },
+      {
+        "title": "Design Basics (Theory + Software)",
+        "lessons": [
+          "Visual Language. Composition, Typography, Hierarchy",
+          "PowerPoint / Google Slides Interface. Working with Templates",
+          "Resource Base",
+          "Visual Inspiration. Pinterest, Behance, Dribbble"
+        ]
+      },
+      {
+        "title": "Element Design & Figma",
+        "lessons": [
+          "Title Slide — The Face of Your Project",
+          "Icons",
+          "'About Me' and 'Team' Slides",
+          "'Before/After' Slide",
+          "Illustrations",
+          "Mockups"
+        ]
+      },
+      {
+        "title": "Data Visualization (Infographics)",
+        "lessons": [
+          "Timelines and Lists",
+          "Charts and Graphs",
+          "Complex Diagrams (Venn Diagram, etc.)"
+        ]
+      },
+      {
+        "title": "Animation & Dynamics",
+        "lessons": [
+          "Basic Animation",
+          "Animation",
+          "Morph Magic (Transformation)",
+          "Interactivity. Buttons, Hyperlinks, Navigation",
+          "Bar Charts and Graphs",
+          "Infographics"
+        ]
+      },
+      {
+        "title": "Figma",
+        "lessons": [
+          "Interface",
+          "Plugins",
+          "Transfer to PowerPoint"
+        ]
+      },
+      {
+        "title": "AI: Revolution in Work",
+        "lessons": [
+          "Working with Text (ChatGPT/Gemini)",
+          "Visual Generation (Adobe Firefly / Midjourney)",
+          "Background Removal and Upscaling"
+        ]
+      },
+      {
+        "title": "Niche Strategies (Special Blocks)",
+        "lessons": [
+          "For Teachers: Gamification. Quizzes in Slides",
+          "For Business & Marketers: Pitch Deck",
+          "Presentation: Connecting Slides with Your Speech"
+        ]
+      },
+      {
+        "title": "Personal Brand & Portfolio",
+        "lessons": [
+          "Instagram/LinkedIn Profile Design",
+          "Finding First Clients / Growth Within a Company"
+        ]
+      }
+    ]
   },
   "services": {
     "title": "Services",

@@ -45,6 +45,7 @@ export function I18nProvider({ children }) {
     }
   };
 
+  // Surface-level string translator
   const t = (key) => {
     if (!translations) return key;
     const keys = key.split('.');
@@ -59,8 +60,23 @@ export function I18nProvider({ children }) {
     return typeof value === 'string' ? value : key;
   };
 
+  // Deep translator — returns the raw value (object/array) for non-string keys
+  const tp = (key) => {
+    if (!translations) return null;
+    const keys = key.split('.');
+    let value = translations;
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = value[k];
+      } else {
+        return null;
+      }
+    }
+    return value;
+  };
+
   return (
-    <I18nContext.Provider value={{ locale, changeLocale, t, loading, SUPPORTED_LOCALES }}>
+    <I18nContext.Provider value={{ locale, changeLocale, t, tp, loading, SUPPORTED_LOCALES }}>
       {children}
     </I18nContext.Provider>
   );
