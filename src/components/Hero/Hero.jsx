@@ -119,8 +119,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero__scroll-indicator">
-        <span className="hero__scroll-text">Scroll</span>
+      <div className="hero__scroll-indicator" aria-hidden="true">
+        <span className="hero__scroll-text">{t('hero.scroll_label')}</span>
         <div className="hero__scroll-line" />
       </div>
     </section>

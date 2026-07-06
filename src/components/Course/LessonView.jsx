@@ -73,31 +73,31 @@ export default function LessonView({ selectedLesson, modules, onBack }) {
       <div className="container">
         <div className="course__back-bar">
           <button className="course__back-btn" onClick={onBack}>
-            ← {module?.title || t('course.title')}
+            ← {t('course.lesson_back')}
           </button>
           <span className="course__back-bar-title">
-            {isFree && <span className="course__free-tag">FREE</span>}
+            {isFree && <span className="course__free-tag">{t('course.free_tag')}</span>}
             {' '}{selectedLesson.title}
           </span>
         </div>
 
         <div className="course__lesson-view fade-in visible">
           <h2 className="course__lesson-title">
-            {isFree && <span className="course__free-tag" style={{ fontSize: '0.7rem', verticalAlign: 'middle', marginRight: 12 }}>FREE</span>}
+            {isFree && <span className="course__free-tag" style={{ fontSize: '0.7rem', verticalAlign: 'middle', marginRight: 12 }}>{t('course.free_tag')}</span>}
             {selectedLesson.title}
           </h2>
 
           <div className="course__lesson-body">
             {lessonLoading ? (
-              <p style={{ color: '#888' }}>Завантаження...</p>
+              <p style={{ color: '#888' }}>{t('course.lesson_loading')}</p>
             ) : error ? (
-              <p style={{ color: '#e74c3c' }}>Помилка завантаження: {error}</p>
+              <p style={{ color: '#e74c3c' }}>{t('course.lesson_error')}: {error}</p>
             ) : content ? (
               <div className="course__lesson-content" dangerouslySetInnerHTML={{ __html: renderContent(content) }} />
             ) : (
               <p style={{ color: '#888' }}>
                 {isFree
-                  ? '🎉 Це безкоштовний пробний урок! Контент з\'явиться незабаром.'
+                  ? t('course.lesson_free_preview')
                   : t('course.lesson_placeholder')}
               </p>
             )}
@@ -105,14 +105,14 @@ export default function LessonView({ selectedLesson, modules, onBack }) {
 
           {videoUrl && (
             <div className="course__lesson-video">
-              <h4>🎬 Відео до уроку</h4>
+              <h4>{t('course.lesson_video')}</h4>
               <video controls src={videoUrl} style={{ width: '100%', maxWidth: 720, borderRadius: 8 }} />
             </div>
           )}
 
           {files.length > 0 && (
             <div className="course__lesson-files">
-              <h4>📎 Матеріали до уроку</h4>
+              <h4>{t('course.lesson_files')}</h4>
               <ul>
                 {files.map((f, fi) => (
                   <li key={fi}>

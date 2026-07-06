@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import Loader from './components/UI/Loader';
 import ScrollToTop from './components/UI/ScrollToTop';
 import ProgressBar from './components/UI/ProgressBar';
-import ErrorBoundary from './components/UI/ErrorBoundary';
+import ErrorBoundary, { TranslatedErrorBoundary } from './components/UI/ErrorBoundary';
 import SWUpdateNotification from './components/UI/SWUpdateNotification';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
@@ -131,16 +131,16 @@ function AppContent() {
         <main id="main-content">
           <Hero />
           <About />
-          <Suspense fallback={null}><ErrorBoundary><Course /></ErrorBoundary></Suspense>
-          <ErrorBoundary><Services /></ErrorBoundary>
-          <Suspense fallback={null}><ErrorBoundary><Testimonials /></ErrorBoundary></Suspense>
-          <Suspense fallback={null}><ErrorBoundary><Portfolio /></ErrorBoundary></Suspense>
-          <Suspense fallback={null}><ErrorBoundary><FAQ /></ErrorBoundary></Suspense>
-          <Suspense fallback={null}><ErrorBoundary><Vacancies /></ErrorBoundary></Suspense>
-          <Suspense fallback={null}><ErrorBoundary><Contact /></ErrorBoundary></Suspense>
+          <Suspense fallback={null}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
+          <TranslatedErrorBoundary><Services /></TranslatedErrorBoundary>
+          <Suspense fallback={null}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
+          <Suspense fallback={null}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
+          <Suspense fallback={null}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
+          <Suspense fallback={null}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
+          <Suspense fallback={null}><TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary></Suspense>
         </main>
-        <Suspense fallback={null}><ErrorBoundary><AdminPanel /></ErrorBoundary></Suspense>
-        <Suspense fallback={null}><ErrorBoundary><Footer /></ErrorBoundary></Suspense>
+        <Suspense fallback={null}><TranslatedErrorBoundary><AdminPanel /></TranslatedErrorBoundary></Suspense>
+        <Suspense fallback={null}><TranslatedErrorBoundary><Footer /></TranslatedErrorBoundary></Suspense>
         <ScrollToTop />
         <SWUpdateNotification />
       </div>

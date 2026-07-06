@@ -123,7 +123,7 @@ export default function Course() {
           className="course__module-lesson course__module-lesson--locked"
           onClick={() => handleLessonClick(moduleIndex, lessonIndex, lesson)}
         >
-          <span className="course__lesson-bullet">🔒</span>
+          <span className="course__lesson-bullet" aria-hidden="true">🔒</span>
           <span>{lesson}</span>
         </li>
       );
@@ -135,7 +135,7 @@ export default function Course() {
         className="course__module-lesson course__module-lesson--open"
         onClick={() => handleLessonClick(moduleIndex, lessonIndex, lesson)}
       >
-        <span className="course__lesson-bullet">
+        <span className="course__lesson-bullet" aria-hidden="true">
           {viewed ? '✓' : '✦'}
         </span>
         <span>
@@ -223,6 +223,7 @@ export default function Course() {
                         </span>
                         <span
                           className={`course__module-arrow ${openModule === i ? 'course__module-arrow--open' : ''}`}
+                          aria-hidden="true"
                         >
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                             <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -293,7 +294,7 @@ export default function Course() {
                   <ul className="course__tariff-features">
                     {tariff.features.map((f, fi) => (
                       <li key={fi} className="course__tariff-feature">
-                        <span className="course__tariff-check">✦</span> {f}
+                        <span className="course__tariff-check" aria-hidden="true">✦</span> {f}
                       </li>
                     ))}
                   </ul>

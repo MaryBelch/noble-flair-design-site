@@ -70,7 +70,7 @@ export default function Portfolio() {
   }, [activeCategory]);
 
   return (
-    <section id="portfolio" className="section portfolio" ref={sectionRef}>
+    <section id="portfolio" className="section portfolio" ref={sectionRef} role="region" aria-label={t('portfolio.title')}>
       <div className="container">
         <SectionTitle titleKey="portfolio.title" subtitleKey="portfolio.subtitle" />
 
@@ -115,7 +115,7 @@ export default function Portfolio() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="portfolio__empty">Немає робіт у цій категорії</p>
+          <p className="portfolio__empty">{t('course.empty_portfolio')}</p>
         )}
       </div>
     </section>

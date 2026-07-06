@@ -43,7 +43,8 @@
     "title": "Noble Flair Design",
     "description": "Втілюємо елегантність у кожній деталі. Дизайн презентацій, поліграфія, навчання та ексклюзивні прикраси з епоксидної смоли.",
     "cta_course": "Дізнатись про курс",
-    "cta_portfolio": "Портфоліо"
+    "cta_portfolio": "Портфоліо",
+    "scroll_label": "Scroll"
   },
   "about": {
     "title": "Про студію",
@@ -211,7 +212,14 @@
         ]
       }
     ],
-    "module_label": "Модуль"
+    "module_label": "Модуль",
+    "lesson_loading": "Завантаження...",
+    "lesson_error": "Помилка завантаження",
+    "lesson_free_preview": "🎉 Це безкоштовний пробний урок! Контент з'явиться незабаром.",
+    "lesson_video": "🎬 Відео до уроку",
+    "lesson_files": "📎 Матеріали до уроку",
+    "lesson_back": "Назад до модулів",
+    "empty_portfolio": "Немає робіт у цій категорії"
   },
   "services": {
     "title": "Послуги",
@@ -284,5 +292,39 @@
     "rights": "© 2026 Noble Flair Design. Всі права захищені.",
     "tagline": "Дизайн, що надихає",
     "navigation": "Навігація"
+  },
+  "admin": {
+    "title": "Адмін-панель",
+    "subtitle": "Керування доступом та повідомлення",
+    "tab_users": "Користувачі",
+    "tab_messages": "Повідомлення",
+    "loading": "Завантаження...",
+    "no_users": "Немає зареєстрованих користувачів",
+    "no_messages": "Немає повідомлень",
+    "access_yes": "✓ Доступ є",
+    "access_no": "✗ Немає",
+    "admin_label": "Адмін",
+    "user_label": "Користувач",
+    "read": "Прочитано",
+    "basic": "Базовий",
+    "standard": "Стандарт",
+    "vip": "ВИП",
+    "revoke": "Відкликати",
+    "make_admin": "Зробити адміном",
+    "make_user": "Зробити user",
+    "confirm_revoke": "відкликати доступ",
+    "confirm_role": "змінити роль",
+    "col_name": "Ім'я",
+    "col_email": "Email",
+    "col_registered": "Зареєстровано",
+    "col_tariff": "Тариф",
+    "col_access": "Доступ",
+    "col_role": "Роль",
+    "col_actions": "Дії"
+  },
+  "error": {
+    "title": "Щось пішло не так",
+    "text": "Сталася помилка під час завантаження цього розділу.",
+    "retry": "Спробувати ще раз"
   }
 }

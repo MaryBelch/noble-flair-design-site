@@ -12,12 +12,13 @@ export default function Skeleton({ width = '100%', height = '20px', borderRadius
 
 /** Skeleton block for a content card */
 export function CardSkeleton({ lines = 3 }) {
+  const widths = ['80%', '65%', '50%', '75%', '55%'];
   return (
     <div className="skeleton-card" aria-hidden="true">
       <Skeleton height="24px" width="60%" />
       <Skeleton height="14px" width="40%" />
       {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton key={i} height="12px" width={`${70 + Math.random() * 30}%`} />
+        <Skeleton key={i} height="12px" width={widths[i % widths.length]} />
       ))}
     </div>
   );

@@ -43,7 +43,8 @@
     "title": "Noble Flair Design",
     "description": "Bringing elegance to every detail. Presentation design, printing, education, and exclusive epoxy resin jewelry.",
     "cta_course": "Learn About Course",
-    "cta_portfolio": "Portfolio"
+    "cta_portfolio": "Portfolio",
+    "scroll_label": "Scroll"
   },
   "about": {
     "title": "About Us",
@@ -211,7 +212,14 @@
         ]
       }
     ],
-    "module_label": "Module"
+    "module_label": "Module",
+    "lesson_loading": "Loading...",
+    "lesson_error": "Loading error",
+    "lesson_free_preview": "🎉 This is a free trial lesson! Content will appear soon.",
+    "lesson_video": "🎬 Lesson Video",
+    "lesson_files": "📎 Lesson Materials",
+    "lesson_back": "Back to modules",
+    "empty_portfolio": "No works in this category"
   },
   "services": {
     "title": "Services",
@@ -284,5 +292,39 @@
     "rights": "© 2026 Noble Flair Design. All rights reserved.",
     "tagline": "Design that inspires",
     "navigation": "Navigation"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "subtitle": "Manage access and messages",
+    "tab_users": "Users",
+    "tab_messages": "Messages",
+    "loading": "Loading...",
+    "no_users": "No registered users",
+    "no_messages": "No messages",
+    "access_yes": "✓ Has access",
+    "access_no": "✗ No access",
+    "admin_label": "Admin",
+    "user_label": "User",
+    "read": "Mark read",
+    "basic": "Basic",
+    "standard": "Standard",
+    "vip": "VIP",
+    "revoke": "Revoke",
+    "make_admin": "Make admin",
+    "make_user": "Make user",
+    "confirm_revoke": "revoke access",
+    "confirm_role": "change role",
+    "col_name": "Name",
+    "col_email": "Email",
+    "col_registered": "Registered",
+    "col_tariff": "Tariff",
+    "col_access": "Access",
+    "col_role": "Role",
+    "col_actions": "Actions"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "text": "An error occurred while loading this section.",
+    "retry": "Try Again"
   }
 }

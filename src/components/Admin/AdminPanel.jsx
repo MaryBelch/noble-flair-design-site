@@ -1,13 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from '../../context/I18nContext';
 import { getAllUsers, updateUserDoc, getAllMessages, markMessageRead } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import './AdminPanel.css';
 
-const TARIFF_LABELS = { basic: 'Базовий', standard: 'Стандарт', vip: 'ВИП' };
+const TARIFF_LABELS = { basic: 'admin.basic', standard: 'admin.standard', vip: 'admin.vip' };
 
 export default function AdminPanel() {
   const { user, isAdmin } = useAuth();
+  const { t } = useTranslation();
   const [tab, setTab] = useState('users');
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -57,9 +59,7 @@ export default function AdminPanel() {
     }
   }, [visible, isAdmin, loadUsers, loadMessages]);
 
-  const confirmAction = (action) => {
-    return window.confirm(`Ви впевнені, що хочете ${action}?`);
-  };
+  const tConfirm = (key) => `Ви впевнені, що хочете ${t(key)}?`;
 
   /* ── User actions ── */
 
@@ -92,7 +92,7 @@ export default function AdminPanel() {
   };
 
   const revokeAccess = async (uid) => {
-    if (!confirmAction('відкликати доступ')) return;
+    if (!window.confirm(tConfirm('admin.confirm_revoke'))) return;
     setSaving((s) => ({ ...s, [uid]: true }));
     try {
       await updateUserDoc(uid, {
@@ -117,7 +117,7 @@ export default function AdminPanel() {
   };
 
   const toggleRole = async (uid, currentRole) => {
-    if (!confirmAction(`змінити роль з "${currentRole === 'admin' ? 'адмін' : 'користувач'}" на "${currentRole === 'admin' ? 'користувач' : 'адмін'}"`)) return;
+    if (!window.confirm(tConfirm('admin.confirm_role'))) return;
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
     setSaving((s) => ({ ...s, [uid]: true }));
     try {
@@ -162,8 +162,8 @@ export default function AdminPanel() {
         <SectionTitle
           titleKey={null}
           subtitleKey={null}
-          forceTitle="Адмін-панель"
-          forceSubtitle="Керування доступом та повідомлення"
+          forceTitle={t('admin.title')}
+          forceSubtitle={t('admin.subtitle')}
         />
 
         {/* ── Tabs ── */}
@@ -172,34 +172,34 @@ export default function AdminPanel() {
             className={`admin-panel__tab ${tab === 'users' ? 'admin-panel__tab--active' : ''}`}
             onClick={() => setTab('users')}
           >
-            Користувачі ({users.length})
+            {t('admin.tab_users')} ({users.length})
           </button>
           <button
             className={`admin-panel__tab ${tab === 'messages' ? 'admin-panel__tab--active' : ''}`}
             onClick={() => setTab('messages')}
           >
-            Повідомлення ({messages.length})
+            {t('admin.tab_messages')} ({messages.length})
           </button>
         </div>
 
         {loading ? (
-          <p className="admin-panel__loading">Завантаження...</p>
+          <p className="admin-panel__loading">{t('admin.loading')}</p>
         ) : tab === 'users' ? (
           /* ── Users table ── */
           users.length === 0 ? (
-            <p className="admin-panel__empty">Немає зареєстрованих користувачів</p>
+            <p className="admin-panel__empty">{t('admin.no_users')}</p>
           ) : (
             <div className="admin-panel__table-wrapper">
               <table className="admin-panel__table">
                 <thead>
                   <tr>
-                    <th>Ім'я</th>
-                    <th>Email</th>
-                    <th>Зареєстровано</th>
-                    <th>Тариф</th>
-                    <th>Доступ</th>
-                    <th>Роль</th>
-                    <th>Дії</th>
+                    <th>{t('admin.col_name')}</th>
+                    <th>{t('admin.col_email')}</th>
+                    <th>{t('admin.col_registered')}</th>
+                    <th>{t('admin.col_tariff')}</th>
+                    <th>{t('admin.col_access')}</th>
+                    <th>{t('admin.col_role')}</th>
+                    <th>{t('admin.col_actions')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -211,7 +211,7 @@ export default function AdminPanel() {
                       <td>
                         {u.tariff ? (
                           <span className="admin-panel__badge admin-panel__badge--active">
-                            {TARIFF_LABELS[u.tariff] || u.tariff}
+                            {t(TARIFF_LABELS[u.tariff]) || u.tariff}
                           </span>
                         ) : (
                           <span style={{ color: '#666', fontSize: '0.85rem' }}>—</span>
@@ -219,7 +219,7 @@ export default function AdminPanel() {
                       </td>
                       <td>
                         <span className={`admin-panel__badge ${u.hasCourseAccess ? 'admin-panel__badge--active' : ''}`}>
-                          {u.hasCourseAccess ? '✓ Доступ є' : '✗ Немає'}
+                          {u.hasCourseAccess ? t('admin.access_yes') : t('admin.access_no')}
                         </span>
                         {u.accessExpiresAt && (
                           <span style={{ display: 'block', fontSize: '0.75rem', color: '#888', marginTop: 4 }}>
@@ -227,7 +227,7 @@ export default function AdminPanel() {
                           </span>
                         )}
                       </td>
-                      <td>{u.role === 'admin' ? 'Адмін' : 'Користувач'}</td>
+                      <td>{u.role === 'admin' ? t('admin.admin_label') : t('admin.user_label')}</td>
                       <td className="admin-panel__actions">
                         {!u.tariff ? (
                           <>
@@ -236,21 +236,21 @@ export default function AdminPanel() {
                               onClick={() => setTariff(u.id, 'basic')}
                               disabled={saving[u.id]}
                             >
-                              {saving[u.id] ? '...' : 'Базовий'}
+                              {saving[u.id] ? '...' : t('admin.basic')}
                             </button>
                             <button
                               className="admin-panel__btn admin-panel__btn--grant"
                               onClick={() => setTariff(u.id, 'standard')}
                               disabled={saving[u.id]}
                             >
-                              {saving[u.id] ? '...' : 'Стандарт'}
+                              {saving[u.id] ? '...' : t('admin.standard')}
                             </button>
                             <button
                               className="admin-panel__btn admin-panel__btn--grant"
                               onClick={() => setTariff(u.id, 'vip')}
                               disabled={saving[u.id]}
                             >
-                              {saving[u.id] ? '...' : 'ВИП'}
+                              {saving[u.id] ? '...' : t('admin.vip')}
                             </button>
                           </>
                         ) : (
@@ -259,7 +259,7 @@ export default function AdminPanel() {
                             onClick={() => revokeAccess(u.id)}
                             disabled={saving[u.id]}
                           >
-                            {saving[u.id] ? '...' : 'Відкликати'}
+                            {saving[u.id] ? '...' : t('admin.revoke')}
                           </button>
                         )}
                         <button
@@ -267,7 +267,7 @@ export default function AdminPanel() {
                           onClick={() => toggleRole(u.id, u.role)}
                           disabled={saving[u.id] || u.id === user?.uid}
                         >
-                          {u.role === 'admin' ? 'Зробити user' : 'Зробити адміном'}
+                          {u.role === 'admin' ? t('admin.make_user') : t('admin.make_admin')}
                         </button>
                       </td>
                     </tr>
@@ -279,7 +279,7 @@ export default function AdminPanel() {
         ) : (
           /* ── Messages tab ── */
           messages.length === 0 ? (
-            <p className="admin-panel__empty">Немає повідомлень</p>
+            <p className="admin-panel__empty">{t('admin.no_messages')}</p>
           ) : (
             <div className="admin-panel__messages">
               {messages.map((m) => (
@@ -293,7 +293,7 @@ export default function AdminPanel() {
                       <span className="admin-panel__message-date">{formatDate(m.createdAt)}</span>
                       {!m.read && (
                         <button className="admin-panel__message-read-btn" onClick={() => handleMarkRead(m.id)}>
-                          Прочитано
+                          {t('admin.read')}
                         </button>
                       )}
                     </div>

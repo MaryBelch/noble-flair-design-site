@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { useTranslation } from '../../context/I18nContext';
 import './ErrorBoundary.css';
 
 export default class ErrorBoundary extends Component {
@@ -22,24 +23,43 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      const fallback = this.props.fallback || (
+      const {
+        fallback,
+        errorTitle = 'Щось пішло не так',
+        errorText = 'Сталася помилка під час завантаження цього розділу.',
+        retryText = 'Спробувати ще раз',
+      } = this.props;
+
+      const content = fallback || (
         <div className="error-boundary">
           <div className="error-boundary__content">
             <span className="error-boundary__icon">⚠️</span>
-            <h2 className="error-boundary__title">Щось пішло не так</h2>
-            <p className="error-boundary__text">
-              Сталася помилка під час завантаження цього розділу.
-            </p>
+            <h2 className="error-boundary__title">{errorTitle}</h2>
+            <p className="error-boundary__text">{errorText}</p>
             <button className="error-boundary__btn" onClick={this.handleRetry}>
-              Спробувати ще раз
+              {retryText}
             </button>
           </div>
         </div>
       );
 
-      return this.props.fallback || fallback;
+      return content;
     }
 
     return this.props.children;
   }
+}
+
+/** ErrorBoundary wrapper that reads translated fallback text from i18n context */
+export function TranslatedErrorBoundary({ children }) {
+  const { t } = useTranslation();
+  return (
+    <ErrorBoundary
+      errorTitle={t('error.title')}
+      errorText={t('error.text')}
+      retryText={t('error.retry')}
+    >
+      {children}
+    </ErrorBoundary>
+  );
 }
