@@ -165,7 +165,7 @@ export default function Course() {
         <div className="course__content">
           <div className="course__info fade-in">
             <p className="course__description">{t('course.description')}</p>
-            <p className="course__status gold-text">{t('course.status')}</p>
+            <p className="course__status">{t('course.status')}</p>
           </div>
 
           <div className="course__modules fade-in">

@@ -129,18 +129,20 @@ function AppContent() {
         <ProgressBar />
         <Header />
         <main id="main-content">
-          <Hero />
-          <About />
-          <Suspense fallback={null}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
-          <TranslatedErrorBoundary><Services /></TranslatedErrorBoundary>
-          <Suspense fallback={null}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
-          <Suspense fallback={null}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
-          <Suspense fallback={null}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
-          <Suspense fallback={null}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
-          <Suspense fallback={null}><TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary></Suspense>
+          <ErrorBoundary>
+            <Hero />
+            <About />
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><Services /></TranslatedErrorBoundary>
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
+            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary></Suspense>
+          </ErrorBoundary>
         </main>
-        <Suspense fallback={null}><TranslatedErrorBoundary><AdminPanel /></TranslatedErrorBoundary></Suspense>
-        <Suspense fallback={null}><TranslatedErrorBoundary><Footer /></TranslatedErrorBoundary></Suspense>
+        <Suspense fallback={<div style={{ minHeight: 100 }} />}><TranslatedErrorBoundary><AdminPanel /></TranslatedErrorBoundary></Suspense>
+        <Suspense fallback={<div style={{ minHeight: 100 }} />}><TranslatedErrorBoundary><Footer /></TranslatedErrorBoundary></Suspense>
         <ScrollToTop />
         <SWUpdateNotification />
       </div>
