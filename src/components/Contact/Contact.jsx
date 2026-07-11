@@ -8,6 +8,7 @@ import Button from '../UI/Button';
 import './Contact.css';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TELEGRAM_RE = /^@[\w]+$/;
 const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
 
 export default function Contact() {
@@ -25,7 +26,7 @@ export default function Contact() {
     if (!data.name || data.name.trim().length < 2) {
       errs.name = t('contact.form_name_error');
     }
-    if (!data.contact || !EMAIL_RE.test(data.contact)) {
+    if (!data.contact || (!EMAIL_RE.test(data.contact) && !TELEGRAM_RE.test(data.contact))) {
       errs.contact = t('contact.form_email_error');
     }
     return errs;
@@ -175,8 +176,9 @@ export default function Contact() {
                   </div>
                   <div className="contact__form-field">
                     <input
-                      type="email"
+                      type="text"
                       name="contact"
+                      inputMode="email"
                       placeholder={t('contact.form_email_placeholder')}
                       className={`contact__form-input${fieldErrors.contact ? ' contact__form-input--error' : ''}`}
                       aria-invalid={fieldErrors.contact ? 'true' : undefined}

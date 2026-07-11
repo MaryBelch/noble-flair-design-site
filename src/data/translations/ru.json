@@ -11,7 +11,8 @@
     "contact": "Контакты",
     "login": "Войти",
     "skip_link": "Перейти к содержимому",
-    "scroll_to_top": "Наверх"
+    "scroll_to_top": "Наверх",
+    "admin": "Админ"
   },
   "auth": {
     "title_login": "Вход",
@@ -246,7 +247,8 @@
     "banners": "Баннеры",
     "printing": "Визитки и полиграфия",
     "epoxy": "Украшения",
-    "empty": "Нет работ в этой категории"
+    "empty": "Нет работ в этой категории",
+    "filter_aria": "Категории портфолио"
   },
   "testimonials": {
     "title": "Отзывы",
@@ -291,15 +293,28 @@
     "form_email": "Email или Telegram",
     "form_message": "Сообщение",
     "form_name_placeholder": "Ваше имя",
-    "form_email_placeholder": "Ваш Email",
+    "form_email_placeholder": "Ваш Email или Telegram",
     "form_submit": "Отправить",
     "form_success": "Спасибо! Мы свяжемся с вами в ближайшее время.",
     "form_error": "Произошла ошибка. Попробуйте позже или напишите нам в Telegram.",
     "form_name_error": "Имя должно быть минимум 2 символа",
-    "form_email_error": "Введите корректный email",
+    "form_email_error": "Введите корректный email или @telegram",
     "form_rate_limit": "Подождите 30 секунд перед следующим сообщением",
     "brief_cta": "📋 Или заполните бриф в Telegram — получите предварительную стоимость сразу",
     "brief_btn": "Заполнить бриф"
+  },
+  "profile": {
+    "tariff": "Тариф",
+    "access": "Доступ",
+    "days_short": "дн.",
+    "forever": "Навсегда",
+    "admin_panel": "Админ-панель",
+    "logout": "Выйти"
+  },
+  "header": {
+    "lang_aria": "Язык",
+    "open_menu": "Открыть меню",
+    "close_menu": "Закрыть меню"
   },
   "footer": {
     "rights": "© 2026 Noble Flair Design. Все права защищены.",
@@ -327,6 +342,7 @@
     "make_user": "Сделать user",
     "confirm_revoke": "отозвать доступ",
     "confirm_role": "изменить роль",
+    "confirm_template": "Вы уверены, что хотите {action}?",
     "col_name": "Имя",
     "col_email": "Email",
     "col_registered": "Зарегистрирован",

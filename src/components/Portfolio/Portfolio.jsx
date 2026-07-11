@@ -74,10 +74,11 @@ export default function Portfolio() {
       <div className="container">
         <SectionTitle titleKey="portfolio.title" subtitleKey="portfolio.subtitle" />
 
-        <div className="portfolio__filters fade-in" role="tablist" aria-label="Категорії портфоліо">
+        <div className="portfolio__filters fade-in" role="tablist" aria-label={t('portfolio.filter_aria')}>
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
+              id={`portfolio-tab-${cat}`}
               className={`portfolio__filter-btn ${activeCategory === cat ? 'portfolio__filter-btn--active' : ''}`}
               onClick={() => setActiveCategory(cat)}
               role="tab"
@@ -93,6 +94,7 @@ export default function Portfolio() {
           id="portfolio-grid"
           className={`portfolio__grid ${animating ? 'portfolio__grid--animating' : ''}`}
           role="tabpanel"
+          aria-labelledby={`portfolio-tab-${activeCategory}`}
         >
           {filtered.map((item, i) => (
             <div

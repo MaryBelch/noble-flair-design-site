@@ -508,6 +508,12 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--gold, #D4AF37);
+}
+
+.course__tariff-price-current {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
   line-height: 1.2;
 }
 

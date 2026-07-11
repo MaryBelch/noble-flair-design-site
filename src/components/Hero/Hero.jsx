@@ -11,7 +11,8 @@ export default function Hero() {
   const sectionRef = useScrollReveal([locale], 0.15);
   const bgRef = useRef(null);
   const contentRef = useRef(null);
-  const rafRef = useRef(null);
+  const scrollRafRef = useRef(null);
+  const mouseRafRef = useRef(null);
   const scrollRef = useRef(0);
   const [displayedText, setDisplayedText] = useState('');
   const [typingDone, setTypingDone] = useState(false);
@@ -46,12 +47,11 @@ export default function Hero() {
     const handleScroll = () => {
       scrollRef.current = window.scrollY;
       // Schedule rAF if not already pending
-      if (!rafRef.current) {
-        rafRef.current = requestAnimationFrame(() => {
+      if (!scrollRafRef.current) {
+        scrollRafRef.current = requestAnimationFrame(() => {
           const offset = scrollRef.current * 0.35;
-          const currentTransform = bg.dataset.mouseTransform || '';
-          bg.style.transform = `translateY(${offset}px) ${currentTransform}`;
-          rafRef.current = null;
+          bg.style.transform = `translateY(${offset}px)`;
+          scrollRafRef.current = null;
         });
       }
     };
@@ -59,8 +59,8 @@ export default function Hero() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
+      if (scrollRafRef.current) {
+        cancelAnimationFrame(scrollRafRef.current);
       }
     };
   }, []);
@@ -68,14 +68,14 @@ export default function Hero() {
   /* ── Mouse-based parallax on content (rAF-throttled) ── */
   const handleMouseMove = useCallback((e) => {
     if (!contentRef.current) return;
-    if (rafRef.current) return; // skip if rAF is pending
+    if (mouseRafRef.current) return; // skip if rAF is pending
 
-    rafRef.current = requestAnimationFrame(() => {
+    mouseRafRef.current = requestAnimationFrame(() => {
       const { clientX, clientY } = e;
       const x = (clientX / window.innerWidth - 0.5) * 6;
       const y = (clientY / window.innerHeight - 0.5) * 6;
       contentRef.current.style.transform = `translate(${x}px, ${y}px)`;
-      rafRef.current = null;
+      mouseRafRef.current = null;
     });
   }, []);
 

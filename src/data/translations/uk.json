@@ -11,7 +11,8 @@
     "contact": "Контакти",
     "login": "Увійти",
     "skip_link": "Перейти до вмісту",
-    "scroll_to_top": "Наверх"
+    "scroll_to_top": "Наверх",
+    "admin": "Адмін"
   },
   "auth": {
     "title_login": "Вхід",
@@ -246,7 +247,8 @@
     "banners": "Банери",
     "printing": "Візитки та поліграфія",
     "epoxy": "Прикраси",
-    "empty": "Немає робіт у цій категорії"
+    "empty": "Немає робіт у цій категорії",
+    "filter_aria": "Категорії портфоліо"
   },
   "testimonials": {
     "title": "Відгуки",
@@ -291,15 +293,28 @@
     "form_email": "Email або Telegram",
     "form_message": "Повідомлення",
     "form_name_placeholder": "Ваше ім'я",
-    "form_email_placeholder": "Ваш Email",
+    "form_email_placeholder": "Ваш Email або Telegram",
     "form_submit": "Надіслати",
     "form_success": "Дякуємо! Ми зв'яжемося з вами найближчим часом.",
     "form_error": "Сталася помилка. Спробуйте пізніше або напишіть нам у Telegram.",
     "form_name_error": "Ім'я має бути мінімум 2 символи",
-    "form_email_error": "Введіть коректний email",
+    "form_email_error": "Введіть коректний email або @telegram",
     "form_rate_limit": "Зачекайте 30 секунд перед наступним повідомленням",
     "brief_cta": "📋 Або заповніть бриф у Telegram — отримайте попередню вартість одразу",
     "brief_btn": "Заповнити бриф"
+  },
+  "profile": {
+    "tariff": "Тариф",
+    "access": "Доступ",
+    "days_short": "дн.",
+    "forever": "Назавжди",
+    "admin_panel": "Адмін-панель",
+    "logout": "Вийти"
+  },
+  "header": {
+    "lang_aria": "Мова",
+    "open_menu": "Відкрити меню",
+    "close_menu": "Закрити меню"
   },
   "footer": {
     "rights": "© 2026 Noble Flair Design. Всі права захищені.",
@@ -327,6 +342,7 @@
     "make_user": "Зробити user",
     "confirm_revoke": "відкликати доступ",
     "confirm_role": "змінити роль",
+    "confirm_template": "Ви впевнені, що хочете {action}?",
     "col_name": "Ім'я",
     "col_email": "Email",
     "col_registered": "Зареєстровано",

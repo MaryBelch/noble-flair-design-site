@@ -59,7 +59,7 @@ export default function AdminPanel() {
     }
   }, [visible, isAdmin, loadUsers, loadMessages]);
 
-  const tConfirm = (key) => `Ви впевнені, що хочете ${t(key)}?`;
+  const tConfirm = (key) => t('admin.confirm_template').replace('{action}', t(key));
 
   /* ── User actions ── */
 

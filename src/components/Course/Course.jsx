@@ -21,10 +21,12 @@ function useSaleCountdown(endDate) {
   const [remaining, setRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, ended: false });
 
   useEffect(() => {
+    let interval;
     function tick() {
       const diff = endDate.getTime() - Date.now();
       if (diff <= 0) {
         setRemaining({ days: 0, hours: 0, minutes: 0, seconds: 0, ended: true });
+        clearInterval(interval);
         return;
       }
       const totalSec = Math.floor(diff / 1000);
@@ -37,7 +39,7 @@ function useSaleCountdown(endDate) {
       });
     }
     tick();
-    const interval = setInterval(tick, 1000);
+    interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, [endDate]);
 
@@ -286,9 +288,15 @@ export default function Course() {
                     {tariff.name}
                   </div>
                   <div className="course__tariff-pricing">
-                    <span className="course__tariff-price-old">${tariff.price}</span>
-                    <span className="course__tariff-price-sale">${tariff.sale_price}</span>
-                    <span className="course__tariff-sale-label">{t('course.tariffs.sale')}</span>
+                    {!countdown.ended ? (
+                      <>
+                        <span className="course__tariff-price-old">${tariff.price}</span>
+                        <span className="course__tariff-price-sale">${tariff.sale_price}</span>
+                        <span className="course__tariff-sale-label">{t('course.tariffs.sale')}</span>
+                      </>
+                    ) : (
+                      <span className="course__tariff-price-current">${tariff.price}</span>
+                    )}
                   </div>
                   <p className="course__tariff-desc">{tariff.desc}</p>
                   <ul className="course__tariff-features">

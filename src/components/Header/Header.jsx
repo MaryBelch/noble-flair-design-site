@@ -47,23 +47,43 @@ export default function Header() {
 
   /* ── Active nav link via IntersectionObserver ── */
   useEffect(() => {
-    const sectionEls = navItems
-      .map((item) => document.querySelector(item.href))
-      .filter(Boolean);
+    let observer = null;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: '-72px 0px -50% 0px' }
-    );
+    const setupObserver = () => {
+      // Disconnect previous observer if re-setting up
+      if (observer) observer.disconnect();
 
-    sectionEls.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      const sectionEls = navItems
+        .map((item) => document.querySelector(item.href))
+        .filter(Boolean);
+
+      if (sectionEls.length === 0) return;
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: '-72px 0px -50% 0px' }
+      );
+
+      sectionEls.forEach((el) => observer.observe(el));
+    };
+
+    setupObserver();
+
+    // Watch for lazy-loaded sections appearing in the DOM
+    const mo = new MutationObserver(() => setupObserver());
+    const target = document.getElementById('main-content') || document.body;
+    mo.observe(target, { childList: true, subtree: true });
+
+    return () => {
+      if (observer) observer.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   /* ── Focus trap for mobile nav ── */
@@ -239,24 +259,24 @@ export default function Header() {
                   <div className="header__profile-dropdown" role="menu">
                     {userDoc?.tariff && (
                       <div className="header__profile-row" role="menuitem">
-                        <span className="header__profile-label">Тариф:</span>
+                        <span className="header__profile-label">{t('profile.tariff')}:</span>
                         <span className="header__profile-value">
                           {tariffLabels[userDoc.tariff] || userDoc.tariff}
                         </span>
                       </div>
                     )}
-                    {(userDoc?.tariff && tariffLabels[userDoc.tariff] !== 'ВИП') && remainingDays !== null && (
+                    {(userDoc?.tariff && tariffLabels[userDoc.tariff] !== 'vip') && remainingDays !== null && (
                       <div className="header__profile-row" role="menuitem">
-                        <span className="header__profile-label">Доступ:</span>
+                        <span className="header__profile-label">{t('profile.access')}:</span>
                         <span className={`header__profile-value ${remainingDays <= 14 ? 'header__profile-value--warning' : ''}`}>
-                          {remainingDays > 0 ? `${remainingDays} дн.` : 'Закінчився'}
+                          {remainingDays > 0 ? `${remainingDays} ${t('profile.days_short')}` : t('admin.access_no')}
                         </span>
                       </div>
                     )}
                     {userDoc?.tariff === 'vip' && (
                       <div className="header__profile-row" role="menuitem">
-                        <span className="header__profile-label">Доступ:</span>
-                        <span className="header__profile-value" style={{ color: '#2ecc71' }}>Назавжди</span>
+                        <span className="header__profile-label">{t('profile.access')}:</span>
+                        <span className="header__profile-value" style={{ color: '#2ecc71' }}>{t('profile.forever')}</span>
                       </div>
                     )}
                     <div className="header__profile-row" role="menuitem">
@@ -265,19 +285,19 @@ export default function Header() {
                     </div>
                     {isAdmin && (
                       <a href="#admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)} role="menuitem">
-                        Адмін-панель
+                        {t('profile.admin_panel')}
                       </a>
                     )}
-                    <button className="header__profile-logout" onClick={logout} role="menuitem">Вийти</button>
+                    <button className="header__profile-logout" onClick={logout} role="menuitem">{t('profile.logout')}</button>
                   </div>
                 )}
 
                 {isAdmin && (
                   <a href="#admin" className="header__admin-link gold-border-hover">
-                    Адмін
+                    {t('nav.admin')}
                   </a>
                 )}
-                <button className="header__logout-btn" onClick={logout} title="Вийти" aria-label="Вийти">
+                <button className="header__logout-btn" onClick={logout} title={t('profile.logout')} aria-label={t('profile.logout')}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
                     <polyline points="16 17 21 12 16 7" />
@@ -292,7 +312,7 @@ export default function Header() {
             )}
           </div>
 
-          <div className="header__lang" role="radiogroup" aria-label="Мова">
+          <div className="header__lang" role="radiogroup" aria-label={t('header.lang_aria')}>
             {SUPPORTED_LOCALES.map((l) => (
               <button
                 key={l}
@@ -311,9 +331,8 @@ export default function Header() {
             ref={burgerRef}
             className={`header__burger ${mobileOpen ? 'header__burger--open' : ''}`}
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? 'Закрити меню' : 'Відкрити меню'}
+            aria-label={mobileOpen ? t('header.close_menu') : t('header.open_menu')}
             aria-expanded={mobileOpen}
-            aria-controls="mobile-menu"
           >
             <span aria-hidden="true" />
             <span aria-hidden="true" />

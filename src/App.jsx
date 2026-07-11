@@ -57,9 +57,9 @@ const structuredData = [
       sameAs: 'https://marybelch.github.io/noble-flair-design-site/',
     },
     offers: [
-      { '@type': 'Offer', name: 'Базовий', price: '100', priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'Стандарт', price: '150', priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'ВИП', price: '300', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Базовий', price: 100, priceCurrency: 'USD', priceValidUntil: '2026-07-31' },
+      { '@type': 'Offer', name: 'Стандарт', price: 150, priceCurrency: 'USD', priceValidUntil: '2026-07-31' },
+      { '@type': 'Offer', name: 'ВИП', price: 300, priceCurrency: 'USD', priceValidUntil: '2026-07-31' },
     ],
   },
   {
@@ -68,32 +68,6 @@ const structuredData = [
     name: 'Noble Flair Design',
     url: 'https://marybelch.github.io/noble-flair-design-site/',
     inLanguage: ['uk', 'ru', 'en'],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Як проходить навчання?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Курс повністю онлайн. Ви отримуєте доступ до відеоуроків, текстового контенту та додаткових матеріалів на платформі.' },
-      },
-      {
-        '@type': 'Question',
-        name: 'Скільки часу потрібно на курс?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Курс розрахований на 4-6 тижнів при регулярних заняттях по 2-3 години на тиждень.' },
-      },
-      {
-        '@type': 'Question',
-        name: 'Які програми потрібні?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Для більшості уроків достатньо PowerPoint або Google Slides. Окремий модуль присвячений Figma.' },
-      },
-      {
-        '@type': 'Question',
-        name: 'Чи видаєте ви сертифікат?',
-        acceptedAnswer: { '@type': 'Answer', text: 'Так, після завершення курсу ви отримуєте електронний сертифікат.' },
-      },
-    ],
   },
 ];
 
@@ -111,6 +85,34 @@ function AppContent() {
   useEffect(() => {
     trackPageView(window.location.pathname);
   }, []);
+
+  // Locale-aware FAQ structured data
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: t('faq.course_format_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.course_format_a') },
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.duration_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.duration_a') },
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.tools_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.tools_a') },
+      },
+      {
+        '@type': 'Question',
+        name: t('faq.certificate_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.certificate_a') },
+      },
+    ],
+  };
 
   return (
     <>
@@ -145,7 +147,7 @@ function AppContent() {
       </div>
 
       {/* JSON-LD structured data */}
-      {structuredData.map((data, i) => (
+      {[...structuredData, faqStructuredData].map((data, i) => (
         <script
           key={i}
           type="application/ld+json"
