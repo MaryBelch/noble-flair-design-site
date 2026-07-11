@@ -27,8 +27,8 @@ export default function Header() {
   const navItems = [
     { key: 'home', href: '#hero' },
     { key: 'about', href: '#about' },
-    { key: 'course', href: '#course' },
     { key: 'services', href: '#services' },
+    { key: 'course', href: '#course' },
     { key: 'portfolio', href: '#portfolio' },
     { key: 'faq', href: '#faq' },
     { key: 'vacancies', href: '#vacancies' },
