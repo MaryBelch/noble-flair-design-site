@@ -87,7 +87,7 @@ export default function Contact() {
         <SectionTitle titleKey="contact.title" subtitleKey="contact.subtitle" />
 
         <div className="contact__content">
-          <div className="contact__info fade-in">
+          <div className="contact__info">
             <p className="contact__description">{t('contact.description')}</p>
 
             <div className="contact__brief-cta">
@@ -152,7 +152,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="contact__form-wrapper fade-in">
+          <div className="contact__form-wrapper">
             <div className="contact__form-card">
               <h3 className="contact__form-title">{t('contact.form_submit')}</h3>
               {submitted ? (
