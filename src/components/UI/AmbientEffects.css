@@ -1,0 +1,129 @@
+/* ── Side fog/mist ambient glow ── */
+.ambient-fog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 25vw;
+  max-width: 300px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-fog--left {
+  left: 0;
+  background: radial-gradient(
+    ellipse 100% 60% at 0% 50%,
+    rgba(212, 175, 55, 0.06) 0%,
+    rgba(212, 175, 55, 0.02) 40%,
+    transparent 70%
+  );
+}
+
+.ambient-fog--right {
+  right: 0;
+  background: radial-gradient(
+    ellipse 100% 60% at 100% 50%,
+    rgba(212, 175, 55, 0.06) 0%,
+    rgba(212, 175, 55, 0.02) 40%,
+    transparent 70%
+  );
+}
+
+/* ── Floating gold particles ── */
+.ambient-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold-main);
+  will-change: transform;
+}
+
+/* Particle positions — spread on the sides of the viewport */
+.ambient-particle:nth-child(1) {
+  left: 8%;
+  top: 15%;
+  width: 4px;
+  height: 4px;
+  opacity: 0.12;
+  animation: float 12s ease-in-out infinite;
+}
+
+.ambient-particle:nth-child(2) {
+  right: 10%;
+  top: 25%;
+  width: 3px;
+  height: 3px;
+  opacity: 0.15;
+  animation: float 10s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.ambient-particle:nth-child(3) {
+  left: 5%;
+  top: 55%;
+  width: 5px;
+  height: 5px;
+  opacity: 0.08;
+  animation: float 14s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.ambient-particle:nth-child(4) {
+  right: 6%;
+  top: 65%;
+  width: 2px;
+  height: 2px;
+  opacity: 0.2;
+  animation: float 9s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.ambient-particle:nth-child(5) {
+  left: 12%;
+  top: 80%;
+  width: 3px;
+  height: 3px;
+  opacity: 0.1;
+  animation: float 11s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+.ambient-particle:nth-child(6) {
+  right: 8%;
+  top: 40%;
+  width: 4px;
+  height: 4px;
+  opacity: 0.1;
+  animation: float 13s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-12px) translateX(4px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(-3px);
+  }
+  75% {
+    transform: translateY(-8px) translateX(3px);
+  }
+}
+
+/* ── Hide on mobile ── */
+@media (max-width: 768px) {
+  .ambient-fog,
+  .ambient-particles {
+    display: none;
+  }
+}

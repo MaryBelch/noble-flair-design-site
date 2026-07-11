@@ -32,6 +32,18 @@
   transform: translateX(0);
 }
 
+/* Fade-in with subtle scale (parallax depth feel) */
+.fade-in-reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 /* Масштабирование при наведении на карточки */
 .card-hover {
   transition: transform var(--transition-base), box-shadow var(--transition-base);

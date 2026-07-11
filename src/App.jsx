@@ -8,6 +8,7 @@ import ScrollToTop from './components/UI/ScrollToTop';
 import ProgressBar from './components/UI/ProgressBar';
 import ErrorBoundary, { TranslatedErrorBoundary } from './components/UI/ErrorBoundary';
 import SWUpdateNotification from './components/UI/SWUpdateNotification';
+import AmbientEffects from './components/UI/AmbientEffects';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
 
@@ -125,6 +126,7 @@ function AppContent() {
     <>
       {!ready && <Loader />}
       <div style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+        <AmbientEffects />
         <SkipLink />
         <ProgressBar />
         <Header />
