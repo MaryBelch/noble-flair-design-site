@@ -115,7 +115,7 @@ export default function Portfolio() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="portfolio__empty">{t('course.empty_portfolio')}</p>
+          <p className="portfolio__empty">{t('portfolio.empty')}</p>
         )}
       </div>
     </section>

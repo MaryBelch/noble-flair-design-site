@@ -21,8 +21,8 @@ export default function Footer() {
           <h4 className="footer__nav-title">{t('footer.navigation')}</h4>
           <nav>
             <a href="#about">{t('nav.about')}</a>
-            <a href="#course">{t('nav.course')}</a>
             <a href="#services">{t('nav.services')}</a>
+            <a href="#course">{t('nav.course')}</a>
             <a href="#portfolio">{t('nav.portfolio')}</a>
             <a href="#contact">{t('nav.contact')}</a>
           </nav>

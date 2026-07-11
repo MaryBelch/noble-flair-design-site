@@ -66,14 +66,12 @@ export default function Testimonials() {
     >
       <div className="container">
         <SectionTitle
-          titleKey={null}
-          subtitleKey={null}
-          forceTitle="Відгуки"
-          forceSubtitle="Що кажуть наші клієнти"
+          titleKey="testimonials.title"
+          subtitleKey="testimonials.subtitle"
         />
         <div className="testimonials__carousel fade-in">
           {/* Progress dots */}
-          <div className="testimonials__dots" role="tablist" aria-label="Відгуки">
+          <div className="testimonials__dots" role="tablist" aria-label={t('testimonials.label')}>
             {testimonials.map((_, i) => (
               <button
                 key={i}
@@ -81,7 +79,7 @@ export default function Testimonials() {
                 onClick={() => goTo(i)}
                 role="tab"
                 aria-selected={i === current}
-                aria-label={`Відгук ${i + 1}`}
+                aria-label={`${t('testimonials.dot_aria')} ${i + 1}`}
               />
             ))}
           </div>
@@ -106,13 +104,13 @@ export default function Testimonials() {
 
           {/* Nav arrows */}
           <div className="testimonials__nav">
-            <button className="testimonials__nav-btn" onClick={goPrev} aria-label="Попередній відгук">
+            <button className="testimonials__nav-btn" onClick={goPrev} aria-label={t('testimonials.prev_aria')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
             <span className="testimonials__counter" aria-live="polite">{current + 1}/{testimonials.length}</span>
-            <button className="testimonials__nav-btn" onClick={goNext} aria-label="Наступний відгук">
+            <button className="testimonials__nav-btn" onClick={goNext} aria-label={t('testimonials.next_aria')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M9 18l6-6-6-6" />
               </svg>

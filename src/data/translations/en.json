@@ -2,13 +2,16 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "course": "Course",
     "services": "Services",
+    "course": "Course",
+    "testimonials": "Testimonials",
     "portfolio": "Portfolio",
     "vacancies": "Vacancies",
     "faq": "FAQ",
     "contact": "Contact",
-    "login": "Sign In"
+    "login": "Sign In",
+    "skip_link": "Skip to content",
+    "scroll_to_top": "Scroll to top"
   },
   "auth": {
     "title_login": "Sign In",
@@ -232,7 +235,8 @@
     "printing_desc": "Business cards, flyers, brochures, invitations. Full cycle: design + printing + delivery across Ukraine.",
     "epoxy": "Epoxy Resin Jewelry",
     "epoxy_desc": "Unique handmade jewelry pieces. Pendants, earrings, bracelets — every detail crafted with love.",
-    "cta": "Order Now"
+    "cta": "Order Now",
+    "brief_btn": "Fill brief"
   },
   "portfolio": {
     "title": "Portfolio",
@@ -241,7 +245,16 @@
     "presentations": "Presentations",
     "banners": "Banners",
     "printing": "Business Cards & Print",
-    "epoxy": "Jewelry"
+    "epoxy": "Jewelry",
+    "empty": "No works in this category"
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "What our clients say",
+    "label": "Testimonials",
+    "dot_aria": "Testimonial",
+    "prev_aria": "Previous testimonial",
+    "next_aria": "Next testimonial"
   },
   "vacancies": {
     "title": "Vacancies",
@@ -321,6 +334,11 @@
     "col_access": "Access",
     "col_role": "Role",
     "col_actions": "Actions"
+  },
+  "sw_update": {
+    "available": "A new version is available",
+    "update": "Update",
+    "close": "Close"
   },
   "error": {
     "title": "Something went wrong",

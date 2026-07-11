@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
-import { I18nProvider } from './context/I18nContext';
+import { I18nProvider, useTranslation } from './context/I18nContext';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './components/UI/Toast';
 import Header from './components/Header/Header';
@@ -97,18 +97,8 @@ const structuredData = [
   },
 ];
 
-function SkipLink() {
-  return (
-    <a
-      href="#main-content"
-      className="skip-link"
-    >
-      Перейти до вмісту
-    </a>
-  );
-}
-
 function AppContent() {
+  const { t } = useTranslation();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -125,9 +115,14 @@ function AppContent() {
   return (
     <>
       {!ready && <Loader />}
+      <a
+        href="#main-content"
+        className="skip-link"
+      >
+        {t('nav.skip_link')}
+      </a>
       <div style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.3s ease' }}>
         <AmbientEffects />
-        <SkipLink />
         <ProgressBar />
         <Header />
         <main id="main-content">

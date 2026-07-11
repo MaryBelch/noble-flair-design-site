@@ -34,7 +34,7 @@ export default function Services() {
                   rel="noopener noreferrer"
                   className="services__card-btn services__card-btn--brief"
                 >
-                  {locale === 'uk' ? 'Заповнити бриф' : locale === 'ru' ? 'Заполнить бриф' : 'Fill brief'} →
+                  {t('services.brief_btn')} →
                 </a>
                 <a href="#contact" className="services__card-btn services__card-btn--contact">
                   {t('services.cta')}

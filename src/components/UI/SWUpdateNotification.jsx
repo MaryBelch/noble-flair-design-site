@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from '../../context/I18nContext';
 import './SWUpdateNotification.css';
 
 export default function SWUpdateNotification() {
+  const { t } = useTranslation();
   const [updateAvailable, setUpdateAvailable] = useState(false);
   const [registration, setRegistration] = useState(null);
 
@@ -38,18 +40,18 @@ export default function SWUpdateNotification() {
       <div className="sw-update-notification__content">
         <span className="sw-update-notification__icon" aria-hidden="true">🔄</span>
         <p className="sw-update-notification__text">
-          Доступна нова версія сайту
+          {t('sw_update.available')}
         </p>
         <button
           className="sw-update-notification__btn"
           onClick={handleUpdate}
         >
-          Оновити
+          {t('sw_update.update')}
         </button>
         <button
           className="sw-update-notification__close"
           onClick={() => setUpdateAvailable(false)}
-          aria-label="Закрити"
+          aria-label={t('sw_update.close')}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
             <path d="M18 6L6 18M6 6l12 12" />
