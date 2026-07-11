@@ -15,6 +15,7 @@ import './styles/global.css';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Services from './components/Services/Services';
+import Contact from './components/Contact/Contact';
 
 // Lazy-loaded sections (below the fold)
 const Course = lazy(() => import('./components/Course/Course'));
@@ -22,7 +23,6 @@ const Testimonials = lazy(() => import('./components/Testimonials/Testimonials')
 const Portfolio = lazy(() => import('./components/Portfolio/Portfolio'));
 const FAQ = lazy(() => import('./components/FAQ/FAQ'));
 const Vacancies = lazy(() => import('./components/Vacancies/Vacancies'));
-const Contact = lazy(() => import('./components/Contact/Contact'));
 const Footer = lazy(() => import('./components/Footer/Footer'));
 const AdminPanel = lazy(() => import('./components/Admin/AdminPanel'));
 
@@ -138,7 +138,7 @@ function AppContent() {
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
-            <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary>
           </ErrorBoundary>
         </main>
         <Suspense fallback={<div style={{ minHeight: 100 }} />}><TranslatedErrorBoundary><AdminPanel /></TranslatedErrorBoundary></Suspense>

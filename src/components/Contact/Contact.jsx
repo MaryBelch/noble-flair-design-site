@@ -13,7 +13,7 @@ const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
 export default function Contact() {
   const { t, locale } = useTranslation();
   const { user } = useAuth();
-  const addToast = useToast();
+  const { addToast } = useToast();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [sending, setSending] = useState(false);
