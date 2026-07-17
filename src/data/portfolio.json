@@ -3,42 +3,42 @@
     "id": 1,
     "title": "Корпоративна презентація TechCorp",
     "category": "presentations",
-    "image": "/images/portfolio/presentation-1.jpg",
+    "image": "/images/portfolio/design/presentation-1.jpg",
     "year": "2026"
   },
   {
     "id": 2,
     "title": "Банер для Instagram-кампанії",
     "category": "banners",
-    "image": "/images/portfolio/banner-1.jpg",
+    "image": "/images/portfolio/design/banner-1.jpg",
     "year": "2026"
   },
   {
     "id": 3,
     "title": "Візитки для Beauty-салону",
     "category": "printing",
-    "image": "/images/portfolio/printing-1.jpg",
+    "image": "/images/portfolio/printing/printing-1.jpg",
     "year": "2026"
   },
   {
     "id": 4,
     "title": "Кулон «Золотий лист»",
     "category": "epoxy",
-    "image": "/images/portfolio/epoxy-1.jpg",
+    "image": "/images/portfolio/epoxy/epoxy-1.jpg",
     "year": "2026"
   },
   {
     "id": 5,
     "title": "Презентація для стартапу EcoFuture",
     "category": "presentations",
-    "image": "/images/portfolio/presentation-2.jpg",
+    "image": "/images/portfolio/design/presentation-2.jpg",
     "year": "2026"
   },
   {
     "id": 6,
     "title": "Набір візиток та флаєрів",
     "category": "printing",
-    "image": "/images/portfolio/printing-2.jpg",
+    "image": "/images/portfolio/printing/printing-2.jpg",
     "year": "2025"
   }
 ]

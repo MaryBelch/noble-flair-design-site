@@ -5,12 +5,13 @@ import SectionTitle from '../UI/SectionTitle';
 import portfolio from '../../data/portfolio.json';
 import './Portfolio.css';
 
-const CATEGORIES = ['all', 'presentations', 'banners', 'printing', 'epoxy'];
+const CATEGORIES = ['all', 'presentations', 'banners', 'printing', 'websites', 'epoxy'];
 
 const GRADIENTS = {
   presentations: 'linear-gradient(135deg, #D4AF37 0%, #8B6914 50%, #3d2b0a 100%)',
   banners: 'linear-gradient(135deg, #2a1f5e 0%, #6B3FA0 50%, #2a1f5e 100%)',
   printing: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a6a 50%, #1a3a3a 100%)',
+  websites: 'linear-gradient(135deg, #0a2a4a 0%, #1a6a9a 50%, #0a2a4a 100%)',
   epoxy: 'linear-gradient(135deg, #3d0f3d 0%, #8B146A 50%, #3d0f3d 100%)',
 };
 
@@ -18,6 +19,7 @@ const ICONS = {
   presentations: '📊',
   banners: '🎯',
   printing: '📄',
+  websites: '🌐',
   epoxy: '💎',
 };
 
