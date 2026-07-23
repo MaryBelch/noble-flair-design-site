@@ -27,7 +27,7 @@ export default function Blog() {
             <article
               key={article.id}
               className={`blog__card fade-in ${expandedId === article.id ? 'blog__card--expanded' : ''}`}
-              style={{ '--card-accent': article.color, transitionDelay: `${i * 0.1}s` }}
+              style={{ '--card-accent': article.color }}
             >
               <div className="blog__card-header">
                 <span className="blog__card-icon" aria-hidden="true">{article.image}</span>
