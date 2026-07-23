@@ -39,6 +39,11 @@ export default function Blog() {
                 </div>
                 <h3 className="blog__card-title">{getText(article.title)}</h3>
                 <p className="blog__card-excerpt">{getText(article.excerpt)}</p>
+                {isOpen && article.content && (
+                  <div className="blog__card-content">
+                    <p>{getText(article.content)}</p>
+                  </div>
+                )}
                 <div className="blog__card-footer">
                   <button
                     className="blog__card-btn"

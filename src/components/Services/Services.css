@@ -24,9 +24,25 @@
 }
 
 .services__card-icon {
-  font-size: 2.2rem;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 14px;
   margin-bottom: 16px;
+  font-size: 1.4rem;
   line-height: 1;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.services__card:hover .services__card-icon {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: scale(1.05);
 }
 
 .services__card-title {

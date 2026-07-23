@@ -125,23 +125,18 @@ function AppContent() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: t('faq.course_format_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq.course_format_a') },
+        name: t('faq.how_order_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.how_order_a') },
       },
       {
         '@type': 'Question',
-        name: t('faq.duration_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq.duration_a') },
+        name: t('faq.payment_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.payment_a') },
       },
       {
         '@type': 'Question',
-        name: t('faq.tools_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq.tools_a') },
-      },
-      {
-        '@type': 'Question',
-        name: t('faq.certificate_q'),
-        acceptedAnswer: { '@type': 'Answer', text: t('faq.certificate_a') },
+        name: t('faq.timing_q'),
+        acceptedAnswer: { '@type': 'Answer', text: t('faq.timing_a') },
       },
     ],
   };
@@ -165,9 +160,9 @@ function AppContent() {
             <About />
             <TranslatedErrorBoundary><Services /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><Instagram /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
-            <TranslatedErrorBoundary><Instagram /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
             <TranslatedErrorBoundary><Blog /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>

@@ -5,11 +5,15 @@ import SectionTitle from '../UI/SectionTitle';
 import './FAQ.css';
 
 const FAQ_DATA = [
+  { key: 'how_order' },
+  { key: 'payment' },
+  { key: 'timing' },
+  { key: 'revisions' },
   { key: 'course_format' },
   { key: 'duration' },
-  { key: 'tools' },
-  { key: 'certificate' },
   { key: 'support' },
+  { key: 'tools' },
+  { key: 'printing' },
   { key: 'refund' },
 ];
 

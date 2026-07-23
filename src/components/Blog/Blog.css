@@ -59,6 +59,31 @@
   margin-top: auto;
 }
 
+.blog__card-content {
+  overflow: hidden;
+  animation: contentExpand 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top;
+}
+
+.blog__card-content p {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  padding: 12px 0;
+  border-top: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+@keyframes contentExpand {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
 .blog__card-btn {
   background: none;
   border: none;
