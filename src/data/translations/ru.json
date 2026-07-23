@@ -8,6 +8,7 @@
     "portfolio": "Портфолио",
     "vacancies": "Вакансии",
     "faq": "FAQ",
+    "case_studies": "Кейсы",
     "contact": "Контакты",
     "login": "Войти",
     "skip_link": "Перейти к содержимому",
@@ -351,7 +352,25 @@
     "col_tariff": "Тариф",
     "col_access": "Доступ",
     "col_role": "Роль",
-    "col_actions": "Действия"
+    "col_actions": "Действия",
+    "tab_vacancies": "Вакансии",
+    "vacancy_add": "Добавить вакансию",
+    "vacancy_delete": "Удалить",
+    "no_vacancies": "Нет вакансий"
+  },
+  "newsletter": {
+    "title": "Будьте в курсе",
+    "subtitle": "Подпишитесь на новости студии",
+    "description": "Узнавайте первыми о новых проектах, запуске курса и специальных предложениях.",
+    "placeholder": "Ваш email",
+    "btn": "Подписаться",
+    "success": "Спасибо! Вы подписались на новости.",
+    "error": "Что-то пошло не так. Попробуйте позже."
+  },
+  "caseStudies": {
+    "title": "Кейсы",
+    "subtitle": "Наши работы в деталях",
+    "status_coming": "Скоро"
   },
   "sw_update": {
     "available": "Доступна новая версия сайта",

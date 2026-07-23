@@ -8,6 +8,7 @@
     "portfolio": "Portfolio",
     "vacancies": "Vacancies",
     "faq": "FAQ",
+    "case_studies": "Case Studies",
     "contact": "Contact",
     "login": "Sign In",
     "skip_link": "Skip to content",
@@ -351,7 +352,25 @@
     "col_tariff": "Tariff",
     "col_access": "Access",
     "col_role": "Role",
-    "col_actions": "Actions"
+    "col_actions": "Actions",
+    "tab_vacancies": "Vacancies",
+    "vacancy_add": "Add Vacancy",
+    "vacancy_delete": "Delete",
+    "no_vacancies": "No vacancies"
+  },
+  "newsletter": {
+    "title": "Stay Updated",
+    "subtitle": "Subscribe to studio news",
+    "description": "Be the first to know about new projects, course launches, and special offers.",
+    "placeholder": "Your email",
+    "btn": "Subscribe",
+    "success": "Thank you! You're now subscribed.",
+    "error": "Something went wrong. Try again later."
+  },
+  "caseStudies": {
+    "title": "Case Studies",
+    "subtitle": "Our projects in detail",
+    "status_coming": "Coming Soon"
   },
   "sw_update": {
     "available": "A new version is available",

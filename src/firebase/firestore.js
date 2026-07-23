@@ -93,3 +93,44 @@ export async function getAllMessages() {
 export async function markMessageRead(id) {
   await updateDoc(doc(db, 'messages', id), { read: true });
 }
+
+/* ── Newsletter subscribers ── */
+
+/** Save a subscriber email */
+export async function saveSubscriber(email) {
+  const ref = doc(collection(db, 'subscribers'));
+  await setDoc(ref, {
+    email,
+    subscribedAt: serverTimestamp(),
+  });
+  return ref.id;
+}
+
+/* ── Vacancies ── */
+
+/** Get all vacancies, ordered */
+export async function getAllVacancies() {
+  const q = query(collection(db, 'vacancies'), orderBy('createdAt', 'desc'));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/** Add a new vacancy */
+export async function saveVacancy(data) {
+  const ref = doc(collection(db, 'vacancies'));
+  await setDoc(ref, {
+    title_uk: data.title_uk || '',
+    title_ru: data.title_ru || '',
+    title_en: data.title_en || '',
+    desc_uk: data.desc_uk || '',
+    desc_ru: data.desc_ru || '',
+    desc_en: data.desc_en || '',
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
+}
+
+/** Delete a vacancy */
+export async function deleteVacancy(id) {
+  await updateDoc(doc(db, 'vacancies', id), { deleted: true });
+}

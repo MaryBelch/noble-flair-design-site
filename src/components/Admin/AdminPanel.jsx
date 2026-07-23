@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../context/I18nContext';
-import { getAllUsers, updateUserDoc, getAllMessages, markMessageRead } from '../../firebase/firestore';
+import { getAllUsers, updateUserDoc, getAllMessages, markMessageRead, getAllVacancies, saveVacancy, deleteVacancy } from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import './AdminPanel.css';
 
@@ -15,6 +15,8 @@ export default function AdminPanel() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState({});
+  const [vacancies, setVacancies] = useState([]);
+  const [newVacancy, setNewVacancy] = useState({ title_uk: '', title_ru: '', title_en: '', desc_uk: '', desc_ru: '', desc_en: '' });
   const [visible, setVisible] = useState(false);
 
   // Check hash for #admin
@@ -25,6 +27,7 @@ export default function AdminPanel() {
       if (newVisible) {
         loadUsers();
         loadMessages();
+        loadVacancies();
       }
     };
     onHash();
@@ -52,12 +55,22 @@ export default function AdminPanel() {
     }
   }, [isAdmin]);
 
+  const loadVacancies = useCallback(async () => {
+    if (!isAdmin) return;
+    try {
+      const data = await getAllVacancies();
+      setVacancies(data.filter((v) => !v.deleted));
+    } catch {
+      // Silent
+    }
+  }, [isAdmin]);
+
   useEffect(() => {
     if (visible && isAdmin) {
       setLoading(true);
-      Promise.all([loadUsers(), loadMessages()]).finally(() => setLoading(false));
+      Promise.all([loadUsers(), loadMessages(), loadVacancies()]).finally(() => setLoading(false));
     }
-  }, [visible, isAdmin, loadUsers, loadMessages]);
+  }, [visible, isAdmin, loadUsers, loadMessages, loadVacancies]);
 
   const tConfirm = (key) => t('admin.confirm_template').replace('{action}', t(key));
 
@@ -180,6 +193,12 @@ export default function AdminPanel() {
           >
             {t('admin.tab_messages')} ({messages.length})
           </button>
+          <button
+            className={`admin-panel__tab ${tab === 'vacancies' ? 'admin-panel__tab--active' : ''}`}
+            onClick={() => setTab('vacancies')}
+          >
+            {t('admin.tab_vacancies')} ({vacancies.length})
+          </button>
         </div>
 
         {loading ? (
@@ -276,6 +295,59 @@ export default function AdminPanel() {
               </table>
             </div>
           )
+        ) : tab === 'vacancies' ? (
+          /* ── Vacancies tab ── */
+          <div className="admin-panel__vacancies">
+            <div className="admin-panel__vacancies-form">
+              <h4 style={{ marginBottom: 12, color: '#D4AF37' }}>{t('admin.vacancy_add')}</h4>
+              <div className="admin-panel__vacancies-grid">
+                <input className="admin-panel__input" placeholder="Назва (укр)" value={newVacancy.title_uk} onChange={(e) => setNewVacancy((v) => ({ ...v, title_uk: e.target.value }))} />
+                <input className="admin-panel__input" placeholder="Название (рус)" value={newVacancy.title_ru} onChange={(e) => setNewVacancy((v) => ({ ...v, title_ru: e.target.value }))} />
+                <input className="admin-panel__input" placeholder="Title (en)" value={newVacancy.title_en} onChange={(e) => setNewVacancy((v) => ({ ...v, title_en: e.target.value }))} />
+                <textarea className="admin-panel__input" placeholder="Опис (укр)" rows={3} value={newVacancy.desc_uk} onChange={(e) => setNewVacancy((v) => ({ ...v, desc_uk: e.target.value }))} />
+                <textarea className="admin-panel__input" placeholder="Описание (рус)" rows={3} value={newVacancy.desc_ru} onChange={(e) => setNewVacancy((v) => ({ ...v, desc_ru: e.target.value }))} />
+                <textarea className="admin-panel__input" placeholder="Description (en)" rows={3} value={newVacancy.desc_en} onChange={(e) => setNewVacancy((v) => ({ ...v, desc_en: e.target.value }))} />
+              </div>
+              <button
+                className="admin-panel__btn admin-panel__btn--grant"
+                style={{ marginTop: 12 }}
+                onClick={async () => {
+                  if (!newVacancy.title_uk && !newVacancy.title_ru && !newVacancy.title_en) return;
+                  await saveVacancy(newVacancy);
+                  setNewVacancy({ title_uk: '', title_ru: '', title_en: '', desc_uk: '', desc_ru: '', desc_en: '' });
+                  loadVacancies();
+                }}
+              >
+                {t('admin.vacancy_add')}
+              </button>
+            </div>
+
+            {vacancies.length === 0 ? (
+              <p className="admin-panel__empty" style={{ marginTop: 24 }}>{t('admin.no_vacancies')}</p>
+            ) : (
+              <div className="admin-panel__vacancies-list" style={{ marginTop: 24 }}>
+                {vacancies.map((v) => (
+                  <div key={v.id} className="admin-panel__vacancy-item">
+                    <div className="admin-panel__vacancy-info">
+                      <strong>{v.title_uk || v.title_ru || v.title_en || '—'}</strong>
+                      <span style={{ fontSize: '0.85rem', color: '#888' }}>{v.desc_uk || v.desc_ru || v.desc_en || ''}</span>
+                    </div>
+                    <button
+                      className="admin-panel__btn admin-panel__btn--revoke"
+                      onClick={async () => {
+                        if (window.confirm('Delete this vacancy?')) {
+                          await deleteVacancy(v.id);
+                          loadVacancies();
+                        }
+                      }}
+                    >
+                      {t('admin.vacancy_delete')}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         ) : (
           /* ── Messages tab ── */
           messages.length === 0 ? (

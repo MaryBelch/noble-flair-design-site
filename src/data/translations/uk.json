@@ -8,6 +8,7 @@
     "portfolio": "Портфоліо",
     "vacancies": "Вакансії",
     "faq": "FAQ",
+    "case_studies": "Кейси",
     "contact": "Контакти",
     "login": "Увійти",
     "skip_link": "Перейти до вмісту",
@@ -351,7 +352,25 @@
     "col_tariff": "Тариф",
     "col_access": "Доступ",
     "col_role": "Роль",
-    "col_actions": "Дії"
+    "col_actions": "Дії",
+    "tab_vacancies": "Вакансії",
+    "vacancy_add": "Додати вакансію",
+    "vacancy_delete": "Видалити",
+    "no_vacancies": "Немає вакансій"
+  },
+  "newsletter": {
+    "title": "Будьте в курсі",
+    "subtitle": "Підпишіться на новини студії",
+    "description": "Дізнавайтеся першими про нові проєкти, запуск курсу та спеціальні пропозиції.",
+    "placeholder": "Ваш email",
+    "btn": "Підписатися",
+    "success": "Дякуємо! Ви підписані на новини.",
+    "error": "Щось пішло не так. Спробуйте пізніше."
+  },
+  "caseStudies": {
+    "title": "Кейси",
+    "subtitle": "Наші роботи в деталях",
+    "status_coming": "Скоро"
   },
   "sw_update": {
     "available": "Доступна нова версія сайту",

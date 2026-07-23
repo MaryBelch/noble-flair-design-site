@@ -9,6 +9,8 @@ import ProgressBar from './components/UI/ProgressBar';
 import ErrorBoundary, { TranslatedErrorBoundary } from './components/UI/ErrorBoundary';
 import SWUpdateNotification from './components/UI/SWUpdateNotification';
 import AmbientEffects from './components/UI/AmbientEffects';
+import Newsletter from './components/Newsletter/Newsletter';
+import CaseStudies from './components/CaseStudies/CaseStudies';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
 
@@ -133,11 +135,13 @@ function AppContent() {
             <About />
             <TranslatedErrorBoundary><Services /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><CaseStudies /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
             <TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary>
+            <TranslatedErrorBoundary><Newsletter /></TranslatedErrorBoundary>
           </ErrorBoundary>
         </main>
         <Suspense fallback={<div style={{ minHeight: 100 }} />}><TranslatedErrorBoundary><AdminPanel /></TranslatedErrorBoundary></Suspense>
