@@ -12,6 +12,7 @@ import AmbientEffects from './components/UI/AmbientEffects';
 import Newsletter from './components/Newsletter/Newsletter';
 import Instagram from './components/Instagram/Instagram';
 import LeadMagnet from './components/LeadMagnet/LeadMagnet';
+import Blog from './components/Blog/Blog';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
 
@@ -83,7 +84,7 @@ const structuredData = [
 ];
 
 function AppContent() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -168,6 +169,7 @@ function AppContent() {
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
             <TranslatedErrorBoundary><Instagram /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><Blog /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
             <TranslatedErrorBoundary><LeadMagnet /></TranslatedErrorBoundary>
             <TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary>

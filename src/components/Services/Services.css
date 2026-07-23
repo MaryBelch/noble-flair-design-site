@@ -37,6 +37,15 @@
   margin-bottom: 12px;
 }
 
+.services__card-price {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-main);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
 .services__card-desc {
   font-size: 0.9rem;
   color: var(--color-text-secondary);

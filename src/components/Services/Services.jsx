@@ -27,6 +27,7 @@ export default function Services() {
             >
               <div className="services__card-icon" aria-hidden="true">{service.icon}</div>
               <h3 className="services__card-title">{t(service.title_key)}</h3>
+              {service.price && <span className="services__card-price">{service.price}</span>}
               <p className="services__card-desc">{t(service.desc_key)}</p>
               <div className="services__card-actions">
                 <a

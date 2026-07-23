@@ -4,6 +4,7 @@
     "icon": "🎨",
     "title_key": "services.design",
     "desc_key": "services.design_desc",
+    "price": "від $150",
     "image": "/images/services/presentations.jpg"
   },
   {
@@ -11,6 +12,7 @@
     "icon": "🌐",
     "title_key": "services.websites",
     "desc_key": "services.websites_desc",
+    "price": "від $250",
     "image": "/images/services/websites.jpg"
   },
   {
@@ -18,6 +20,7 @@
     "icon": "🖨️",
     "title_key": "services.printing",
     "desc_key": "services.printing_desc",
+    "price": "від $50",
     "image": "/images/services/printing.jpg"
   },
   {
@@ -25,6 +28,7 @@
     "icon": "💎",
     "title_key": "services.epoxy",
     "desc_key": "services.epoxy_desc",
+    "price": "від $80",
     "image": "/images/services/epoxy.jpg"
   }
 ]

@@ -385,6 +385,14 @@
     "success": "Thank you! You're now subscribed.",
     "error": "Something went wrong. Try again later."
   },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Useful articles about design, branding, and presentations",
+    "read": "Read",
+    "hide": "Hide",
+    "cta_text": "Want to learn more? Book a consultation!",
+    "cta_btn": "Contact us"
+  },
   "leadMagnet": {
     "title": "Free Checklist",
     "subtitle": "«Perfect Presentation»",
