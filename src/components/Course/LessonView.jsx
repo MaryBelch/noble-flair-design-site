@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase/config';
+import { getDbInstance } from '../../firebase/config';
 import { markLessonViewed } from '../../firebase/firestore';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
@@ -27,6 +26,10 @@ export default function LessonView({ selectedLesson, modules, onBack }) {
       setLessonLoading(true);
       setError(null);
       try {
+        const [db, { doc, getDoc }] = await Promise.all([
+          getDbInstance(),
+          import('firebase/firestore'),
+        ]);
         const snap = await getDoc(doc(db, 'lessons', lessonId));
         if (!cancelled) {
           setLessonData(snap.exists() ? snap.data() : null);

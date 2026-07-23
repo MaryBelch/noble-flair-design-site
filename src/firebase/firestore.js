@@ -1,20 +1,17 @@
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  serverTimestamp,
-} from 'firebase/firestore';
-import { db } from './config';
+import { getDbInstance } from './config';
+
+let _db = null;
+async function getDb() {
+  if (!_db) _db = await getDbInstance();
+  return _db;
+}
 
 /* ── User management ── */
 
 /** Create a user document on registration */
 export async function createUserDoc(uid, name, email) {
+  const db = await getDb();
+  const { doc, setDoc, serverTimestamp } = await import('firebase/firestore');
   await setDoc(doc(db, 'users', uid), {
     name,
     email,
@@ -26,17 +23,23 @@ export async function createUserDoc(uid, name, email) {
 
 /** Get user document from Firestore */
 export async function getUserDoc(uid) {
+  const db = await getDb();
+  const { doc, getDoc } = await import('firebase/firestore');
   const snap = await getDoc(doc(db, 'users', uid));
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
 }
 
 /** Update a user field (e.g. hasCourseAccess, role) */
 export async function updateUserDoc(uid, data) {
+  const db = await getDb();
+  const { doc, updateDoc } = await import('firebase/firestore');
   await updateDoc(doc(db, 'users', uid), data);
 }
 
 /** Get all users (admin only) */
 export async function getAllUsers() {
+  const db = await getDb();
+  const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
   const q = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -46,6 +49,8 @@ export async function getAllUsers() {
 
 /** Mark a lesson as viewed by the user */
 export async function markLessonViewed(uid, lessonId) {
+  const db = await getDb();
+  const { doc, setDoc, serverTimestamp } = await import('firebase/firestore');
   await setDoc(doc(db, 'users', uid), {
     [`progress.${lessonId}`]: serverTimestamp(),
   }, { merge: true });
@@ -53,12 +58,16 @@ export async function markLessonViewed(uid, lessonId) {
 
 /** Get a lesson document by ID */
 export async function getLessonDoc(lessonId) {
+  const db = await getDb();
+  const { doc, getDoc } = await import('firebase/firestore');
   const snap = await getDoc(doc(db, 'lessons', lessonId));
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
 }
 
 /** Get all lessons, ordered */
 export async function getAllLessons() {
+  const db = await getDb();
+  const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
   const q = query(collection(db, 'lessons'), orderBy('order', 'asc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -68,6 +77,8 @@ export async function getAllLessons() {
 
 /** Save a contact form submission to Firestore */
 export async function saveContactMessage(data) {
+  const db = await getDb();
+  const { doc, collection, setDoc, serverTimestamp } = await import('firebase/firestore');
   const ref = doc(collection(db, 'messages'));
   await setDoc(ref, {
     name: data.name,
@@ -84,6 +95,8 @@ export async function saveContactMessage(data) {
 
 /** Get all contact messages (admin only) */
 export async function getAllMessages() {
+  const db = await getDb();
+  const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
   const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -91,6 +104,8 @@ export async function getAllMessages() {
 
 /** Mark a message as read */
 export async function markMessageRead(id) {
+  const db = await getDb();
+  const { doc, updateDoc } = await import('firebase/firestore');
   await updateDoc(doc(db, 'messages', id), { read: true });
 }
 
@@ -98,6 +113,8 @@ export async function markMessageRead(id) {
 
 /** Save a subscriber email */
 export async function saveSubscriber(email) {
+  const db = await getDb();
+  const { doc, collection, setDoc, serverTimestamp } = await import('firebase/firestore');
   const ref = doc(collection(db, 'subscribers'));
   await setDoc(ref, {
     email,
@@ -110,6 +127,8 @@ export async function saveSubscriber(email) {
 
 /** Get all vacancies, ordered */
 export async function getAllVacancies() {
+  const db = await getDb();
+  const { collection, getDocs, query, orderBy } = await import('firebase/firestore');
   const q = query(collection(db, 'vacancies'), orderBy('createdAt', 'desc'));
   const snap = await getDocs(q);
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -117,6 +136,8 @@ export async function getAllVacancies() {
 
 /** Add a new vacancy */
 export async function saveVacancy(data) {
+  const db = await getDb();
+  const { doc, collection, setDoc, serverTimestamp } = await import('firebase/firestore');
   const ref = doc(collection(db, 'vacancies'));
   await setDoc(ref, {
     title_uk: data.title_uk || '',
@@ -132,5 +153,7 @@ export async function saveVacancy(data) {
 
 /** Delete a vacancy */
 export async function deleteVacancy(id) {
+  const db = await getDb();
+  const { doc, updateDoc } = await import('firebase/firestore');
   await updateDoc(doc(db, 'vacancies', id), { deleted: true });
 }

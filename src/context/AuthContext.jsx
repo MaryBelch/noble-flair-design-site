@@ -1,8 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase/config';
-import { loginUser, registerUser, logoutUser } from '../firebase/auth';
-import { getUserDoc } from '../firebase/firestore';
+import { getAuthInstance } from '../firebase/config';
 
 const AuthContext = createContext(null);
 
@@ -13,41 +10,62 @@ export function AuthProvider({ children }) {
 
   // Listen for auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setUser(firebaseUser);
-      if (firebaseUser) {
-        const doc = await getUserDoc(firebaseUser.uid);
-        setUserDoc(doc);
-      } else {
-        setUserDoc(null);
-      }
-      setLoading(false);
-    });
-    return unsubscribe;
+    let unsubscribe = null;
+    let mounted = true;
+
+    (async () => {
+      const auth = await getAuthInstance();
+      const { onAuthStateChanged } = await import('firebase/auth');
+      const { getUserDoc } = await import('../firebase/firestore');
+
+      if (!mounted) return;
+
+      unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+        setUser(firebaseUser);
+        if (firebaseUser) {
+          const doc = await getUserDoc(firebaseUser.uid);
+          setUserDoc(doc);
+        } else {
+          setUserDoc(null);
+        }
+        setLoading(false);
+      });
+    })();
+
+    return () => {
+      mounted = false;
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   // Refresh user doc from Firestore (e.g. after admin grants access)
   const refreshUserDoc = async () => {
     if (!user) return;
+    const { getUserDoc } = await import('../firebase/firestore');
     const doc = await getUserDoc(user.uid);
     setUserDoc(doc);
   };
 
   const login = async (email, password) => {
+    const { loginUser } = await import('../firebase/auth');
     const fbUser = await loginUser(email, password);
+    const { getUserDoc } = await import('../firebase/firestore');
     const doc = await getUserDoc(fbUser.uid);
     setUserDoc(doc);
     return fbUser;
   };
 
   const register = async (name, email, password) => {
+    const { registerUser } = await import('../firebase/auth');
     const fbUser = await registerUser(name, email, password);
+    const { getUserDoc } = await import('../firebase/firestore');
     const doc = await getUserDoc(fbUser.uid);
     setUserDoc(doc);
     return fbUser;
   };
 
   const logout = async () => {
+    const { logoutUser } = await import('../firebase/auth');
     await logoutUser();
     setUser(null);
     setUserDoc(null);

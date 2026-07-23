@@ -1,6 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Firebase config — reads from env vars with fallback to hardcoded values
@@ -14,8 +12,26 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+/** Lazily init and cache Firebase Auth instance — firebase/auth (~145KB) loaded on first use */
+let _auth = null;
+export async function getAuthInstance() {
+  if (!_auth) {
+    const { getAuth } = await import('firebase/auth');
+    _auth = getAuth(app);
+  }
+  return _auth;
+}
+
+/** Lazily init and cache Firestore instance — firebase/firestore (~440KB) loaded on first use */
+let _db = null;
+export async function getDbInstance() {
+  if (!_db) {
+    const { getFirestore } = await import('firebase/firestore');
+    _db = getFirestore(app);
+  }
+  return _db;
+}
 
 // Lazy-init analytics — fails silently in unsupported environments (extensions, SSR)
 let analytics = null;
