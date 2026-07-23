@@ -122,7 +122,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://instagram.com/noble_flair_design"
+                href="https://www.instagram.com/maryna_design_nfd/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact__link card-hover"
@@ -134,11 +134,11 @@ export default function Contact() {
                 </div>
                 <div>
                   <strong>Instagram</strong>
-                  <span>@noble_flair_design</span>
+                  <span>@maryna_design_nfd</span>
                 </div>
               </a>
 
-              <a href="mailto:noble.flair.design@gmail.com" className="contact__link card-hover">
+              <a href="mailto:maryna.nfd@gmail.com" className="contact__link card-hover">
                 <div className="contact__link-icon" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -147,7 +147,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <strong>{t('contact.email')}</strong>
-                  <span>noble.flair.design@gmail.com</span>
+                  <span>maryna.nfd@gmail.com</span>
                 </div>
               </a>
             </div>

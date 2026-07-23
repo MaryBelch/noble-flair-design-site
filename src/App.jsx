@@ -39,11 +39,11 @@ const structuredData = [
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
-      email: 'noble.flair.design@gmail.com',
+      email: 'maryna.nfd@gmail.com',
       url: 'https://t.me/noble_flair_design_bot',
     },
     sameAs: [
-      'https://instagram.com/noble_flair_design',
+      'https://www.instagram.com/maryna_design_nfd/',
     ],
   },
   {
