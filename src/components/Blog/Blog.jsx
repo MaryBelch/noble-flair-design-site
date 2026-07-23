@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
@@ -8,8 +9,13 @@ import './Blog.css';
 export default function Blog() {
   const { t, locale } = useTranslation();
   const sectionRef = useScrollReveal([locale], { threshold: 0.1, stagger: 0.1 });
+  const [expandedId, setExpandedId] = useState(null);
 
   const getText = (obj) => obj[locale] || obj.uk;
+
+  const toggleArticle = (id) => {
+    setExpandedId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section id="blog" className="section blog" ref={sectionRef} role="region" aria-label={t('blog.title')}>
@@ -20,7 +26,7 @@ export default function Blog() {
           {articles.map((article, i) => (
             <article
               key={article.id}
-              className="blog__card fade-in"
+              className={`blog__card fade-in ${expandedId === article.id ? 'blog__card--expanded' : ''}`}
               style={{ '--card-accent': article.color, transitionDelay: `${i * 0.1}s` }}
             >
               <div className="blog__card-header">
@@ -35,10 +41,21 @@ export default function Blog() {
               </div>
               <h3 className="blog__card-title">{getText(article.title)}</h3>
               <p className="blog__card-excerpt">{getText(article.excerpt)}</p>
+
+              {expandedId === article.id && (
+                <div className="blog__card-content">
+                  <p>{getText(article.content)}</p>
+                </div>
+              )}
+
               <div className="blog__card-footer">
-                <a href="#contact" className="blog__card-btn">
-                  {t('blog.read')} →
-                </a>
+                <button
+                  className="blog__card-btn"
+                  onClick={() => toggleArticle(article.id)}
+                  aria-expanded={expandedId === article.id}
+                >
+                  {expandedId === article.id ? `${t('blog.hide')} ↑` : `${t('blog.read')} →`}
+                </button>
               </div>
             </article>
           ))}
