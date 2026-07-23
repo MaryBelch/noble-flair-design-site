@@ -52,28 +52,71 @@
   100% { transform: scale(1) rotate(360deg); }
 }
 
-/* Pause animation on hover of the carousel */
+/* Pause animation on hover */
 .testimonials:hover .testimonials__dot--active::after {
   animation-play-state: paused;
 }
 
+/* ── Card wrapper (for swipe area) ── */
+.testimonials__card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  touch-action: pan-y; /* allow vertical scroll, capture horizontal swipes */
+}
+
+/* ── Card with directional slide animation ── */
 .testimonials__card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 36px 32px;
-  transition: border-color 0.3s, transform 0.3s;
-  animation: cardFade 0.35s ease;
+  position: relative;
+  transition: border-color 0.3s;
 }
 
 .testimonials__card:hover {
   border-color: rgba(212, 175, 55, 0.2);
-  transform: translateY(-2px);
 }
 
-@keyframes cardFade {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Directional entrance: slide from right when going next, from left when prev */
+.testimonials__card--next {
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonials__card--prev {
+  animation: slideInLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Decorative quote mark ── */
+.testimonials__quote-icon {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  pointer-events: none;
+  color: var(--gold-main);
 }
 
 .testimonials__stars {
@@ -90,6 +133,8 @@
   line-height: 1.7;
   margin-bottom: 24px;
   font-style: italic;
+  position: relative;
+  z-index: 1;
 }
 
 .testimonials__author {
@@ -107,6 +152,7 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--gold, #D4AF37);
+  flex-shrink: 0;
 }
 
 .testimonials__name {
@@ -148,6 +194,11 @@
 .testimonials__nav-btn:hover {
   border-color: var(--gold-main);
   color: var(--gold-main);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.1);
+}
+
+.testimonials__nav-btn:active {
+  transform: scale(0.92);
 }
 
 .testimonials__counter {
@@ -165,5 +216,10 @@
 
   .testimonials__text {
     font-size: 0.9rem;
+  }
+
+  .testimonials__nav-btn {
+    width: 36px;
+    height: 36px;
   }
 }
