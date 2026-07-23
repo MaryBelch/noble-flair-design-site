@@ -257,6 +257,23 @@
   background: rgba(212, 175, 55, 0.1);
 }
 
+/* Telegram button */
+.header__telegram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--gold-main);
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+}
+
+.header__telegram-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: scale(1.1);
+}
+
 /* ── Mobile overlay ── */
 .header__overlay {
   display: none;

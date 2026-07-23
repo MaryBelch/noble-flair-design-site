@@ -312,6 +312,18 @@ export default function Header() {
             )}
           </div>
 
+          <a
+            href="https://t.me/noble_flair_design_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header__telegram-btn"
+            title="Telegram"
+            aria-label="Telegram"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.127.087.669.087.669l-1.188 6.113s-.176.523-.682.523a.834.834 0 0 1-.565-.277l-3.118-2.503-1.302.99a.44.44 0 0 1-.404.108l-.538-2.502-2.246-.78s-.308-.141-.316-.331c-.009-.19.262-.302.262-.302l8.909-3.27s.643-.26.643-.183z"/>
+            </svg>
+          </a>
           <div className="header__lang" role="radiogroup" aria-label={t('header.lang_aria')}>
             {SUPPORTED_LOCALES.map((l) => (
               <button
