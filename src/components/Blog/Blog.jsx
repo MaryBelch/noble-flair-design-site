@@ -42,11 +42,11 @@ export default function Blog() {
               <h3 className="blog__card-title">{getText(article.title)}</h3>
               <p className="blog__card-excerpt">{getText(article.excerpt)}</p>
 
-              {expandedId === article.id && (
-                <div className="blog__card-content">
+              <div className={`blog__card-content ${expandedId === article.id ? 'blog__card-content--open' : ''}`}>
+                <div className="blog__card-content-inner">
                   <p>{getText(article.content)}</p>
                 </div>
-              )}
+              </div>
 
               <div className="blog__card-footer">
                 <button
