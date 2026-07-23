@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../UI/Toast';
@@ -10,7 +10,31 @@ import './Contact.css';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TELEGRAM_RE = /^@[\w]+$/;
-const RATE_LIMIT_MS = 30000; // 30 seconds between submissions
+const RATE_LIMIT_MS = 30000;
+const MAX_MESSAGE_LENGTH = 1000;
+
+function SpinnerDots() {
+  return (
+    <span className="contact__spinner" aria-hidden="true">
+      <span className="contact__spinner-dot" />
+      <span className="contact__spinner-dot" />
+      <span className="contact__spinner-dot" />
+    </span>
+  );
+}
+
+function SuccessCheckmark({ t }) {
+  return (
+    <div className="contact__form-success">
+      <div className="contact__success-checkmark" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+      <span className="contact__form-success-text">{t('contact.form_success')}</span>
+    </div>
+  );
+}
 
 export default function Contact() {
   const { t, locale } = useTranslation();
@@ -20,9 +44,11 @@ export default function Contact() {
   const [error, setError] = useState(false);
   const [sending, setSending] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [messageLength, setMessageLength] = useState(0);
   const lastSubmit = useRef(0);
+  const formRef = useRef(null);
 
-  const validate = (data) => {
+  const validate = useCallback((data) => {
     const errs = {};
     if (!data.name || data.name.trim().length < 2) {
       errs.name = t('contact.form_name_error');
@@ -31,7 +57,7 @@ export default function Contact() {
       errs.contact = t('contact.form_email_error');
     }
     return errs;
-  };
+  }, [t]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +72,6 @@ export default function Contact() {
     setFieldErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
-    // Rate limiting (client-side)
     const now = Date.now();
     if (now - lastSubmit.current < RATE_LIMIT_MS) {
       addToast(t('contact.form_rate_limit'), 'warning');
@@ -66,7 +91,6 @@ export default function Contact() {
         userEmail: user?.email || null,
       });
 
-      // Also send to Telegram bot as before
       window.open(`https://t.me/noble_flair_design_bot?start=contact_${encodeURIComponent(data.name)}`, '_blank');
 
       lastSubmit.current = Date.now();
@@ -74,7 +98,8 @@ export default function Contact() {
       trackEvent('form', 'submit', 'contact');
       addToast(t('contact.form_success'), 'success');
       e.target.reset();
-      setTimeout(() => setSubmitted(false), 5000);
+      setMessageLength(0);
+      setTimeout(() => setSubmitted(false), 6000);
     } catch (err) {
       if (import.meta.env.DEV) console.error('Error saving message:', err);
       setError(true);
@@ -162,11 +187,11 @@ export default function Contact() {
             <div className="contact__form-card">
               <h3 className="contact__form-title">{t('contact.form_submit')}</h3>
               {submitted ? (
-                <p className="contact__form-success">{t('contact.form_success')}</p>
+                <SuccessCheckmark t={t} />
               ) : error ? (
                 <p className="contact__form-error">{t('contact.form_error')}</p>
               ) : (
-                <form className="contact__form" onSubmit={handleSubmit} noValidate>
+                <form className="contact__form" onSubmit={handleSubmit} noValidate ref={formRef}>
                   <div className="contact__form-field">
                     <input
                       type="text"
@@ -195,13 +220,18 @@ export default function Contact() {
                   <div className="contact__form-field">
                     <textarea
                       name="message"
-                      placeholder={t('contact.form_message')}
+                      placeholder={t('contact.form_message') || 'Ваше повідомлення'}
                       className="contact__form-input contact__form-textarea"
                       rows={4}
+                      maxLength={MAX_MESSAGE_LENGTH}
+                      onChange={(e) => setMessageLength(e.target.value.length)}
                     />
+                    <div className="contact__char-counter" aria-live="polite">
+                      {messageLength}/{MAX_MESSAGE_LENGTH}
+                    </div>
                   </div>
                   <Button variant="primary" type="submit" className="contact__form-btn" disabled={sending}>
-                    {sending ? '...' : t('contact.form_submit')}
+                    {sending ? <SpinnerDots /> : t('contact.form_submit')}
                   </Button>
                 </form>
               )}

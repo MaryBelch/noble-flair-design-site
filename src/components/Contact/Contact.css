@@ -24,6 +24,12 @@
   border-radius: var(--radius-md);
   padding: 16px 20px;
   margin-bottom: 24px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact__brief-cta:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.06);
 }
 
 .contact__brief-cta p {
@@ -55,8 +61,10 @@
   border-color: transparent;
   color: #1a1a1a;
   text-decoration: none;
+  transform: translateY(-1px);
 }
 
+/* Contact links */
 .contact__links {
   display: flex;
   flex-direction: column;
@@ -76,6 +84,7 @@
 
 .contact__link:hover {
   border-color: var(--gold-main);
+  background: rgba(212, 175, 55, 0.03);
 }
 
 .contact__link-icon {
@@ -88,6 +97,12 @@
   border-radius: var(--radius-sm);
   color: var(--gold-main);
   flex-shrink: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.contact__link:hover .contact__link-icon {
+  background: rgba(212, 175, 55, 0.18);
+  transform: scale(1.05);
 }
 
 .contact__link strong {
@@ -104,12 +119,21 @@
   color: var(--color-text-muted);
 }
 
-/* Form */
+/* ── Form card ── */
 .contact__form-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 36px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gold glow when any field is focused */
+.contact__form-card:focus-within {
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.05), inset 0 1px 0 rgba(212, 175, 55, 0.05);
 }
 
 .contact__form-title {
@@ -124,64 +148,181 @@
 .contact__form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
+/* ── Form fields with floating labels ── */
 .contact__form-field {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  position: relative;
 }
 
 .contact__form-input {
-  padding: 14px 16px;
+  width: 100%;
+  padding: 16px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   color: var(--color-text-primary);
   font-size: 0.95rem;
-  transition: border-color var(--transition-fast);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  outline: none;
 }
 
 .contact__form-input:focus {
-  outline: none;
   border-color: var(--gold-main);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
 }
 
 .contact__form-input::placeholder {
   color: var(--color-text-muted);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.contact__form-input:focus::placeholder {
+  opacity: 0.6;
+  transform: translateY(-2px) scale(0.96);
+}
+
+/* Floating label effect via placeholder-shown */
+.contact__form-input--floating {
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+
+.contact__form-input--floating + .contact__form-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left;
+}
+
+.contact__form-input--floating:focus + .contact__form-label,
+.contact__form-input--floating:not(:placeholder-shown) + .contact__form-label {
+  top: 4px;
+  font-size: 0.7rem;
+  color: var(--gold-main);
+  opacity: 0.8;
 }
 
 .contact__form-input--error {
   border-color: #e74c3c;
+  animation: shakeInput 0.4s ease;
 }
 
 .contact__form-input--error:focus {
   border-color: #e74c3c;
-  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.15);
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+}
+
+@keyframes shakeInput {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
 }
 
 .contact__field-error {
   font-size: 0.78rem;
   color: #e74c3c;
   padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: fadeInError 0.25s ease;
+}
+
+@keyframes fadeInError {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contact__field-error::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: #e74c3c;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .contact__form-textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 110px;
+  line-height: 1.6;
 }
 
-.contact__form-btn {
-  margin-top: 8px;
-  width: 100%;
+/* ── Character counter ── */
+.contact__char-counter {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-align: right;
+  padding-right: 4px;
+  opacity: 0.6;
+  margin-top: -8px;
 }
 
+/* ── Sending spinner ── */
+.contact__spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact__spinner-dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: spinnerDot 1.2s ease infinite;
+}
+
+.contact__spinner-dot:nth-child(2) { animation-delay: 0.2s; }
+.contact__spinner-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes spinnerDot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.7); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Success state ── */
 .contact__form-success {
-  color: var(--color-success);
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   padding: 30px 0;
   text-align: center;
+}
+
+.contact__success-checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(46, 204, 113, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: successPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes successPop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.contact__form-success-text {
+  color: var(--color-success, #2ecc71);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .contact__form-error {
@@ -189,6 +330,50 @@
   font-size: 0.95rem;
   padding: 30px 0;
   text-align: center;
+}
+
+/* ── Staggered field entrance ── */
+.contact__form-field {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fieldEntrance 0.4s ease forwards;
+}
+
+.contact__form-field:nth-child(1) { animation-delay: 0s; }
+.contact__form-field:nth-child(2) { animation-delay: 0.08s; }
+.contact__form-field:nth-child(3) { animation-delay: 0.16s; }
+.contact__form-field:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes fieldEntrance {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contact__form-btn {
+  margin-top: 8px;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contact__form-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Newsletter integration note ── */
+.contact__newsletter-note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.contact__newsletter-note a {
+  color: var(--gold-main);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.contact__newsletter-note a:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
