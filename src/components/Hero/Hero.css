@@ -100,6 +100,52 @@
   margin-bottom: 24px;
 }
 
+/* Word-by-word entrance — uses CSS animation so it plays automatically when hero is in DOM */
+.hero__title-word {
+  display: inline-block;
+  opacity: 0;
+  animation: wordReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--word-delay, 0.2s);
+}
+
+@keyframes wordReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gold underline sweep — animates after all words have revealed */
+.hero__title-reveal {
+  position: relative;
+  display: inline;
+}
+
+.hero__title-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--gold-gradient);
+  border-radius: 3px;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.25;
+  animation: underlineReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--underline-delay, 0.8s);
+}
+
+@keyframes underlineReveal {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
 .hero__description {
   font-size: 1.1rem;
   color: var(--color-text-secondary);

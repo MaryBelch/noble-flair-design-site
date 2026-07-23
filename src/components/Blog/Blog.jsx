@@ -8,7 +8,7 @@ import './Blog.css';
 
 export default function Blog() {
   const { t, locale } = useTranslation();
-  const sectionRef = useScrollReveal([]);
+  const sectionRef = useScrollReveal([locale], { threshold: 0.1, stagger: 0.1 });
   const [expanded, setExpanded] = useState(null);
 
   const getText = (obj) => obj[locale] || obj.uk;

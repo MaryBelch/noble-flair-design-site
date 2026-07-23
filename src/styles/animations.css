@@ -1,8 +1,11 @@
-/* Анимация появления секций при скролле */
+/* ── Scroll reveal base classes ── */
+
+/* .fade-in: slide up + fade */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .fade-in.visible {
@@ -10,10 +13,12 @@
   transform: translateY(0);
 }
 
+/* .fade-in-left: slide in from left */
 .fade-in-left {
   opacity: 0;
   transform: translateX(-40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .fade-in-left.visible {
@@ -21,10 +26,12 @@
   transform: translateX(0);
 }
 
+/* .fade-in-right: slide in from right */
 .fade-in-right {
   opacity: 0;
   transform: translateX(40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .fade-in-right.visible {
@@ -32,11 +39,12 @@
   transform: translateX(0);
 }
 
-/* Fade-in with subtle scale (parallax depth feel) */
+/* .fade-in-reveal: slide up + subtle scale (parallax depth) */
 .fade-in-reveal {
   opacity: 0;
   transform: translateY(30px) scale(0.97);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .fade-in-reveal.visible {
@@ -44,7 +52,21 @@
   transform: translateY(0) scale(1);
 }
 
-/* Масштабирование при наведении на карточки */
+/* .fade-in-scale: fade + scale from 0.92 */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Card hover effects ── */
+
 .card-hover {
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
@@ -54,47 +76,7 @@
   box-shadow: var(--shadow-gold);
 }
 
-/* Мерцание золотого */
-@keyframes goldShimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--gold-main) 0%,
-    var(--gold-light) 50%,
-    var(--gold-main) 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: goldShimmer 3s ease infinite;
-}
-
-/* Плавное появление снизу (для карточек) */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.slide-up {
-  animation: slideUp 0.5s ease forwards;
-}
-
-/* Золотая рамка при наведении */
+/* Gold border underline on hover */
 .gold-border-hover {
   position: relative;
   overflow: hidden;
@@ -115,64 +97,7 @@
   width: 100%;
 }
 
-/* Пульсация */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.pulse {
-  animation: pulse 2s ease infinite;
-}
-
-/* ── Micro-animations ── */
-
-/* Glow on hover (cards, buttons) */
-.glow-hover {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.glow-hover:hover {
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), 0 0 40px rgba(212, 175, 55, 0.05);
-  transform: translateY(-2px);
-}
-
-/* Scale on hover (subtle) */
-.scale-hover {
-  transition: transform 0.25s ease;
-}
-
-.scale-hover:hover {
-  transform: scale(1.03);
-}
-
-/* Gold glow border on focus */
-.gold-focus:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
-}
-
-/* Fade scale entrance */
-@keyframes fadeScaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.fade-scale-in {
-  animation: fadeScaleIn 0.4s ease forwards;
-}
-
-/* Lift shadow on hover (for cards) */
+/* Lift + shadow on hover (cards) */
 .lift-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -182,12 +107,26 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 175, 55, 0.1);
 }
 
-/* Gold shimmer on hover (background variant) */
-@keyframes shimmerBg {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+/* Glow on hover */
+.glow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), 0 0 40px rgba(212, 175, 55, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Subtle scale on hover */
+.scale-hover {
+  transition: transform 0.25s ease;
+}
+
+.scale-hover:hover {
+  transform: scale(1.03);
+}
+
+/* Gold shimmer background on hover */
 .shimmer-bg-hover:hover {
   background: linear-gradient(
     90deg,
@@ -217,4 +156,119 @@
 
 .ripple:hover::after {
   opacity: 1;
+}
+
+/* ── Keyframe animations ── */
+
+/* Gold shimmer text */
+@keyframes goldShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-main) 0%,
+    var(--gold-light) 50%,
+    var(--gold-main) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 3s ease infinite;
+}
+
+/* Shimmer background move */
+@keyframes shimmerBg {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Slide up entrance */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease forwards;
+}
+
+/* Fade + scale entrance */
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fade-scale-in {
+  animation: fadeScaleIn 0.4s ease forwards;
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.pulse {
+  animation: pulse 2s ease infinite;
+}
+
+/* ── Hover shine effect for cards ── */
+.shine-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.06),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.shine-hover:hover::before {
+  left: 150%;
+}
+
+/* ── Focus visible accessible ring ── */
+.gold-focus:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
+}
+
+/* ── Hero subtitle typing cursor ── */
+.hero__cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 300;
+  color: var(--gold-main);
+  opacity: 1;
+  animation: cursorFade 0.6s ease infinite;
+}
+
+.hero__cursor--blink {
+  animation: cursorBlink 1s step-end infinite;
+}
+
+@keyframes cursorFade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

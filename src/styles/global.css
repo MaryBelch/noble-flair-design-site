@@ -145,3 +145,63 @@ input, textarea {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold-dark);
 }
+
+/* ── Subtle section divider gold line ── */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-main) 20%,
+    var(--gold-light) 50%,
+    var(--gold-main) 80%,
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* First section (Hero) has no top border — it starts at the top of the page */
+.section:first-of-type::before {
+  display: none;
+}
+
+/* Section-specific border: visible on scroll via the visible class added to section's fade-in children */
+/* When the first fade-in child becomes visible, the section's divider animates in */
+.section:has(.fade-in.visible:first-child)::before {
+  width: min(60%, 400px);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Section entrance divider ── */
+.section {
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-main) 20%,
+    var(--gold-light) 50%,
+    var(--gold-main) 80%,
+    transparent
+  );
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section.in-view::before {
+  width: min(60%, 400px);
+}

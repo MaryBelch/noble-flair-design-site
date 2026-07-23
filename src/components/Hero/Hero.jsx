@@ -105,7 +105,17 @@ export default function Hero() {
         </p>
 
         <h1 className="hero__title hero__animate">
-          <span className="gold-text">{t('hero.title')}</span>
+          <span className="hero__title-reveal" style={{ '--underline-delay': `${0.2 + t('hero.title').split(' ').length * 0.12 + 0.3}s` }}>
+            {t('hero.title').split(' ').map((word, i) => (
+              <span
+                key={i}
+                className="hero__title-word gold-text"
+                style={{ '--word-delay': `${0.2 + i * 0.12}s` }}
+              >
+                {word}{' '}
+              </span>
+            ))}
+          </span>
         </h1>
 
         <p className="hero__description hero__animate">{t('hero.description')}</p>
