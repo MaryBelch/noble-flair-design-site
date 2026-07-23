@@ -44,7 +44,9 @@ export default function Blog() {
 
               <div className={`blog__card-content ${expandedId === article.id ? 'blog__card-content--open' : ''}`}>
                 <div className="blog__card-content-inner">
-                  <p>{getText(article.content)}</p>
+                  {getText(article.content).map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
                 </div>
               </div>
 

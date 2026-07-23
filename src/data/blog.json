@@ -15,9 +15,24 @@
       "en": "Presentation design is not just about pretty pictures. It's a communication tool that helps convey your message. Here are 5 principles for an effective presentation."
     },
     "content": {
-      "uk": "Перший принцип — мінімалізм. Чим менше зайвих елементів на слайді, тим легше глядачу зосередитись на головному. Другий — контраст. Використовуйте контрастні кольори для заголовків та ключових даних. Третій — ієрархія. Розташовуйте інформацію так, щоб погляд рухався від головного до другорядного. Четвертий — типографіка. Один шрифт для заголовків, інший для тексту — і не більше двох гарнітур. П'ятий — візуалізація даних. Замість таблиць використовуйте графіки та іконки. Дотримуючись цих принципів, ви створите презентацію, яка запам'ятається.",
-      "ru": "Первый принцип — минимализм. Чем меньше лишних элементов на слайде, тем легче зрителю сосредоточиться на главном. Второй — контраст. Используйте контрастные цвета для заголовков и ключевых данных. Третий — иерархия. Располагайте информацию так, чтобы взгляд двигался от главного к второстепенному. Четвёртый — типографика. Один шрифт для заголовков, другой для текста — и не больше двух гарнитур. Пятый — визуализация данных. Вместо таблиц используйте графики и иконки. Следуя этим принципам, вы создадите презентацию, которая запомнится.",
-      "en": "First principle — minimalism. The fewer extra elements on a slide, the easier it is for the viewer to focus on the main message. Second — contrast. Use contrasting colors for headings and key data. Third — hierarchy. Arrange information so the eye moves from primary to secondary. Fourth — typography. One font for headings, another for body — no more than two typefaces. Fifth — data visualization. Use charts and icons instead of tables. Follow these principles and you'll create a presentation that sticks."
+      "uk": [
+        "Дизайн презентації — це не просто красиві картинки. Це інструмент комунікації, який допомагає донести вашу думку до аудиторії. Важливо розуміти, що кожен елемент на слайді впливає на сприйняття інформації. Тому дизайн має бути не тільки естетичним, а й функціональним.",
+        "Перший принцип — мінімалізм. Чим менше зайвих елементів на слайді, тим легше глядачу зосередитись на головному. Другий — контраст. Використовуйте контрастні кольори для заголовків та ключових даних — це допомагає розставити акценти.",
+        "Третій — ієрархія. Розташовуйте інформацію так, щоб погляд рухався від головного до другорядного. Четвертий — типографіка. Один шрифт для заголовків, інший для тексту — і не більше двох гарнітур на одну презентацію. П'ятий — візуалізація даних: замість таблиць використовуйте графіки та іконки.",
+        "Дотримуючись цих принципів, ви створите презентацію, яка запам'ятається аудиторії та допоможе досягти ваших цілей. Почніть з малого — приберіть зайве, додайте контрасту, і результат не змусить себе чекати."
+      ],
+      "ru": [
+        "Дизайн презентации — это не просто красивые картинки. Это инструмент коммуникации, который помогает донести вашу мысль до аудитории. Важно понимать, что каждый элемент на слайде влияет на восприятие информации. Поэтому дизайн должен быть не только эстетичным, но и функциональным.",
+        "Первый принцип — минимализм. Чем меньше лишних элементов на слайде, тем легче зрителю сосредоточиться на главном. Второй — контраст. Используйте контрастные цвета для заголовков и ключевых данных — это помогает расставить акценты.",
+        "Третий — иерархия. Располагайте информацию так, чтобы взгляд двигался от главного к второстепенному. Четвёртый — типографика. Один шрифт для заголовков, другой для текста — и не больше двух гарнитур на одну презентацию. Пятый — визуализация данных: вместо таблиц используйте графики и иконки.",
+        "Следуя этим принципам, вы создадите презентацию, которая запомнится аудитории и поможет достичь ваших целей. Начните с малого — уберите лишнее, добавьте контраста, и результат не заставит себя ждать."
+      ],
+      "en": [
+        "Presentation design is more than just pretty pictures. It is a communication tool that helps convey your message effectively. Every element on a slide influences how information is perceived, so design should be both aesthetic and functional.",
+        "First principle — minimalism. The fewer extra elements on a slide, the easier it is for the audience to focus on the main message. Second — contrast. Use contrasting colors for headings and key data to emphasize what matters most.",
+        "Third — hierarchy. Arrange information so the eye naturally flows from primary to secondary content. Fourth — typography. Use one font for headings, another for body text, and never more than two typefaces per presentation. Fifth — data visualization: replace tables with charts and icons.",
+        "Follow these principles and you will create a presentation that your audience remembers. Start small — remove the clutter, add contrast, and the results will follow."
+      ]
     }
   },
   {
@@ -36,9 +51,24 @@
       "en": "Minimalism, dark mode, micro-animations, and custom typography — the key web design trends that actually impact UX and conversion."
     },
     "content": {
-      "uk": "У 2026 році веб-дизайн продовжує рух у бік спрощення та функціональності. Темна тема стала стандартом — вона зменшує навантаження на очі та виглядає сучасно. Мікро-анімації допомагають користувачу орієнтуватися на сайті: плавні переходи, підсвічування кнопок, поява елементів при скролі. Кастомна типографіка виділяє бренд серед конкурентів. Асиметричні макети та «брутальний» мінімалізм додають характеру. Головна порада: не женіться за трендами сліпо — обирайте те, що працює на вашу цільову аудиторію.",
-      "ru": "В 2026 году веб-дизайн продолжает движение в сторону упрощения и функциональности. Тёмная тема стала стандартом — она снижает нагрузку на глаза и выглядит современно. Микро-анимации помогают пользователю ориентироваться на сайте: плавные переходы, подсветка кнопок, появление элементов при скролле. Кастомная типографика выделяет бренд среди конкурентов. Асимметричные макеты и «брутальный» минимализм добавляют характера. Главный совет: не гонитесь за трендами слепо — выбирайте то, что работает на вашу целевую аудиторию.",
-      "en": "In 2026, web design continues its shift toward simplicity and functionality. Dark mode has become the standard — it reduces eye strain and looks modern. Micro-animations help users navigate: smooth transitions, button highlights, scroll-triggered reveals. Custom typography sets a brand apart. Asymmetrical layouts and brutalist minimalism add character. Key advice: don't chase trends blindly — choose what serves your target audience."
+      "uk": [
+        "У 2026 році веб-дизайн продовжує рух у бік спрощення та функціональності. Користувачі втомилися від перевантажених інтерфейсів — у тренді чистота, повітря та зрозуміла навігація. Головне правило: кожен елемент на сторінці має виконувати конкретну задачу.",
+        "Темна тема стала стандартом — вона зменшує навантаження на очі та виглядає сучасно. Мікро-анімації допомагають користувачу орієнтуватися на сайті: плавні переходи, підсвічування кнопок, поява елементів при скролі. Це дрібниці, які формують загальне враження.",
+        "Кастомна типографіка виділяє бренд серед конкурентів — унікальний шрифт запам'ятовується краще за будь-який логотип. Асиметричні макети та «брутальний» мінімалізм додають характеру і ламають шаблони, роблячи сайт незабутнім.",
+        "Головна порада: не женіться за трендами сліпо. Обирайте те, що працює на вашу цільову аудиторію. Навіть наймодніший дизайн не врятує проєкт, якщо він не вирішує задачі користувача."
+      ],
+      "ru": [
+        "В 2026 году веб-дизайн продолжает движение в сторону упрощения и функциональности. Пользователи устали от перегруженных интерфейсов — в тренде чистота, воздух и понятная навигация. Главное правило: каждый элемент на странице должен выполнять конкретную задачу.",
+        "Тёмная тема стала стандартом — она снижает нагрузку на глаза и выглядит современно. Микро-анимации помогают пользователю ориентироваться на сайте: плавные переходы, подсветка кнопок, появление элементов при скролле. Это мелочи, которые формируют общее впечатление.",
+        "Кастомная типографика выделяет бренд среди конкурентов — уникальный шрифт запоминается лучше любого логотипа. Асимметричные макеты и «брутальный» минимализм добавляют характера и ломают шаблоны, делая сайт незабываемым.",
+        "Главный совет: не гонитесь за трендами слепо. Выбирайте то, что работает на вашу целевую аудиторию. Даже самый модный дизайн не спасёт проект, если он не решает задачи пользователя."
+      ],
+      "en": [
+        "In 2026, web design continues its shift toward simplicity and functionality. Users are tired of cluttered interfaces — the trend favors clean layouts, breathing space, and clear navigation. The golden rule: every element on the page must serve a purpose.",
+        "Dark mode has become the standard — it reduces eye strain and looks modern. Micro-animations help users navigate: smooth transitions, button highlights, scroll-triggered reveals. These small details shape the overall impression of your site.",
+        "Custom typography sets a brand apart — a unique font is more memorable than any logo. Asymmetrical layouts and brutalist minimalism add character and break patterns, making a website unforgettable.",
+        "Key advice: don't chase trends blindly. Choose what serves your target audience. Even the trendiest design won't save a project if it doesn't solve the user's problems."
+      ]
     }
   },
   {
@@ -57,9 +87,24 @@
       "en": "Logo, colors, fonts — just the tip of the iceberg. Here's what brand identity really includes, how it's developed, and what to consider when ordering."
     },
     "content": {
-      "uk": "Фірмовий стиль — це не просто логотип. Це система візуальної комунікації вашого бренду: кольорова палітра, типографіка, паттерни, стиль фотографій, носії (візитки, бланки, презентації, соцмережі). Процес розробки починається з брифування та аналізу конкурентів. Далі — створення концепції (2-3 варіанти), після затвердження — деталізація та підготовка гайдлайну. Вартість залежить від складності та кількості носіїв: базовий пакет (лого + кольори + шрифти) — від $250, повний брендбук — від $500. Термін розробки — від 5 до 14 днів.",
-      "ru": "Фирменный стиль — это не просто логотип. Это система визуальной коммуникации вашего бренда: цветовая палитра, типографика, паттерны, стиль фотографий, носители (визитки, бланки, презентации, соцсети). Процесс разработки начинается с брифинга и анализа конкурентов. Далее — создание концепции (2-3 варианта), после утверждения — детализация и подготовка гайдлайна. Стоимость зависит от сложности и количества носителей: базовый пакет (лого + цвета + шрифты) — от $250, полный брендбук — от $500. Срок разработки — от 5 до 14 дней.",
-      "en": "Brand identity is more than just a logo. It's a visual communication system: color palette, typography, patterns, photography style, and touchpoints (business cards, stationery, presentations, social media). The process starts with a brief and competitor analysis. Next comes concept development (2-3 options), followed by refinement and guideline preparation. Pricing depends on complexity: basic package (logo + colors + fonts) from $250, full brand book from $500. Development takes 5 to 14 days."
+      "uk": [
+        "Фірмовий стиль — це не просто логотип. Це цілісна система візуальної комунікації вашого бренду: кольорова палітра, типографіка, паттерни, стиль фотографій, а також носії — візитки, бланки, презентації, соціальні мережі. Усі ці елементи працюють разом, щоб створити впізнаваний образ.",
+        "Процес розробки починається з брифування та аналізу конкурентів. Це найважливіший етап — ми вивчаємо ваш бізнес, цінності та цільову аудиторію. Далі створюємо 2-3 концепції, після затвердження однієї з них переходимо до деталізації та підготовки гайдлайну.",
+        "Вартість залежить від складності та кількості носіїв. Базовий пакет (логотип + кольори + шрифти) — від $250. Повний брендбук з усіма носіями — від $500. Термін розробки — від 5 до 14 днів, залежно від обсягу робіт.",
+        "Готовий фірмовий стиль — це інвестиція в довіру клієнтів. Люди несвідомо обирають бренди, які виглядають професійно та цілісно. Не варто економити на першому враженні."
+      ],
+      "ru": [
+        "Фирменный стиль — это не просто логотип. Это целостная система визуальной коммуникации вашего бренда: цветовая палитра, типографика, паттерны, стиль фотографий, а также носители — визитки, бланки, презентации, социальные сети. Все эти элементы работают вместе, чтобы создать узнаваемый образ.",
+        "Процесс разработки начинается с брифинга и анализа конкурентов. Это самый важный этап — мы изучаем ваш бизнес, ценности и целевую аудиторию. Далее создаём 2-3 концепции, после утверждения одной из них переходим к детализации и подготовке гайдлайна.",
+        "Стоимость зависит от сложности и количества носителей. Базовый пакет (логотип + цвета + шрифты) — от $250. Полный брендбук со всеми носителями — от $500. Срок разработки — от 5 до 14 дней, в зависимости от объёма работ.",
+        "Готовый фирменный стиль — это инвестиция в доверие клиентов. Люди подсознательно выбирают бренды, которые выглядят профессионально и целостно. Не стоит экономить на первом впечатлении."
+      ],
+      "en": [
+        "Brand identity is more than just a logo. It is a complete visual communication system: color palette, typography, patterns, photography style, and touchpoints — business cards, stationery, presentations, social media. All these elements work together to create a recognizable image.",
+        "The process starts with a brief and competitor analysis. This is the most important stage — we study your business, values, and target audience. Next, we create 2-3 concepts. After one is approved, we move to refinement and guideline preparation.",
+        "Pricing depends on complexity and the number of touchpoints. A basic package (logo + colors + fonts) starts at $250. A full brand book with all materials starts at $500. Development takes 5 to 14 days depending on scope.",
+        "A solid brand identity is an investment in customer trust. People subconsciously choose brands that look professional and cohesive. Don't skimp on the first impression — it pays off in the long run."
+      ]
     }
   }
 ]
