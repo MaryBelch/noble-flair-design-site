@@ -53,6 +53,7 @@
     "cta_course": "Learn About Course",
     "cta_services": "Order Services",
     "cta_portfolio": "Portfolio",
+    "cta_project": "Discuss a Project",
     "scroll_label": "Scroll"
   },
   "about": {
@@ -264,6 +265,20 @@
     "prev_aria": "Previous testimonial",
     "next_aria": "Next testimonial"
   },
+  "instagram": {
+    "title": "Follow Us on Instagram",
+    "subtitle": "Daily ideas, work, and inspiration",
+    "follow": "Follow",
+    "follow_username": "@maryna_design_nfd",
+    "posts": {
+      "post1": "Presentation Design",
+      "post2": "Brand Identity",
+      "post3": "Print Design",
+      "post4": "Epoxy Resin Art",
+      "post5": "Creation Process",
+      "post6": "Inspiration"
+    }
+  },
   "vacancies": {
     "title": "Vacancies",
     "subtitle": "Join the Noble Flair Design team",
@@ -369,6 +384,18 @@
     "btn": "Subscribe",
     "success": "Thank you! You're now subscribed.",
     "error": "Something went wrong. Try again later."
+  },
+  "leadMagnet": {
+    "title": "Free Checklist",
+    "subtitle": "«Perfect Presentation»",
+    "description": "10 steps to a presentation that stands out. Enter your email and download the checklist now.",
+    "name_placeholder": "Your name",
+    "email_placeholder": "Your email",
+    "btn": "Get the Checklist",
+    "sending": "Sending...",
+    "success": "Thank you! Click the button below to download your checklist.",
+    "download_btn": "Download PDF",
+    "error": "Something went wrong. Please try again later."
   },
   "sw_update": {
     "available": "A new version is available",

@@ -82,6 +82,19 @@
   color: var(--gold-main);
 }
 
+/* Gold filled — main CTA */
+.btn--gold {
+  background: var(--gold-gradient);
+  color: var(--color-bg);
+  border: none;
+  font-weight: 600;
+}
+
+.btn--gold:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-gold);
+}
+
 .btn--large {
   padding: 18px 40px;
   font-size: 1.05rem;

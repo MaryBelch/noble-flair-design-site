@@ -10,6 +10,8 @@ import ErrorBoundary, { TranslatedErrorBoundary } from './components/UI/ErrorBou
 import SWUpdateNotification from './components/UI/SWUpdateNotification';
 import AmbientEffects from './components/UI/AmbientEffects';
 import Newsletter from './components/Newsletter/Newsletter';
+import Instagram from './components/Instagram/Instagram';
+import LeadMagnet from './components/LeadMagnet/LeadMagnet';
 import { trackPageView } from './lib/analytics';
 import './styles/global.css';
 
@@ -164,8 +166,10 @@ function AppContent() {
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Portfolio /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Course /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Testimonials /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><Instagram /></TranslatedErrorBoundary>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><FAQ /></TranslatedErrorBoundary></Suspense>
             <Suspense fallback={<div className="section"><div className="container" style={{ minHeight: 200 }} /></div>}><TranslatedErrorBoundary><Vacancies /></TranslatedErrorBoundary></Suspense>
+            <TranslatedErrorBoundary><LeadMagnet /></TranslatedErrorBoundary>
             <TranslatedErrorBoundary><Contact /></TranslatedErrorBoundary>
             <TranslatedErrorBoundary><Newsletter /></TranslatedErrorBoundary>
           </ErrorBoundary>

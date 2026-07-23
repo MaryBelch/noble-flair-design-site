@@ -111,6 +111,9 @@ export default function Hero() {
         <p className="hero__description hero__animate">{t('hero.description')}</p>
 
         <div className="hero__actions hero__animate">
+          <Button variant="gold" href="#contact" onClick={() => trackEvent('interaction', 'click', 'hero_project')}>
+            {t('hero.cta_project')} →
+          </Button>
           <Button variant="outline-animated" href="#services" onClick={() => trackEvent('interaction', 'click', 'hero_services')}>
             {t('hero.cta_services')}
           </Button>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Чек-лист «Ідеальна презентація» — Noble Flair Design</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    h1 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #F5D67A, #D4AF37, #B8892F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .header p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+    }
+    .step {
+      background: #111;
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .step:hover {
+      border-color: rgba(212,175,55,0.35);
+    }
+    .step__num {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #D4AF37, #B8892F);
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .step h2 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      color: #D4AF37;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .step ul {
+      list-style: none;
+      padding: 0;
+    }
+    .step li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .step li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #D4AF37;
+      opacity: 0.6;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer a {
+      color: #D4AF37;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    @media print {
+      body { padding: 20px; background: #fff; color: #333; }
+      .step { border-color: #ddd; background: #fafafa; }
+      .step h2 { color: #b8860b; }
+      .step__num { -webkit-text-fill-color: #0a0a0a; }
+      h1 { -webkit-text-fill-color: #b8860b; }
+      .footer a { color: #333; }
+      .footer { border-top-color: #ddd; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Ідеальна презентація</h1>
+      <p>Чек-лист із 10 кроків для створення презентації, яка запам'ятовується</p>
+    </div>
+
+    <div class="step">
+      <span class="step__num">1</span>
+      <h2>Визначте мету презентації</h2>
+      <ul>
+        <li>Чого ви хочете досягти? (продаж, навчання, натхнення)</li>
+        <li>Хто ваша аудиторія?</li>
+        <li>Який головний меседж ви хочете донести?</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">2</span>
+      <h2>Структура — кістяк презентації</h2>
+      <ul>
+        <li>Вступ: проблема / контекст / інтрига</li>
+        <li>Основна частина: 3-5 ключових тез</li>
+        <li>Висновок: заклик до дії (CTA)</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">3</span>
+      <h2>Один слайд — одна думка</h2>
+      <ul>
+        <li>Не перевантажуйте слайд текстом</li>
+        <li>Максимум 6-8 слів на слайд для ключових меседжів</li>
+        <li>Використовуйте заголовки, які резонують</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">4</span>
+      <h2>Візуальна ієрархія</h2>
+      <ul>
+        <li>Найважливіше — найбільше і найпомітніше</li>
+        <li>Використовуйте контраст (розмір, колір, товщина)</li>
+        <li>Пустий простір — ваш друг</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">5</span>
+      <h2>Кольорова палітра</h2>
+      <ul>
+        <li>2-3 основних кольори + 1 акцентний</li>
+        <li>Переконайтеся, що текст контрастує з фоном</li>
+        <li>Дотримуйтесь палітри на всіх слайдах</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">6</span>
+      <h2>Типографіка</h2>
+      <ul>
+        <li>Не більше 2 шрифтів на презентацію</li>
+        <li>Заголовки: виразний шрифт, 30-48px</li>
+        <li>Основний текст: читабельний шрифт, 18-24px</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">7</span>
+      <h2>Зображення та іконки</h2>
+      <ul>
+        <li>Тільки якісні, ліцензійно чисті зображення</li>
+        <li>Один візуальний елемент на слайд</li>
+        <li>Іконки в одному стилі</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">8</span>
+      <h2>Анімація — в міру</h2>
+      <ul>
+        <li>З'являйте елементи поступово, не всі одразу</li>
+        <li>Один тип анімації на всю презентацію</li>
+        <li>Уникайте зайвих ефектів (обертання, стрибки)</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">9</span>
+      <h2>Фінальна перевірка</h2>
+      <ul>
+        <li>Перегляньте презентацію від початку до кінця</li>
+        <li>Перевірте орфографію та пунктуацію</li>
+        <li>Протестуйте на проєкторі / іншому екрані</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <span class="step__num">10</span>
+      <h2>Подача</h2>
+      <ul>
+        <li>Репетируйте вголос перед презентацією</li>
+        <li>Підготуйте відповіді на можливі питання</li>
+        <li>Будьте впевнені — ви експерт</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>Створено з ❤️ студією <a href="https://marybelch.github.io/noble-flair-design-site/">Noble Flair Design</a></p>
+    </div>
+  </div>
+</body>
+</html>

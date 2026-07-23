@@ -157,3 +157,19 @@ export async function deleteVacancy(id) {
   const { doc, updateDoc } = await import('firebase/firestore');
   await updateDoc(doc(db, 'vacancies', id), { deleted: true });
 }
+
+/* ── Lead magnet ── */
+
+/** Save a lead (checklist download) */
+export async function saveLead(name, email) {
+  const db = await getDb();
+  const { doc, collection, setDoc, serverTimestamp } = await import('firebase/firestore');
+  const ref = doc(collection(db, 'leads'));
+  await setDoc(ref, {
+    name,
+    email,
+    source: 'checklist',
+    createdAt: serverTimestamp(),
+  });
+  return ref.id;
+}
