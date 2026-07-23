@@ -8,7 +8,6 @@
     "portfolio": "Portfolio",
     "vacancies": "Vacancies",
     "faq": "FAQ",
-    "case_studies": "Case Studies",
     "contact": "Contact",
     "login": "Sign In",
     "skip_link": "Skip to content",
@@ -366,11 +365,6 @@
     "btn": "Subscribe",
     "success": "Thank you! You're now subscribed.",
     "error": "Something went wrong. Try again later."
-  },
-  "caseStudies": {
-    "title": "Case Studies",
-    "subtitle": "Our projects in detail",
-    "status_coming": "Coming Soon"
   },
   "sw_update": {
     "available": "A new version is available",
