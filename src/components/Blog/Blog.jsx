@@ -26,7 +26,7 @@ export default function Blog() {
           {articles.map((article, i) => (
             <article
               key={article.id}
-              className={`blog__card fade-in ${expandedId === article.id ? 'blog__card--expanded' : ''}`}
+              className={`blog__card ${expandedId === article.id ? 'blog__card--expanded' : ''}`}
               style={{ '--card-accent': article.color }}
             >
               <div className="blog__card-header">
