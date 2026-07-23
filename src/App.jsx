@@ -70,6 +70,14 @@ const structuredData = [
     url: 'https://marybelch.github.io/noble-flair-design-site/',
     inLanguage: ['uk', 'ru', 'en'],
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Дизайн презентацій',
+    provider: { '@type': 'Organization', name: 'Noble Flair Design' },
+    areaServed: ['UA', 'US', 'EU'],
+    description: 'Розробка презентацій преміум-класу для бізнесу, стартапів та освітніх проєктів.',
+  },
 ];
 
 function AppContent() {
@@ -86,6 +94,26 @@ function AppContent() {
   useEffect(() => {
     trackPageView(window.location.pathname);
   }, []);
+
+  // Dynamic SEO title + meta per locale
+  useEffect(() => {
+    const title = t('seo.title');
+    const description = t('seo.description');
+
+    document.title = title;
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    const metaDesc = document.querySelector('meta[name="description"]');
+
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    if (ogDesc) ogDesc.setAttribute('content', description);
+    if (twTitle) twTitle.setAttribute('content', title);
+    if (twDesc) twDesc.setAttribute('content', description);
+    if (metaDesc) metaDesc.setAttribute('content', description);
+  }, [locale, t]);
 
   // Locale-aware FAQ structured data
   const faqStructuredData = {
