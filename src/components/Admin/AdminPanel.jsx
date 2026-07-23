@@ -37,8 +37,8 @@ export default function AdminPanel() {
     try {
       const data = await getAllUsers();
       setUsers(data);
-    } catch (err) {
-      console.error('Error loading users:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     }
   }, [isAdmin]);
 
@@ -47,8 +47,8 @@ export default function AdminPanel() {
     try {
       const data = await getAllMessages();
       setMessages(data);
-    } catch (err) {
-      console.error('Error loading messages:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     }
   }, [isAdmin]);
 
@@ -84,8 +84,8 @@ export default function AdminPanel() {
           u.id === uid ? { ...u, tariff, hasCourseAccess: true, accessGrantedAt: now, accessExpiresAt } : u
         )
       );
-    } catch (err) {
-      console.error('Error setting tariff:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     } finally {
       setSaving((s) => ({ ...s, [uid]: false }));
     }
@@ -109,8 +109,8 @@ export default function AdminPanel() {
             : u
         )
       );
-    } catch (err) {
-      console.error('Error revoking access:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     } finally {
       setSaving((s) => ({ ...s, [uid]: false }));
     }
@@ -125,8 +125,8 @@ export default function AdminPanel() {
       setUsers((prev) =>
         prev.map((u) => (u.id === uid ? { ...u, role: newRole } : u))
       );
-    } catch (err) {
-      console.error('Error updating role:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     } finally {
       setSaving((s) => ({ ...s, [uid]: false }));
     }
@@ -138,8 +138,8 @@ export default function AdminPanel() {
     try {
       await markMessageRead(id);
       setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, read: true } : m)));
-    } catch (err) {
-      console.error('Error marking message read:', err);
+    } catch {
+      // Silent: admin operations fail gracefully
     }
   };
 

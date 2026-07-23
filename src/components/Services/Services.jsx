@@ -2,6 +2,7 @@ import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import services from '../../data/services.json';
+import { trackEvent } from '../../lib/analytics';
 import './Services.css';
 
 export default function Services() {
@@ -33,10 +34,11 @@ export default function Services() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="services__card-btn services__card-btn--brief"
+                  onClick={() => trackEvent('interaction', 'click', `brief_${service.id}`)}
                 >
                   {t('services.brief_btn')} →
                 </a>
-                <a href="#contact" className="services__card-btn services__card-btn--contact">
+                <a href="#contact" className="services__card-btn services__card-btn--contact" onClick={() => trackEvent('interaction', 'click', `contact_${service.id}`)}>
                   {t('services.cta')}
                 </a>
               </div>

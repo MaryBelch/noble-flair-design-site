@@ -32,7 +32,6 @@ export default function LessonView({ selectedLesson, modules, onBack }) {
           setLessonData(snap.exists() ? snap.data() : null);
         }
       } catch (err) {
-        console.error('Error fetching lesson:', err);
         if (!cancelled) setError(err.message);
       } finally {
         if (!cancelled) setLessonLoading(false);

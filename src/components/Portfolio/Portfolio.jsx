@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
+import { trackEvent } from '../../lib/analytics';
 import portfolio from '../../data/portfolio.json';
 import './Portfolio.css';
 
@@ -82,7 +83,10 @@ export default function Portfolio() {
               key={cat}
               id={`portfolio-tab-${cat}`}
               className={`portfolio__filter-btn ${activeCategory === cat ? 'portfolio__filter-btn--active' : ''}`}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => {
+                trackEvent('interaction', 'filter', cat);
+                setActiveCategory(cat);
+              }}
               role="tab"
               aria-selected={activeCategory === cat}
               aria-controls="portfolio-grid"

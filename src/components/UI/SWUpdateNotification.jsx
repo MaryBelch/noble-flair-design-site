@@ -54,6 +54,7 @@ export default function SWUpdateNotification() {
           aria-label={t('sw_update.close')}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+            <title>{t('sw_update.close')}</title>
             <path d="M18 6L6 18M6 6l12 12" />
           </svg>
         </button>

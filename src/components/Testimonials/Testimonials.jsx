@@ -106,12 +106,14 @@ export default function Testimonials() {
           <div className="testimonials__nav">
             <button className="testimonials__nav-btn" onClick={goPrev} aria-label={t('testimonials.prev_aria')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <title>{t('testimonials.prev_aria')}</title>
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
             <span className="testimonials__counter" aria-live="polite">{current + 1}/{testimonials.length}</span>
             <button className="testimonials__nav-btn" onClick={goNext} aria-label={t('testimonials.next_aria')}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <title>{t('testimonials.next_aria')}</title>
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>

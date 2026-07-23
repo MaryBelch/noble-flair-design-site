@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../context/I18nContext';
 import { resetPassword } from '../../firebase/auth';
+import { trackEvent } from '../../lib/analytics';
 import Button from '../UI/Button';
 import './AuthModal.css';
 
@@ -83,6 +84,7 @@ export default function AuthModal({ onClose }) {
       } else {
         await login(email, password);
       }
+      trackEvent('auth', mode, null);
       onClose();
     } catch (err) {
       const code = err.code;
@@ -115,6 +117,7 @@ export default function AuthModal({ onClose }) {
       >
         <button className="auth-modal__close" onClick={onClose} aria-label={t('auth.close')}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <title>{t('auth.close')}</title>
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
