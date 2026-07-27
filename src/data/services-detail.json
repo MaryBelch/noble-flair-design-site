@@ -305,13 +305,73 @@
           "ru": "Настенные, настольные, карманные календари. Корпоративные подарки с дизайном под ваш бренд.",
           "en": "Wall, desk, and pocket calendars. Corporate gifts with custom brand design."
         }
+      },
+      {
+        "id": "photo-prints",
+        "icon": "🖼️",
+        "title": {
+          "uk": "Фото-друк та фотобуки",
+          "ru": "Печать фото и фотобуки",
+          "en": "Photo Printing & Photobooks"
+        },
+        "desc": {
+          "uk": "Друк фотографій різних форматів від 10×15 до A4 та фотокниги з твердою або м'якою обкладинкою. Матовий, глянцевий, фотопапір преміум-класу.",
+          "ru": "Печать фотографий разных форматов от 10×15 до A4 и фотокниги с твёрдой или мягкой обложкой. Матовая, глянцевая, фотобумага премиум-класса.",
+          "en": "Photo printing in various formats from 4×6 to A4 and hardcover or softcover photobooks. Matte, glossy, premium photo paper."
+        }
+      },
+      {
+        "id": "certificates",
+        "icon": "📜",
+        "title": {
+          "uk": "Сертифікати та дипломи",
+          "ru": "Сертификаты и дипломы",
+          "en": "Certificates & Diplomas"
+        },
+        "desc": {
+          "uk": "Подарункові сертифікати, подяки, грамоти, дипломи для курсів та конкурсів. Дизайн і друк на щільному папері з ламінацією.",
+          "ru": "Подарочные сертификаты, благодарности, грамоты, дипломы для курсов и конкурсов. Дизайн и печать на плотной бумаге с ламинацией.",
+          "en": "Gift certificates, thank-you notes, awards, diplomas for courses and competitions. Design and printing on thick paper with lamination."
+        }
+      },
+      {
+        "id": "coloring-pages",
+        "icon": "🖍️",
+        "title": {
+          "uk": "Розмальовки за вашими фото",
+          "ru": "Раскраски по вашим фото",
+          "en": "Coloring Pages from Your Photos"
+        },
+        "desc": {
+          "uk": "Перетворимо ваше фото на унікальну розмальовку. Чудовий подарунок для дітей та дорослих.",
+          "ru": "Превратим ваше фото в уникальную раскраску. Отличный подарок для детей и взрослых.",
+          "en": "We turn your photo into a unique coloring page. A perfect gift for children and adults."
+        }
+      },
+      {
+        "id": "photo-cards",
+        "icon": "🃏",
+        "title": {
+          "uk": "Карти з вашим фото",
+          "ru": "Карты с вашим фото",
+          "en": "Photo Cards"
+        },
+        "desc": {
+          "uk": "Гральні карти з вашими фотографіями — унікальний подарунок для близьких та корпоративних клієнтів.",
+          "ru": "Игральные карты с вашими фотографиями — уникальный подарок для близких и корпоративных клиентов.",
+          "en": "Playing cards featuring your photos — a unique gift for loved ones and corporate clients."
+        }
       }
     ],
     "gallery": [
       { "icon": "🪪", "label": { "uk": "Візитки", "ru": "Визитки", "en": "Business Cards" } },
       { "icon": "📄", "label": { "uk": "Флаєри", "ru": "Флаеры", "en": "Flyers" } },
       { "icon": "📘", "label": { "uk": "Брошури", "ru": "Брошюры", "en": "Brochures" } },
-      { "icon": "💌", "label": { "uk": "Запрошення", "ru": "Приглашения", "en": "Invitations" } }
+      { "icon": "💌", "label": { "uk": "Запрошення", "ru": "Приглашения", "en": "Invitations" } },
+      { "icon": "🖼️", "label": { "uk": "Фото", "ru": "Фото", "en": "Photos" } },
+      { "icon": "📜", "label": { "uk": "Сертифікати", "ru": "Сертификаты", "en": "Certificates" } },
+      { "icon": "🖍️", "label": { "uk": "Розмальовки", "ru": "Раскраски", "en": "Coloring Pages" } },
+      { "icon": "🃏", "label": { "uk": "Карти", "ru": "Карты", "en": "Photo Cards" } }
     ]
   },
   "epoxy": {
