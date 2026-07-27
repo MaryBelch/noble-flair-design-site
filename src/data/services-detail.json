@@ -1,0 +1,402 @@
+{
+  "design": {
+    "icon": "🎨",
+    "title": {
+      "uk": "Дизайн",
+      "ru": "Дизайн",
+      "en": "Design"
+    },
+    "subtitle": {
+      "uk": "Презентації, банери, брендинг та візуальний контент",
+      "ru": "Презентации, баннеры, брендинг и визуальный контент",
+      "en": "Presentations, banners, branding, and visual content"
+    },
+    "description": [
+      {
+        "uk": "Дизайн — це обличчя вашого бізнесу. Ми створюємо візуальні рішення, які привертають увагу, викликають довіру та запам'ятовуються. Кожен проєкт унікальний і розробляється індивідуально під ваші задачі та цільову аудиторію.",
+        "ru": "Дизайн — это лицо вашего бизнеса. Мы создаём визуальные решения, которые привлекают внимание, вызывают доверие и запоминаются. Каждый проект уникален и разрабатывается индивидуально под ваши задачи и целевую аудиторию.",
+        "en": "Design is the face of your business. We create visual solutions that grab attention, build trust, and leave a lasting impression. Every project is unique and tailored to your specific goals and audience."
+      },
+      {
+        "uk": "Працюємо з бізнесами будь-якого масштабу — від стартапів до великих компаній. Використовуємо сучасні інструменти та підходи, щоб ваш продукт виглядав актуально та професійно. Терміни виконання — від 3 до 10 днів залежно від складності.",
+        "ru": "Работаем с бизнесами любого масштаба — от стартапов до крупных компаний. Используем современные инструменты и подходы, чтобы ваш продукт выглядел актуально и профессионально. Сроки выполнения — от 3 до 10 дней в зависимости от сложности.",
+        "en": "We work with businesses of all sizes — from startups to established companies. Using modern tools and approaches, we ensure your product looks current and professional. Delivery time: 3 to 10 days depending on complexity."
+      }
+    ],
+    "features": [
+      {
+        "icon": "📊",
+        "title": {
+          "uk": "Презентації преміум-класу",
+          "ru": "Презентации премиум-класса",
+          "en": "Premium Presentations"
+        },
+        "desc": {
+          "uk": "Від корпоративних пітчів до навчальних матеріалів — стильні структуровані презентації, які працюють на ваш успіх.",
+          "ru": "От корпоративных питчей до учебных материалов — стильные структурированные презентации, которые работают на ваш успех.",
+          "en": "From corporate pitches to educational materials — stylish, well-structured presentations that drive your success."
+        }
+      },
+      {
+        "icon": "🖼️",
+        "title": {
+          "uk": "Банери та реклама",
+          "ru": "Баннеры и реклама",
+          "en": "Banners & Advertising"
+        },
+        "desc": {
+          "uk": "Привабливі банери для соцмереж, сайтів та друкованої реклами. Адаптація під усі формати та платформи.",
+          "ru": "Привлекательные баннеры для соцсетей, сайтов и печатной рекламы. Адаптация под все форматы и платформы.",
+          "en": "Eye-catching banners for social media, websites, and print ads. Adapted for all formats and platforms."
+        }
+      },
+      {
+        "icon": "✨",
+        "title": {
+          "uk": "Брендинг та фірмовий стиль",
+          "ru": "Брендинг и фирменный стиль",
+          "en": "Branding & Identity"
+        },
+        "desc": {
+          "uk": "Розробка або оновлення вашого бренду: логотип, кольори, шрифти, носії — усе в єдиній системі.",
+          "ru": "Разработка или обновление вашего бренда: логотип, цвета, шрифты, носители — всё в единой системе.",
+          "en": "Develop or refresh your brand: logo, colors, fonts, and touchpoints — all in one cohesive system."
+        }
+      },
+      {
+        "icon": "📱",
+        "title": {
+          "uk": "Контент для соцмереж",
+          "ru": "Контент для соцсетей",
+          "en": "Social Media Content"
+        },
+        "desc": {
+          "uk": "Оформлення профілів, stories, пости та каруселі — регулярний візуальний контент для вашого Instagram, LinkedIn тощо.",
+          "ru": "Оформление профилей, stories, посты и карусели — регулярный визуальный контент для вашего Instagram, LinkedIn и других платформ.",
+          "en": "Profile design, stories, posts, and carousels — regular visual content for your Instagram, LinkedIn, and more."
+        }
+      }
+    ],
+    "gallery": [
+      { "icon": "📊", "label": { "uk": "Презентації", "ru": "Презентации", "en": "Presentations" } },
+      { "icon": "🖼️", "label": { "uk": "Банери", "ru": "Баннеры", "en": "Banners" } },
+      { "icon": "✨", "label": { "uk": "Брендинг", "ru": "Брендинг", "en": "Branding" } },
+      { "icon": "📱", "label": { "uk": "Соцмережі", "ru": "Соцсети", "en": "Social Media" } }
+    ]
+  },
+  "websites": {
+    "icon": "🌐",
+    "title": {
+      "uk": "Веб-розробка",
+      "ru": "Веб-разработка",
+      "en": "Web Development"
+    },
+    "subtitle": {
+      "uk": "Сучасні сайти, лендінги та корпоративні портали",
+      "ru": "Современные сайты, лендинги и корпоративные порталы",
+      "en": "Modern websites, landing pages, and corporate portals"
+    },
+    "description": [
+      {
+        "uk": "Створюємо сайти, які не тільки красиво виглядають, а й ефективно працюють. Кожен наш проєкт побудований на принципах зручності для користувача, швидкості завантаження та сучасного дизайну.",
+        "ru": "Создаём сайты, которые не только красиво выглядят, но и эффективно работают. Каждый наш проект построен на принципах удобства для пользователя, скорости загрузки и современного дизайна.",
+        "en": "We build websites that not only look great but work effectively. Every project is built on principles of usability, fast loading, and modern design."
+      },
+      {
+        "uk": "Від простого лендінгу до багатосторінкового корпоративного сайту — ми підберемо оптимальне рішення під ваш бюджет та задачі. Адаптивна верстка, SEO-оптимізація та підтримка після запуску входять у вартість.",
+        "ru": "От простого лендинга до многостраничного корпоративного сайта — мы подберём оптимальное решение под ваш бюджет и задачи. Адаптивная вёрстка, SEO-оптимизация и поддержка после запуска входят в стоимость.",
+        "en": "From a simple landing page to a multi-page corporate site — we'll find the optimal solution for your budget and goals. Responsive design, SEO optimization, and post-launch support are included."
+      }
+    ],
+    "features": [
+      {
+        "icon": "🏗️",
+        "title": {
+          "uk": "Лендінги та сайти",
+          "ru": "Лендинги и сайты",
+          "en": "Landing Pages & Websites"
+        },
+        "desc": {
+          "uk": "Односторінкові лендінги для акцій та багатосторінкові сайти з каталогом, блогом, формою зв'язку.",
+          "ru": "Одностраничные лендинги для акций и многостраничные сайты с каталогом, блогом, формой связи.",
+          "en": "Single-page landing pages for campaigns and multi-page sites with catalog, blog, and contact form."
+        }
+      },
+      {
+        "icon": "📱",
+        "title": {
+          "uk": "Адаптивний дизайн",
+          "ru": "Адаптивный дизайн",
+          "en": "Responsive Design"
+        },
+        "desc": {
+          "uk": "Ваш сайт ідеально виглядає на будь-яких пристроях — від телефонів до великих екранів.",
+          "ru": "Ваш сайт идеально выглядит на любых устройствах — от телефонов до больших экранов.",
+          "en": "Your website looks perfect on any device — from phones to large screens."
+        }
+      },
+      {
+        "icon": "🚀",
+        "title": {
+          "uk": "SEO та швидкість",
+          "ru": "SEO и скорость",
+          "en": "SEO & Performance"
+        },
+        "desc": {
+          "uk": "Оптимізація для пошукових систем та швидке завантаження — ваш сайт буде знаходити першим.",
+          "ru": "Оптимизация для поисковых систем и быстрая загрузка — ваш сайт будут находить первым.",
+          "en": "Search engine optimization and fast loading — your site will be found first."
+        }
+      },
+      {
+        "icon": "🔧",
+        "title": {
+          "uk": "Підтримка та супровід",
+          "ru": "Поддержка и сопровождение",
+          "en": "Support & Maintenance"
+        },
+        "desc": {
+          "uk": "Оновлення контенту, технічна підтримка, доопрацювання — ми поруч після запуску.",
+          "ru": "Обновление контента, техническая поддержка, доработки — мы рядом после запуска.",
+          "en": "Content updates, technical support, and refinements — we're here after launch."
+        }
+      }
+    ],
+    "gallery": [
+      { "icon": "🏗️", "label": { "uk": "Лендінги", "ru": "Лендинги", "en": "Landing Pages" } },
+      { "icon": "🖥️", "label": { "uk": "Корпоративні сайти", "ru": "Корпоративные сайты", "en": "Corporate Sites" } },
+      { "icon": "📱", "label": { "uk": "Адаптація", "ru": "Адаптация", "en": "Responsive" } },
+      { "icon": "🚀", "label": { "uk": "Оптимізація", "ru": "Оптимизация", "en": "Optimization" } }
+    ]
+  },
+  "printing": {
+    "icon": "🖨️",
+    "title": {
+      "uk": "Дизайн та поліграфія",
+      "ru": "Дизайн и полиграфия",
+      "en": "Design & Printing"
+    },
+    "subtitle": {
+      "uk": "Повний цикл: дизайн + друк + доставка по всій Україні",
+      "ru": "Полный цикл: дизайн + печать + доставка по всей Украине",
+      "en": "Full cycle: design + printing + delivery across Ukraine"
+    },
+    "description": [
+      {
+        "uk": "Поліграфія — один із найпопулярніших напрямків нашої студії. Ми пропонуємо повний цикл послуг: від розробки макета до друку та доставки готової продукції. Працюємо з сучасним обладнанням та якісними матеріалами.",
+        "ru": "Полиграфия — одно из самых популярных направлений нашей студии. Мы предлагаем полный цикл услуг: от разработки макета до печати и доставки готовой продукции. Работаем с современным оборудованием и качественными материалами.",
+        "en": "Printing is one of our studio's most popular services. We offer a full cycle: from layout design to printing and delivery. We work with modern equipment and high-quality materials."
+      },
+      {
+        "uk": "Для кожного клієнта — індивідуальний підхід та консультація. Допоможемо обрати тип паперу, формат, оздоблення та тираж. Терміни виконання — від 1 до 7 днів залежно від складності та обсягу.",
+        "ru": "Для каждого клиента — индивидуальный подход и консультация. Поможем выбрать тип бумаги, формат, отделку и тираж. Сроки выполнения — от 1 до 7 дней в зависимости от сложности и объёма.",
+        "en": "Every client gets a personalized approach and consultation. We'll help you choose paper type, format, finishing, and quantity. Delivery: 1 to 7 days depending on complexity and volume."
+      }
+    ],
+    "subcategories": [
+      {
+        "id": "business-cards",
+        "icon": "🪪",
+        "title": {
+          "uk": "Візитки",
+          "ru": "Визитки",
+          "en": "Business Cards"
+        },
+        "desc": {
+          "uk": "Класичні, євро, з тисненням, вибірковим лаком або золотою фольгою. Будь-який дизайн та формат.",
+          "ru": "Классические, евро, с тиснением, выборочным лаком или золотой фольгой. Любой дизайн и формат.",
+          "en": "Classic, euro, embossed, with spot UV or gold foil. Any design and format you need."
+        }
+      },
+      {
+        "id": "flyers",
+        "icon": "📄",
+        "title": {
+          "uk": "Флаєри та листівки",
+          "ru": "Флаеры и листовки",
+          "en": "Flyers & Leaflets"
+        },
+        "desc": {
+          "uk": "Рекламні листівки, флаєри, меню — для акцій, подій та просування бізнесу.",
+          "ru": "Рекламные листовки, флаеры, меню — для акций, событий и продвижения бизнеса.",
+          "en": "Promotional leaflets, flyers, menus — for campaigns, events, and business promotion."
+        }
+      },
+      {
+        "id": "brochures",
+        "icon": "📘",
+        "title": {
+          "uk": "Брошури та каталоги",
+          "ru": "Брошюры и каталоги",
+          "en": "Brochures & Catalogs"
+        },
+        "desc": {
+          "uk": "Багатосторінкові брошури, каталоги продукції, буклети — зшивка на скобу, пружину або клей.",
+          "ru": "Многостраничные брошюры, каталоги продукции, буклеты — скрепление на скобу, пружину или клей.",
+          "en": "Multi-page brochures, product catalogs, booklets — stapled, spiral-bound, or glued."
+        }
+      },
+      {
+        "id": "invitations",
+        "icon": "💌",
+        "title": {
+          "uk": "Запрошення та листівки",
+          "ru": "Приглашения и открытки",
+          "en": "Invitations & Cards"
+        },
+        "desc": {
+          "uk": "Весілля, ювілеї, корпоративи — ексклюзивні запрошення з індивідуальним дизайном.",
+          "ru": "Свадьбы, юбилеи, корпоративы — эксклюзивные приглашения с индивидуальным дизайном.",
+          "en": "Weddings, anniversaries, corporate events — exclusive invitations with custom design."
+        }
+      },
+      {
+        "id": "posters",
+        "icon": "🖼️",
+        "title": {
+          "uk": "Плакати та банери",
+          "ru": "Плакаты и банеры",
+          "en": "Posters & Banners"
+        },
+        "desc": {
+          "uk": "Великоформатний друк: плакати, постери, банери для приміщень та зовнішньої реклами.",
+          "ru": "Широкоформатная печать: плакаты, постеры, банеры для помещений и наружной рекламы.",
+          "en": "Large format printing: posters, placards, banners for indoor and outdoor use."
+        }
+      },
+      {
+        "id": "stickers",
+        "icon": "🏷️",
+        "title": {
+          "uk": "Стикери та наклейки",
+          "ru": "Стикеры и наклейки",
+          "en": "Stickers & Labels"
+        },
+        "desc": {
+          "uk": "Друк наклейок будь-якої форми та розміру. Для брендування, пакування та промо.",
+          "ru": "Печать наклеек любой формы и размера. Для брендирования, упаковки и промо.",
+          "en": "Custom-shaped stickers in any size. For branding, packaging, and promotions."
+        }
+      },
+      {
+        "id": "packaging",
+        "icon": "📦",
+        "title": {
+          "uk": "Упаковка",
+          "ru": "Упаковка",
+          "en": "Packaging"
+        },
+        "desc": {
+          "uk": "Дизайн та друк упаковки: коробки, пакети, крафтові пакети з логотипом бренду.",
+          "ru": "Дизайн и печать упаковки: коробки, пакеты, крафтовые пакеты с логотипом бренда.",
+          "en": "Packaging design and printing: boxes, bags, craft bags with your brand logo."
+        }
+      },
+      {
+        "id": "calendars",
+        "icon": "📅",
+        "title": {
+          "uk": "Календарі",
+          "ru": "Календари",
+          "en": "Calendars"
+        },
+        "desc": {
+          "uk": "Настінні, настільні, кишенькові календарі. Корпоративні подарунки з дизайном під ваш бренд.",
+          "ru": "Настенные, настольные, карманные календари. Корпоративные подарки с дизайном под ваш бренд.",
+          "en": "Wall, desk, and pocket calendars. Corporate gifts with custom brand design."
+        }
+      }
+    ],
+    "gallery": [
+      { "icon": "🪪", "label": { "uk": "Візитки", "ru": "Визитки", "en": "Business Cards" } },
+      { "icon": "📄", "label": { "uk": "Флаєри", "ru": "Флаеры", "en": "Flyers" } },
+      { "icon": "📘", "label": { "uk": "Брошури", "ru": "Брошюры", "en": "Brochures" } },
+      { "icon": "💌", "label": { "uk": "Запрошення", "ru": "Приглашения", "en": "Invitations" } }
+    ]
+  },
+  "epoxy": {
+    "icon": "💎",
+    "title": {
+      "uk": "Епоксидна смола",
+      "ru": "Эпоксидная смола",
+      "en": "Epoxy Resin Jewelry"
+    },
+    "subtitle": {
+      "uk": "Унікальні прикраси ручної роботи з епоксидної смоли",
+      "ru": "Уникальные украшения ручной работы из эпоксидной смолы",
+      "en": "Unique handmade jewelry pieces from epoxy resin"
+    },
+    "description": [
+      {
+        "uk": "Кожна прикраса з епоксидної смоли — це унікальний витвір. Ми використовуємо натуральні матеріали: сухі квіти, блискітки, пігменти, щоб створити неповторний дизайн. Жодна прикраса не повторюється.",
+        "ru": "Каждое украшение из эпоксидной смолы — это уникальное творение. Мы используем натуральные материалы: сухие цветы, блёстки, пигменты, чтобы создать неповторимый дизайн. Ни одно украшение не повторяется.",
+        "en": "Each epoxy resin piece is a unique creation. We use natural materials: dried flowers, glitter, pigments to create one-of-a-kind designs. No two pieces are alike."
+      },
+      {
+        "uk": "Прикраси ідеально підходять як подарунок або для особливих подій. Можливе індивідуальне замовлення — ви обираєте кольори, наповнення та форму.",
+        "ru": "Украшения идеально подходят как подарок или для особых событий. Возможен индивидуальный заказ — вы выбираете цвета, наполнение и форму.",
+        "en": "Our pieces make perfect gifts or special occasion accessories. Custom orders available — you choose colors, materials, and shape."
+      }
+    ],
+    "features": [
+      {
+        "icon": "🌸",
+        "title": {
+          "uk": "Підвіски та кулони",
+          "ru": "Подвески и кулоны",
+          "en": "Pendants & Necklaces"
+        },
+        "desc": {
+          "uk": "Ніжні підвіски з сухими квітами, блискітками, перламутром — на будь-який смак.",
+          "ru": "Нежные подвески с сухими цветами, блёстками, перламутром — на любой вкус.",
+          "en": "Delicate pendants with dried flowers, glitter, mother-of-pearl — for every taste."
+        }
+      },
+      {
+        "icon": "💫",
+        "title": {
+          "uk": "Сережки",
+          "ru": "Серёжки",
+          "en": "Earrings"
+        },
+        "desc": {
+          "uk": "Легкі та яскраві сережки з епоксидної смоли — класичні та авторські форми.",
+          "ru": "Лёгкие и яркие серьги из эпоксидной смолы — классические и авторские формы.",
+          "en": "Light and vibrant epoxy resin earrings — classic and custom shapes."
+        }
+      },
+      {
+        "icon": "⌚",
+        "title": {
+          "uk": "Браслети",
+          "ru": "Браслеты",
+          "en": "Bracelets"
+        },
+        "desc": {
+          "uk": "Елегантні браслети з різними наповнювачами: квіти, камінці, металеві вставки.",
+          "ru": "Элегантные браслеты с разными наполнителями: цветы, камушки, металлические вставки.",
+          "en": "Elegant bracelets with various fillings: flowers, stones, metal accents."
+        }
+      },
+      {
+        "icon": "🎨",
+        "title": {
+          "uk": "Індивідуальні замовлення",
+          "ru": "Индивидуальные заказы",
+          "en": "Custom Orders"
+        },
+        "desc": {
+          "uk": "Створимо прикрасу за вашим ескізом — для себе або в подарунок. Будь-які кольори та форми.",
+          "ru": "Создадим украшение по вашему эскизу — для себя или в подарок. Любые цвета и формы.",
+          "en": "We'll create a piece from your sketch — for yourself or as a gift. Any colors and shapes."
+        }
+      }
+    ],
+    "gallery": [
+      { "icon": "🌸", "label": { "uk": "Підвіски", "ru": "Подвески", "en": "Pendants" } },
+      { "icon": "💫", "label": { "uk": "Сережки", "ru": "Серёжки", "en": "Earrings" } },
+      { "icon": "⌚", "label": { "uk": "Браслети", "ru": "Браслеты", "en": "Bracelets" } },
+      { "icon": "🎨", "label": { "uk": "На замовлення", "ru": "На заказ", "en": "Custom" } }
+    ]
+  }
+}

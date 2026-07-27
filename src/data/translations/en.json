@@ -245,6 +245,16 @@
     "cta": "Order Now",
     "brief_btn": "Fill brief"
   },
+  "services-detail": {
+    "details": "Details",
+    "back": "Back to services",
+    "not_found": "Service not found",
+    "what_we_offer": "What We Offer",
+    "subcategories": "Printing Services",
+    "gallery": "Portfolio",
+    "photo": "Photo",
+    "cta_text": "Ready to get started? Fill out a brief or contact us directly."
+  },
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "Our works",

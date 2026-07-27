@@ -15,7 +15,7 @@
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-base);
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-base);
 }
 
 .services__card:hover {
@@ -50,7 +50,27 @@
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--color-text-primary);
+  margin: 0;
+  text-align: left;
+}
+
+.services__card-title-btn {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
   margin-bottom: 12px;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.services__card-title-btn:hover {
+  opacity: 0.8;
+}
+
+.services__card-title-btn:hover .services__card-title {
+  color: var(--gold-main);
 }
 
 .services__card-price {
@@ -96,6 +116,22 @@
   background: transparent;
   color: var(--gold-main);
   border: 1.5px solid var(--gold-main);
+}
+
+.services__card-btn--detail {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1.5px solid rgba(212, 175, 55, 0.25);
+  font-size: 0.82rem;
+  padding: 10px 14px;
+}
+
+.services__card-btn--detail:hover {
+  border-color: var(--gold-main);
+  color: var(--gold-main);
+  background: rgba(212, 175, 55, 0.06);
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .services__card-btn--brief:hover {
