@@ -1,0 +1,375 @@
+.founder {
+  padding: 80px 2rem;
+  background-color: var(--bg);
+}
+
+.founder__header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.founder__photo {
+  flex-shrink: 0;
+}
+
+.founder__photo-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.founder__intro {
+  flex: 1;
+}
+
+.founder__name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bg-dark);
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.founder__tagline {
+  font-size: 1.2rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.founder__description {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+.founder__story,
+.founder__expertise,
+.founder__philosophy,
+.founder__achievements,
+.founder__personal,
+.founder__cta,
+.founder__behind-scenes {
+  margin-bottom: 3rem;
+}
+
+.founder__section-title {
+  font-size: 2rem;
+  color: var(--bg-dark);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.founder__section-title::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.founder__story-content p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.founder__timeline {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.founder__timeline-item {
+  flex: 1;
+  text-align: center;
+}
+
+.founder__timeline-item h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.founder__timeline-item p {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.founder__expertise-grid,
+.founder__philosophy-grid,
+.founder__personal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.founder__expertise-item,
+.founder__philosophy-item,
+.founder__personal-item {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.founder__expertise-item:hover,
+.founder__philosophy-item:hover,
+.founder__personal-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.founder__expertise-item h3,
+.founder__philosophy-item h3,
+.founder__personal-item h3 {
+  font-size: 1.2rem;
+  color: var(--bg-dark);
+  margin-bottom: 0.75rem;
+}
+
+.founder__expertise-item p,
+.founder__philosophy-item p,
+.founder__personal-item p {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.founder__philosophy-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+  color: var(--primary);
+}
+
+.founder__achievements-content {
+  display: flex;
+  gap: 2rem;
+}
+
+.founder__testimonials {
+  flex: 1;
+}
+
+.founder__testimonials h3 {
+  font-size: 1.5rem;
+  color: var(--bg-dark);
+  margin-bottom: 1rem;
+}
+
+.founder__testimonial {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--primary);
+}
+
+.founder__testimonial p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.founder__testimonial p::before {
+  content: "“";
+  font-size: 2rem;
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+}
+
+.founder__testimonial-author {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.founder__recognition h3 {
+  font-size: 1.5rem;
+  color: var(--bg-dark);
+  margin-bottom: 1rem;
+}
+
+.founder__recognition-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.founder__recognition-item {
+  background: var(--primary-dark);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.founder__cta {
+  text-align: center;
+  padding: 3rem 0;
+  background: var(--primary-light);
+  border-radius: 20px;
+}
+
+.founder__cta-title {
+  font-size: 2rem;
+  color: var(--bg-dark);
+  margin-bottom: 1rem;
+}
+
+.founder__cta-description {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.founder__cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.founder__cta-btn {
+  min-width: 180px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.founder__behind-scenes {
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+}
+
+.founder__behind-scenes-title {
+  font-size: 1.8rem;
+  color: var(--bg-dark);
+  margin-bottom: 1.5rem;
+}
+
+.founder__behind-scenes-description {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.founder__behind-scenes-icons {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.founder__behind-scenes-item {
+  text-align: center;
+}
+
+.founder__behind-scenes-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: var(--primary);
+}
+
+.founder__behind-scenes-item p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .founder__header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .founder__photo {
+    margin-bottom: 1.5rem;
+  }
+
+  .founder__intro {
+    text-align: center;
+  }
+
+  .founder__name {
+    font-size: 2rem;
+  }
+
+  .founder__achievements-content {
+    flex-direction: column;
+  }
+
+  .founder__timeline {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .founder__timeline-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .founder__expertise-grid,
+  .founder__philosophy-grid,
+  .founder__personal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .founder {
+    padding: 60px 1rem;
+  }
+
+  .founder__name {
+    font-size: 1.8rem;
+  }
+
+  .founder__section-title {
+    font-size: 1.6rem;
+  }
+
+  .founder__cta-title {
+    font-size: 1.6rem;
+  }
+
+  .founder__cta-description {
+    font-size: 1rem;
+  }
+
+  .founder__cta-btn {
+    min-width: 150px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+}

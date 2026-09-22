@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
+import { NavLink } from 'react-router-dom';
 import services from '../../data/services.json';
 import ServiceDetail from './ServiceDetail';
 import { trackEvent } from '../../lib/analytics';
@@ -70,9 +71,9 @@ export default function Services() {
                 >
                   {t('services.brief_btn')} →
                 </a>
-                <a href="#contact" className="services__card-btn services__card-btn--contact" onClick={() => trackEvent('interaction', 'click', `contact_${service.id}`)}>
+                <NavLink to="/contact" className="services__card-btn services__card-btn--contact" onClick={() => trackEvent('interaction', 'click', `contact_${service.id}`)}>
                   {t('services.cta')}
-                </a>
+                </NavLink>
               </div>
             </div>
           ))}

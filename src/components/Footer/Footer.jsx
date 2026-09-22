@@ -1,5 +1,6 @@
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { NavLink } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
@@ -10,21 +11,21 @@ export default function Footer() {
     <footer className="footer" ref={sectionRef} role="contentinfo">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <a href="#hero" className="footer__logo">
+          <NavLink to="/" className="footer__logo" end>
             <span className="footer__logo-text">Noble Flair Design</span>
             <span className="footer__logo-dot">.</span>
-          </a>
+          </NavLink>
           <p className="footer__tagline">{t('footer.tagline')}</p>
         </div>
 
         <div className="footer__nav">
           <h4 className="footer__nav-title">{t('footer.navigation')}</h4>
           <nav>
-            <a href="#about">{t('nav.about')}</a>
-            <a href="#services">{t('nav.services')}</a>
-            <a href="#portfolio">{t('nav.portfolio')}</a>
-            <a href="#course">{t('nav.course')}</a>
-            <a href="#contact">{t('nav.contact')}</a>
+            <NavLink to="/about">{t('nav.about')}</NavLink>
+            <NavLink to="/services">{t('nav.services')}</NavLink>
+            <NavLink to="/portfolio">{t('nav.portfolio')}</NavLink>
+            <NavLink to="/course">{t('nav.course')}</NavLink>
+            <NavLink to="/contact">{t('nav.contact')}</NavLink>
           </nav>
         </div>
 

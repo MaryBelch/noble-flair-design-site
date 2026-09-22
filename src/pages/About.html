@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noble Flair Design — О нас</title>
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --bg: #f8fafc;
+      --bg-dark: #1e293b;
+      --text: #1e293b;
+      --text-light: #f1f5f9;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --card: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header/Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      background: var(--primary);
+      color: white;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .nav-actions a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 2rem 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    /* About Content */
+    .about-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.8rem;
+      color: var(--bg-dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+
+    /* Founder Card */
+    .founder-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .founder-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .founder-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--primary);
+      margin: 0 auto 1.5rem;
+      background: #edf2f7;
+    }
+
+    .founder-card h3 {
+      font-size: 1.8rem;
+      color: var(--bg-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .founder-card p {
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    /* Mission Statement */
+    .mission {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin: 4rem 0;
+    }
+
+    .mission h3 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .mission p {
+      color: #64748b;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    /* Stats */
+    .stats {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Contact/ socials */
+    .contact-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .contact-section h3 {
+      color: var(--bg-dark);
+      margin-bottom: 1rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-dark);
+      color: var-text-light;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      margin-right: 1.5rem;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Noble Flair Design</a>
+      <ul class="nav-links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#contact">Связаться</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Noble Flair Design</h1>
+    <p>Студия дизайна презентаций и авторского брендинга</p>
+  </section>
+
+  <!-- About Content -->
+  <div class="about-content">
+    <div class="section-title">
+      <h2>О студии</h2>
+      <p>Мы превращаем идеи в визуальные произведения искусства</h2>
+    </div>
+
+    <!-- Founder Card -->
+    <div class="founder-card">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=80" alt="Фото основателя" class="founder-img">
+      <h3>Имя Основателя</h3>
+      <p>Основатель и главный дизайн-директор студии Noble Flair Design</p>
+    </div>
+
+    <!-- Mission -->
+    <div class="mission">
+      <h3>Наша миссия</h3>
+      <p>Мы помогаем предпринимателям и компаниям создавать презентации, которые оставляют неизгладимое впечатление. От конcepc до финальной доставки — мы уделяем каждой детали внимание, которое она заслуживает.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Успешных проектов</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Годов опыта</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Клиентов по всему миру</div>
+      </div>
+    </div>
+
+    <!-- Contact/Social -->
+    <div class="contact-section">
+      <h3>Свяжитесь с нами</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Telegram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.16 5.83a1 1 0 0 1 .3-.91h4.72a1 1 0 0 1 .67 1.27l-1.38 5.43a1 1 0 0 1-.76.55h-5.49a1 1 0 0 1-.97-.21l-1.42-5.65a1 1 0 0 1-.1-.91h.01M5.83 21.22a1 1 0 0 0-.3-.91h4.72a1 1 0 0 0 .67 1.27l-1.38-5.43a1 1 0 0 0-.76-.55H5.13a1 1 0 0 1-.97.21l1.42 5.65h5.49a1 1 0 0 0 .1.91z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163a5.88 5.88 0 0 1 0 10.425l6.403-6.403a4.988 4.988 0 0 0-7.071-7.071L12 8.788l-5.258-5.258a4.988 4.988 0 0 0-7.071 7.071L12 21.837l8.657-8.657a5.88 5.88 0 0 1 0 10.425z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4h-3.318l-.528 5.373A1.996 1.996 0 0 0 16 11.75h1.318l.53-5.373A1.996 1.996 0 0 0 17 4h-3.318zm-6.31 2.656c0-2.183-.527-3.517-1.464-3.517-1.005 0-1.538 1.215-1.464 3.517 0 2.3 1.5 3.8 1.5 3.8s1.5-1.5 1.5-3.8zM5.837 5.282c0-2.183.527-3.516 1.464-3.516 1.005 0 1.538 1.216 1.464 3.517 0 2.3 1.5 3.8 1.5 3.8s1.5-1.5 1.5-3.8zM.693 12.733c0-2.183.527-3.517 1.464-3.517 1.005 0 1.538 1.216 1.464 3.517 0 2.3 1.5 3.8 1.5 3.8s1.5-1.5 1.5-3.8z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="#">Услуги</a>
+        <a href="#">Портфолио</a>
+        <a href="#">Блог</a>
+        <a href="#">Контакты</a>
+      </div>
+      <div>
+        <p>© 2024 Noble Flair Design. Все права защищены.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Сделано с ♥ Noble Flair Design
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,115 +1,116 @@
 {
   "seo": {
     "title": "Noble Flair Design — Premium Design Studio",
-    "description": "Presentation design, web development, print design, training, and exclusive epoxy resin art. Modern web design, branding, banners, business cards, and the «Art of Presentations» course."
+    "description": ""
   },
   "nav": {
     "home": "Home",
-    "about": "About",
+    "about": "About Studio",
     "services": "Services",
     "course": "Course",
     "testimonials": "Testimonials",
     "portfolio": "Portfolio",
     "vacancies": "Vacancies",
     "faq": "FAQ",
-    "contact": "Contact",
-    "login": "Sign In",
+    "contact": "Contacts",
+    "login": "Login",
     "skip_link": "Skip to content",
     "scroll_to_top": "Scroll to top",
-    "admin": "Admin"
+    "admin": "Admin",
+    "back": "Back"
   },
   "auth": {
-    "title_login": "Sign In",
+    "title_login": "Login",
     "title_register": "Register",
     "title_reset": "Reset Password",
     "name_placeholder": "Your name",
-    "email_placeholder": "Your email",
+    "email_placeholder": "Your Email",
     "password_placeholder": "Password",
     "confirm_placeholder": "Confirm password",
-    "submit_login": "Sign In",
+    "submit_login": "Login",
     "submit_register": "Register",
     "submit_reset": "Send email",
     "submit_wait": "Please wait...",
     "reset_sent": "Password reset email sent to",
-    "reset_check": "Check your inbox.",
+    "reset_check": "Check your email.",
     "switch_login_question": "Already have an account?",
-    "switch_register_question": "Don't have an account?",
-    "switch_back": "Back to sign in",
+    "switch_register_question": "Don't have an account yet?",
+    "switch_back": "Back to login",
     "forgot": "Forgot password?",
     "close": "Close",
-    "error_password_mismatch": "Passwords do not match",
+    "error_password_mismatch": "Passwords don't match",
     "error_password_length": "Password must be at least 6 characters",
-    "error_email_exists": "Email already registered",
+    "error_email_exists": "This email is already registered",
     "error_invalid_credentials": "Invalid email or password",
     "error_wrong_password": "Wrong password",
     "error_invalid_email": "Invalid email format",
     "error_too_many": "Too many attempts. Try again later.",
-    "error_generic": "An error occurred"
+    "error_generic": "Something went wrong"
   },
   "hero": {
     "subtitle": "Design Studio",
     "title": "Noble Flair Design",
-    "description": "Bringing elegance to every detail. Presentation design, printing, education, and exclusive epoxy resin jewelry.",
-    "cta_course": "Learn About Course",
-    "cta_services": "Order Services",
+    "description": "",
+    "cta_course": "Learn about the course",
+    "cta_services": "Order services",
     "cta_portfolio": "Portfolio",
-    "cta_project": "Discuss a Project",
+    "cta_project": "Discuss project",
     "scroll_label": "Scroll"
   },
   "about": {
-    "title": "About Us",
+    "title": "About Studio",
     "subtitle": "We create design with soul",
-    "text1": "Noble Flair Design is a space where elegance and individuality are born. We specialize in presentation design, advertising materials, and printing.",
-    "text2": "Our mission is to help you shine. Through education, ready-made design solutions, or unique epoxy resin jewelry — we are with you at every step.",
-    "feature1_title": "Individual Approach",
-    "feature1_desc": "Every project is unique, just like our approach to it",
-    "feature2_title": "Premium Quality",
+    "text1": "Noble Flair Design is a space where elegance and individuality are born. We specialize in presentation design, advertising materials, and print design.",
+    "text2": "",
+    "feature1_title": "Individual approach",
+    "feature1_desc": "Each project is unique, as is our approach to it",
+    "feature2_title": "Premium quality",
     "feature2_desc": "We use the best materials and modern techniques",
-    "feature3_title": "Full Cycle",
+    "feature3_title": "Full cycle",
     "feature3_desc": "From idea to implementation — we handle everything",
     "stat1": "years of experience",
-    "stat2": "projects completed",
-    "stat3": "students & clients"
+    "stat2": "completed projects",
+    "stat3": "students and clients"
   },
   "course": {
-    "title": "Course: The Art of Presentations",
+    "title": "Course «Art of Presentations»",
     "subtitle": "Turn your ideas into a visual masterpiece",
-    "description": "Learn to create presentations that leave a lasting impression. From composition to delivery — a complete presentation design course for beginners and professionals.",
-    "cta": "Enroll in Course",
-    "status": "The course is in development. Leave your details to get notified about the launch!",
+    "description": "Learn to create presentations that are remembered. From composition to delivery — full course on presentation design for beginners and professionals.",
+    "cta": "Enroll in the course",
+    "status": "Course in development. Leave an application to get notified about the launch!",
     "placeholder_name": "Your name",
     "placeholder_email": "Email or Telegram",
     "submit": "Send",
-    "login_prompt": "Sign in to access the course lessons",
-    "login_btn": "Sign In",
-    "pay_prompt": "Purchase the course to get access to all lessons",
-    "pay_btn": "Purchase Course",
-    "lesson_placeholder": "Lesson content will appear here. Add text, video and files in Firestore.",
-    "lesson_plural": ["lesson", "lessons", "lessons"],
+    "login_prompt": "Log in to access course lessons",
+    "login_btn": "Login",
+    "pay_prompt": "Pay for the course to get access to all lessons",
+    "pay_btn": "Pay for the course",
+    "lesson_placeholder": "Here will be the lesson content. Marina, add text, video and files to Firestore.",
+    "lesson_plural": ["lesson", "lesson", "lessons"],
     "free_trial": "🎉 Try the first lesson for free!",
     "free_tag": "FREE",
-    "countdown_label": "⏳ Sale ends in:",
+    "countdown_label": "⏳ Discount active for:",
     "countdown_days": "d",
     "countdown_hours": "h",
     "countdown_minutes": "m",
     "countdown_seconds": "s",
     "tariffs": {
-      "title": "Choose your plan",
-      "sale": "sale",
+      "title": "Choose your tariff",
+      "sale": "on sale",
       "recommended": "recommended",
-      "btn": "Buy Now",
+      "btn": "Pay",
       "access": "access",
       "items": [
         {
           "name": "Basic",
           "price": 125,
           "sale_price": 100,
-          "desc": "6 modules for self-paced start",
+          "desc": "6 modules for independent start",
           "features": [
-            "6 modules (intro, design basics, elements, infographics, animation, Figma)",
+            "6 modules (introduction, design basics, elements, infographics, animation, Figma)",
             "Basic presentation templates",
-            "Resource library (links, tools)",
-            "3 months access"
+            "Resource base (links, services)",
+            "Access for 3 months"
           ]
         },
         {
@@ -117,14 +118,14 @@
           "price": 220,
           "sale_price": 150,
           "recommended": true,
-          "desc": "All modules with premium materials",
+          "desc": "All course modules with premium materials",
           "features": [
-            "All 9 modules (incl. AI, niche strategies, personal brand)",
-            "Premium templates & mockups",
-            "Homework assignments with review",
-            "Bonus: icon packs, fonts, Figma plugins",
+            "All 9 modules (including AI, niche strategies, brand)",
+            "Premium templates and mockups",
+            "Homework with checking",
+            "Bonus: icon, font, Figma plugins collection",
             "Certificate",
-            "1 year access"
+            "Access for 1 year"
           ]
         },
         {
@@ -133,10 +134,10 @@
           "sale_price": 300,
           "desc": "Full lifetime access with support",
           "features": [
-            "Everything in the Standard plan",
+            "Everything from the «Standard» tariff",
             "Lifetime access to materials",
-            "Priority Telegram support",
-            "Portfolio & client-finding assistance",
+            "Priority support in Telegram",
+            "Help with portfolio and client search",
             "Certificate"
           ]
         }
@@ -144,49 +145,49 @@
     },
     "modules": [
       {
-        "title": "Intro Module",
+        "title": "Introduction Module",
         "lessons": [
-          "How to benefit from this course",
-          "My 'Second Brain' in Obsidian",
-          "Project Planning"
+          "How to take the course effectively",
+          "My «Second Brain» in Obsidian",
+          "Project planning"
         ]
       },
       {
         "title": "Design Basics (Theory + Software)",
         "lessons": [
-          "Visual Language. Composition, Typography, Hierarchy",
-          "PowerPoint / Google Slides Interface. Working with Templates",
-          "Resource Base",
-          "Visual Inspiration. Pinterest, Behance, Dribbble"
+          "Visual language. Composition, typography and hierarchy",
+          "Interface of PowerPoint / Google Slides. Working with templates",
+          "Resource base",
+          "Erudition. Pinterest, Behance, Dribbble"
         ]
       },
       {
-        "title": "Element Design & Figma",
+        "title": "Element Design and Figma",
         "lessons": [
-          "Title Slide — The Face of Your Project",
+          "Title slide — the face of the project",
           "Icons",
-          "'About Me' and 'Team' Slides",
-          "'Before/After' Slide",
-          "Illustrations",
+          "Slide «About me» and «Team»",
+          "Slide «Before/After»",
+          "Illustration",
           "Mockups"
         ]
       },
       {
         "title": "Data Visualization (Infographics)",
         "lessons": [
-          "Timelines and Lists",
-          "Charts and Graphs",
-          "Complex Diagrams (Venn Diagram, etc.)"
+          "Timelines and lists",
+          "Diagrams and charts",
+          "Complex schemes (Venn diagram and others)"
         ]
       },
       {
-        "title": "Animation & Dynamics",
+        "title": "Animation and Dynamics",
         "lessons": [
-          "Basic Animation",
+          "Basic animation",
           "Animation",
-          "Morph Magic (Transformation)",
-          "Interactivity. Buttons, Hyperlinks, Navigation",
-          "Bar Charts and Graphs",
+          "Magic Morph (Transformation)",
+          "Interactivity. Buttons, hyperlinks and navigation",
+          "Bar chart and graphs",
           "Infographics"
         ]
       },
@@ -199,61 +200,282 @@
         ]
       },
       {
-        "title": "AI: Revolution in Work",
+        "title": "Neural Networks: Revolution in Work",
         "lessons": [
-          "Working with Text (ChatGPT/Gemini)",
-          "Visual Generation (Adobe Firefly / Midjourney)",
-          "Background Removal and Upscaling"
+          "Working with text (ChatGPT/Gemini)",
+          "Visual generation (Adobe Firefly / Midjourney)",
+          "Background removal and upscaling"
         ]
       },
       {
-        "title": "Niche Strategies (Special Blocks)",
+        "title": "Niche Strategies (Special Block)",
         "lessons": [
-          "For Teachers: Gamification. Quizzes in Slides",
-          "For Business & Marketers: Pitch Deck",
-          "Presentation: Connecting Slides with Your Speech"
+          "For teachers: Gamification. Quiz or game in slides",
+          "For business and marketers: Pitch deck",
+          "Performance: How to connect slides with your language"
         ]
       },
       {
-        "title": "Personal Brand & Portfolio",
+        "title": "Personal Brand and Portfolio",
         "lessons": [
-          "Instagram/LinkedIn Profile Design",
-          "Finding First Clients / Growth Within a Company"
+          "Instagram/LinkedIn formatting",
+          "Search for first orders / Growth in company"
         ]
       }
     ],
     "module_label": "Module",
     "lesson_loading": "Loading...",
     "lesson_error": "Loading error",
-    "lesson_free_preview": "🎉 This is a free trial lesson! Content will appear soon.",
-    "lesson_video": "🎬 Lesson Video",
-    "lesson_files": "📎 Lesson Materials",
+    "lesson_free_preview": "🎉 This is a free preview lesson! Content will appear shortly.",
+    "lesson_video": "🎬 Video for the lesson",
+    "lesson_files": "📎 Materials for the lesson",
     "lesson_back": "Back to modules",
     "empty_portfolio": "No works in this category"
+  },
+  "course_curriculum_details": {
+    "title": "Detailed Curriculum",
+    "subtitle": "What you will study in each module of the course",
+    "module_1": {
+      "title": "Introduction Module",
+      "description": "Basics of effective learning and working with the course",
+      "objectives": [
+        "Set up a productive learning environment",
+        "Familiarize yourself with the tools we'll be using",
+        "Create a personal knowledge system for maximum course benefit"
+      ],
+      "skills": [
+        "Educational process planning",
+        "Working with Obsidian for note-taking",
+        "Setting learning goals"
+      ]
+    },
+    "module_2": {
+      "title": "Design Basics (Theory + Software)",
+      "description": "Fundamental principles of visual design and working with essential tools",
+      "objectives": [
+        "Master principles of composition, typography, and information hierarchy",
+        "Learn to work with PowerPoint and Google Slides at a professional level",
+        "Effectively use resource bases for inspiration and work acceleration"
+      ],
+      "skills": [
+        "Creating visually appealing and structured presentations",
+        "Professional work with presentation software",
+        "Quick search and application of visual resources"
+      ]
+    },
+    "module_3": {
+      "title": "Element Design and Figma",
+      "description": "Creating individual design elements and working in Figma",
+      "objectives": [
+        "Learn to create professional title slides",
+        "Master working with icons and illustrations in presentations",
+        "Create before/after slides to demonstrate results",
+        "Work with mockups for realistic presentation of works"
+      ],
+      "skills": [
+        "Designing title slides and brand elements",
+        "Working with vector and raster graphics",
+        "Creating realistic work previews"
+      ]
+    },
+    "module_4": {
+      "title": "Data Visualization (Infographics)",
+      "description": "Transforming complex information into understandable visual formats",
+      "objectives": [
+        "Learn to create informative timelines and lists",
+        "Master creating diagrams and charts for presentations",
+        "Work with complex schemes such as Venn diagrams"
+      ],
+      "skills": [
+        "Turning dry data into visual stories",
+        "Creating clear and memorable infographics",
+        "Choosing optimal visualization format for different information types"
+      ]
+    },
+    "module_5": {
+      "title": "Animation and Dynamics",
+      "description": "Adding motion and interactivity to presentations",
+      "objectives": [
+        "Study basic and advanced animation principles",
+        "Master the Magic Morph technique for smooth transformations",
+        "Create interactive elements in presentations",
+        "Work with bar charts and other animated elements"
+      ],
+      "skills": [
+        "Creating smooth and professional animated content",
+        "Developing interactive presentations",
+        "Animating data and visualizations"
+      ]
+    },
+    "module_6": {
+      "title": "Figma",
+      "description": "Professional work with modern design tool",
+      "objectives": [
+        "Master Figma interface for designers",
+        "Learn to work with plugins to extend functionality",
+        "Transfer works from Figma to PowerPoint for presentations"
+      ],
+      "skills": [
+        "Professional work in Figma",
+        "Using plugins to automate routine tasks",
+        "Integrating Figma with other presentation tools"
+      ]
+    },
+    "module_7": {
+      "title": "Neural Networks: Revolution in Work",
+      "description": "Using AI to increase productivity and creativity",
+      "objectives": [
+        "Learn to work with text using ChatGPT and Gemini",
+        "Generate visual content using Adobe Firefly and Midjourney",
+        "Remove backgrounds and increase image resolution without quality loss"
+      ],
+      "skills": [
+        "Integrating AI into presentation creation workflow",
+        "Generating content with modern AI tools",
+        "Processing and improving visual materials"
+      ]
+    },
+    "module_8": {
+      "title": "Niche Strategies (Special Blocks)",
+      "description": "Specialized strategies for different audiences and goals",
+      "objectives": [
+        "Create educational presentations and gamified content for teachers",
+        "Develop investment presentations (pitch decks) for business and marketers",
+        "Adapt presentation style to specific audience and goals"
+      ],
+      "skills": [
+        "Creating educational content with game elements",
+        "Developing investment presentations",
+        "Adapting communication style for different audiences"
+      ]
+    },
+    "module_9": {
+      "title": "Personal Brand and Portfolio",
+      "description": "Creating personal brand and professional portfolio",
+      "objectives": [
+        "Learn to professionally format profiles on Instagram and LinkedIn",
+        "Develop strategy for finding first orders and company growth",
+        "Create portfolio that attracts clients and employers"
+      ],
+      "skills": [
+        "Professional personal branding in social media",
+        "Strategic client search and career growth",
+        "Creating attractive portfolio"
+      ]
+    }
+  },
+  "course_outcomes": {
+    "title": "What You Will Get After Completing the Course",
+    "subtitle": "Tangible results and skills that will stay with you forever",
+    "outcomes": [
+      {
+        "icon": "🎯",
+        "title": "Readiness for Real Projects",
+        "description": "You will be able to create professional presentations for business, education, and personal projects from the first day after completing the course"
+      },
+      {
+        "icon": "💼",
+        "title": "Portfolio That Sells",
+        "description": "During the course you will create several works for your portfolio that will help attract clients and employers"
+      },
+      {
+        "icon": "📈",
+        "title": "Freelancer and Entrepreneur Skills",
+        "description": "You will learn how to find clients, set prices for your services, and effectively communicate your value"
+      },
+      {
+        "icon": "🎓",
+        "title": "Course Completion Certificate",
+        "description": "Official document confirming your skills and knowledge in presentation design"
+      },
+      {
+        "icon": "💬",
+        "title": "Communication and Presentation Skills",
+        "description": "You will significantly improve your public speaking skills and ability to effectively convey ideas to an audience"
+      },
+      {
+        "icon": "🚀",
+        "title": "Readiness for Career Growth",
+        "description": "New skills and portfolio will open opportunities for career advancement or transition to more interesting and well-paid positions"
+      }
+    ]
+  },
+  "course_conversion": {
+    "title": "Why Choose Our Course",
+    "subtitle": "Advantages that make our course the best choice",
+    "guarantees": [
+      {
+        "title": "Quality Guarantee",
+        "description": "If you are not satisfied with the course after the first two weeks of study, we will refund the full cost"
+      },
+      {
+        "title": "Lifetime Access",
+        "description": "Pay for the course one time, you get access to all materials forever, including all future updates"
+      },
+      {
+        "title": "Expert Support",
+        "description": "Get answers to your questions from experienced presentation designers in our private chat"
+      }
+    ],
+    "faq": [
+      {
+        "question": "Do I need design experience to take the course?",
+        "answer": "No, the course is designed for beginners and professionals. We start with the basics and gradually move to advanced topics."
+      },
+      {
+        "question": "How much time should I dedicate to the course each week?",
+        "answer": "It is recommended to dedicate 5-7 hours per week for optimal course completion in 6-8 weeks."
+      },
+      {
+        "question": "Can I pay for the course in installments?",
+        "answer": "Yes, we provide the option to pay in installments through our partners. Details in chat with the bot."
+      },
+      {
+        "question": "Will I get access to course updates after completion?",
+        "answer": "Yes, all updates and new materials will be available to you free of charge within your pricing plan."
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Anna Petrova",
+        "role": "Marketing Manager",
+        "text": "The course completely changed my approach to creating presentations. Now my presentations receive much more positive feedback, and clients note the professionalism of the materials."
+      },
+      {
+        "name": "Dmitry Sidorov",
+        "role": "Freelancer Designer",
+        "text": "Thanks to the course I was able to increase my prices by 40% and start working with larger clients. The portfolio I created during training became my main competitive advantage."
+      },
+      {
+        "name": "Elena Kovaleva",
+        "role": "History Teacher",
+        "text": "As a teacher, I always struggled with making complex material interesting for students. After the course my presentations became real stories that children look forward to."
+      }
+    ]
   },
   "services": {
     "title": "Services",
     "subtitle": "What we offer",
     "design": "Design",
-    "design_desc": "Presentations, banners, branding, and visual content for business, social media, and marketing campaigns.",
-    "websites": "Web Development",
-    "websites_desc": "Modern websites, landing pages, and corporate portals. Responsive design, optimization, and ongoing support.",
-    "printing": "Design & Printing",
+    "design_desc": "Development of presentations, advertising banners, corporate style and visual content for business, social media and marketing.",
+    "websites": "Website Development",
+    "websites_desc": "Creating modern websites, landing pages and corporate portals. Responsive design, optimization and support.",
+    "printing": "Design and Printing",
     "printing_desc": "Business cards, flyers, brochures, invitations. Full cycle: design + printing + delivery across Ukraine.",
-    "epoxy": "Epoxy Resin Jewelry",
-    "epoxy_desc": "Unique handmade jewelry pieces. Pendants, earrings, bracelets — every detail crafted with love.",
-    "cta": "Order Now",
-    "brief_btn": "Fill brief"
+    "epoxy": "",
+    "epoxy_desc": "",
+    "cta": "Order",
+    "brief_btn": "Fill out brief"
   },
   "services-detail": {
     "details": "Details",
-    "back": "Back to services",
+    "back": "← Back to services",
     "not_found": "Service not found",
-    "what_we_offer": "What We Offer",
-    "subcategories": "Printing Services",
-    "gallery": "Portfolio",
+    "what_we_offer": "What we offer",
+    "subcategories": "Printing services",
+    "gallery": "Photo gallery",
     "photo": "Photo",
-    "cta_text": "Ready to get started? Fill out a brief or contact us directly."
+    "cta_text": "Ready to start? Fill out the brief or contact us."
   },
   "portfolio": {
     "title": "Portfolio",
@@ -261,12 +483,52 @@
     "all": "All",
     "presentations": "Presentations",
     "banners": "Banners",
-    "printing": "Business Cards & Print",
+    "printing": "Business cards and printing",
     "websites": "Websites",
-    "epoxy": "Jewelry",
+    "epoxy": "",
     "empty": "No works in this category",
-    "filter_aria": "Portfolio categories"
+    "filter_aria": "Portfolio categories",
+    "details": "Project Details",
+    "cta_button": "Discuss Project",
+    "back_to_portfolio": "Back to Portfolio",
+    "info": {
+      "client": "Client",
+      "challenge": "Challenge",
+      "solution": "Solution",
+      "results": "Results"
+    },
+    "description_default": "Project description not available.",
+    "client_default": "Client information not available.",
+    "challenge_default": "Project challenge not available.",
+    "solution_default": "Project solution not available.",
+    "results_default": "Project results not available."
   },
+  "portfolio_description_1": "TechCorp approached us with the task of creating a corporate presentation that would reflect their innovative approach to technology and help them stand out at an international conference. The presentation needed to combine technical accuracy with visual appeal to engage both technical specialists and business executives.",
+  "portfolio_client_1": "TechCorp",
+  "portfolio_challenge_1": "The main challenge was to present complex technical information in an accessible and visually engaging way, while maintaining a professional corporate aesthetic that would appeal to an international audience.",
+  "portfolio_solution_1": "We developed a modern presentation with clean lines, sophisticated data visualizations, and a color palette that reflected TechCorp's brand identity. We used infographics to simplify complex concepts and created a narrative flow that guided the audience through the company's technological advantages.",
+  "portfolio_results_1": "The presentation received excellent feedback at the conference, helping TechCorp secure several new partnerships. The client reported increased engagement during their session and praised the presentation's ability to make technical content accessible to diverse audiences.",
+  "portfolio_description_2": "For an Instagram advertising campaign, we created a series of eye-catching banners designed to stop scrollers and communicate the brand's message instantly. The banners needed to be optimized for mobile viewing while maintaining brand consistency across different ad sets.",
+  "portfolio_client_2": "FashionBrand",
+  "portfolio_challenge_2": "Creating banners that would stand out in the crowded Instagram feed while adhering to the platform's specific technical requirements and maintaining brand consistency across multiple ad variations.",
+  "portfolio_solution_2": "We designed a banner series with bold typography, vibrant colors, and clear focal points that would be visible even on small mobile screens. Each banner was optimized for Instagram's specifications and included clear calls-to-action tailored to different stages of the marketing funnel.",
+  "portfolio_results_2": "The banner campaign achieved a 35% higher click-through rate compared to industry averages and significantly increased brand engagement. The client reported that the banners performed exceptionally well in A/B testing against their previous creative assets.",
+  "portfolio_description_3": "We created a complete set of business cards for a beauty salon that needed to convey elegance and professionalism while being practical for daily use. The design needed to reflect the salon's premium positioning while remaining functional.",
+  "portfolio_client_3": "Elite Beauty Salon",
+  "portfolio_challenge_3": "Balancing luxurious aesthetics with practical considerations for a business card that would be handled frequently. The design needed to work well at small scale while conveying the salon's premium services.",
+  "portfolio_solution_3": "We selected premium matte paper with subtle texture and created a minimalist design with elegant typography and a distinctive color scheme. The cards featured spot UV coating on the logo for a tactile element that enhanced the premium feel.",
+  "portfolio_results_3": "The business cards received positive feedback from both the salon staff and their clients. The salon reported that the cards helped reinforce their premium positioning and were frequently complimented by clients during visits.",
+  "portfolio_description_4": "EcoFuture, an environmentally focused startup, needed a presentation to communicate their innovative sustainability solutions to potential investors. The presentation needed to balance scientific data with inspirational storytelling to attract funding.",
+  "portfolio_client_4": "EcoFuture",
+  "portfolio_challenge_4": "Presenting complex environmental data and business projections in a way that was both scientifically accurate and emotionally compelling to attract investor interest.",
+  "portfolio_solution_4": "We created a presentation that combined clear data visualizations with powerful imagery and a compelling narrative about environmental stewardship. The design used earth tones and natural textures to reinforce the company's mission while maintaining a professional appearance suitable for investor meetings.",
+  "portfolio_results_4": "The presentation helped EcoFuture secure their seed funding round, with investors specifically commenting on the quality of the presentation materials. The client noted that the presentation made complex concepts accessible to investors without scientific backgrounds.",
+  "portfolio_description_5": "For a client launching a new product line, we created a coordinated set of business cards and flyers that needed to work together as a cohesive brand identity system while serving different promotional purposes.",
+  "portfolio_client_5": "Artisan Goods Co.",
+  "portfolio_challenge_5": "Creating a unified brand identity across different print formats with varying sizes and purposes, while ensuring each piece was optimized for its specific use case.",
+  "portfolio_solution_5": "We developed a cohesive visual system with consistent typography, color palette, and design elements that adapted appropriately to each format. The business cards focused on essential contact information with a premium feel, while the flyers provided space for product details and promotional messaging.",
+  "portfolio_results_5": "The coordinated print materials helped Artisan Goods Co. create a strong first impression at trade shows and in client meetings. The client reported that the unified brand identity made their marketing materials more memorable and professional."
+},
   "testimonials": {
     "title": "Testimonials",
     "subtitle": "What our clients say",
@@ -276,54 +538,54 @@
     "next_aria": "Next testimonial"
   },
   "instagram": {
-    "title": "Follow Us on Instagram",
-    "subtitle": "Daily ideas, work, and inspiration",
+    "title": "We are on Instagram",
+    "subtitle": "Daily ideas, works and inspiration",
     "follow": "Follow",
     "follow_username": "@maryna_design_nfd",
     "posts": {
-      "post1": "Presentation Design",
-      "post2": "Brand Identity",
-      "post3": "Print Design",
-      "post4": "Epoxy Resin Art",
-      "post5": "Creation Process",
+      "post1": "Presentation design",
+      "post2": "Brand identity",
+      "post3": "Printing",
+      "post4": "",
+      "post5": "Creation process",
       "post6": "Inspiration"
     }
   },
   "vacancies": {
     "title": "Vacancies",
     "subtitle": "Join the Noble Flair Design team",
-    "description": "We are always looking for talented people. If you are a designer, manager, or creative individual — write to us!",
-    "open_title": "Open Positions",
-    "no_open": "There are no open vacancies at the moment, but you can still send us your resume — we will review it when a position opens up.",
-    "cta": "Send Resume"
+    "description": "We are always looking for talented people. If you are a designer, manager or creative person — write to us!",
+    "open_title": "Open positions",
+    "no_open": "Currently there are no open vacancies, but you can still send us your resume — we will review it when a position becomes available.",
+    "cta": "Send resume"
   },
   "faq": {
-    "title": "FAQ",
-    "subtitle": "All about ordering, design work, and learning",
-    "how_order_q": "How do I order design?",
-    "how_order_a": "You can submit a request via the contact form, write to Telegram, or fill out a brief with our bot. We discuss the task, timeline, and cost, then start working. A 50% prepayment is required.",
-    "payment_q": "What payment methods do you accept?",
-    "payment_a": "We work on a 50% prepayment basis. Payment can be made via card (Visa/MasterCard), bank transfer, or cryptocurrency by arrangement. The remaining 50% is due after the design is approved.",
-    "timing_q": "How long does design work take?",
-    "timing_a": "Presentation — 3 to 7 days. Website — 7 to 14 days. Brand identity — 5 to 10 days. Print materials — 2 to 5 days. Exact timelines depend on complexity and are discussed individually.",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything about work, ordering and learning",
+    "how_order_q": "How to order design?",
+    "how_order_a": "You can leave a request through the form on the site, write in Telegram or fill out the brief with our bot. We discuss the task, deadlines and cost, after which we start work. Prepayment 50%.",
+    "payment_q": "What payment methods?",
+    "payment_a": "We work with 50% prepayment. Payment is accepted by card (Visa/MasterCard), bank transfer or cryptocurrency by agreement. The remaining 50% — after approval of the layout.",
+    "timing_q": "How long does development take?",
+    "timing_a": "Presentation — from 3 to 7 days. Website-landing page — from 7 to 14 days. Corporate style — from 5 to 10 days. Printing — from 2 to 5 days. Exact terms depend on complexity and are discussed individually.",
     "revisions_q": "How many revisions are included?",
-    "revisions_a": "The price includes up to 2 rounds of revisions. Additional revisions are discussed separately. We always aim to make sure you're happy with the result.",
+    "revisions_a": "The price includes up to 2 rounds of revisions. Additional revisions are discussed separately. We always strive to make sure you are satisfied with the result.",
     "course_format_q": "How does the course work?",
-    "course_format_a": "The course is fully online. You get access to video lessons, text content, and supplementary materials on the platform. Learn at your own pace — access to materials is gradually unlocked.",
-    "duration_q": "How long does the course take?",
-    "duration_a": "The course takes 4-6 weeks with regular study of 2-3 hours per week. You can go faster or slower — there are no time constraints within your plan.",
-    "tools_q": "What software do I need for the course?",
-    "tools_a": "PowerPoint or Google Slides is sufficient for most lessons. A dedicated module covers Figma — and it's free. All links and resources are provided within the course.",
-    "support_q": "Is there support during the course?",
-    "support_a": "Yes! All students have access to a Telegram chat. The VIP plan includes priority support with personal mentorship.",
-    "printing_q": "Do you handle printing?",
-    "printing_a": "Yes, we offer print design: business cards, flyers, brochures, banners, invitations, stickers. Timelines and costs depend on the design complexity and print quantity.",
-    "refund_q": "Can I get a refund?",
-    "refund_a": "For design services: if work hasn't started yet — 100% refund. If the design has been approved — no refund is possible. For the course: if after the first three lessons it's not for you — full refund within 14 days."
+    "course_format_a": "The course is fully online. You get access to video lessons, text content and additional materials on the platform. Study at your own pace — access to materials opens gradually.",
+    "duration_q": "How much time is needed for the course?",
+    "duration_a": "The course is designed for 4-6 weeks with regular classes of 2-3 hours per week. But you can go faster or slower — there are no time limits within your tariff.",
+    "tools_q": "What programs are needed for the course?",
+    "tools_a": "For most lessons, PowerPoint or Google Slides is sufficient. A separate module is dedicated to Figma — it is free. All links and resources are provided in the course.",
+    "support_q": "Is there support during training?",
+    "support_a": "Yes! All students have access to the Telegram chat. The «VIP» tariff includes priority support with personal guidance.",
+    "printing_q": "Do you do printing?",
+    "printing_a": "Yes, we offer print design: business cards, flyers, brochures, banners, invitations, stickers. Terms and prices depend on layout complexity and circulation.",
+    "refund_q": "Can money be refunded?",
+    "refund_a": "For design services: if work hasn't started — 100% refund. If the layout has been approved — refund is not possible. For the course: if after the first three lessons the course doesn't suit you — we refund the full cost within 14 days."
   },
   "contact": {
-    "title": "Contact",
-    "subtitle": "Get in touch",
+    "title": "Contacts",
+    "subtitle": "Get in touch with us",
     "description": "Ready to discuss your project? Write to us — we respond within 24 hours.",
     "telegram": "Telegram",
     "instagram": "Instagram",
@@ -332,23 +594,23 @@
     "form_email": "Email or Telegram",
     "form_message": "Message",
     "form_name_placeholder": "Your name",
-    "form_email_placeholder": "Your email or Telegram",
+    "form_email_placeholder": "Your Email or Telegram",
     "form_submit": "Send",
-    "form_success": "Thank you! We'll get back to you soon.",
-    "form_error": "Something went wrong. Try again later or message us on Telegram.",
+    "form_success": "Thank you! We will get back to you shortly.",
+    "form_error": "Something went wrong. Try again later or write to us in Telegram.",
     "form_name_error": "Name must be at least 2 characters",
     "form_email_error": "Enter a valid email or @telegram",
-    "form_rate_limit": "Please wait 30 seconds before sending another message",
-    "brief_cta": "📋 Or fill out a brief in Telegram — get a preliminary price instantly",
-    "brief_btn": "Fill brief"
+    "form_rate_limit": "Wait 30 seconds before the next message",
+    "brief_cta": "📋 Or fill out the brief in Telegram — get preliminary cost immediately",
+    "brief_btn": "Fill out brief"
   },
   "profile": {
     "tariff": "Tariff",
     "access": "Access",
-    "days_short": "d.",
+    "days_short": "days",
     "forever": "Forever",
-    "admin_panel": "Admin Panel",
-    "logout": "Log out"
+    "admin_panel": "Admin panel",
+    "logout": "Logout"
   },
   "header": {
     "lang_aria": "Language",
@@ -361,18 +623,18 @@
     "navigation": "Navigation"
   },
   "admin": {
-    "title": "Admin Panel",
-    "subtitle": "Manage access and messages",
+    "title": "Admin panel",
+    "subtitle": "Access and message management",
     "tab_users": "Users",
     "tab_messages": "Messages",
     "loading": "Loading...",
     "no_users": "No registered users",
     "no_messages": "No messages",
-    "access_yes": "✓ Has access",
+    "access_yes": "✓ Access granted",
     "access_no": "✗ No access",
     "admin_label": "Admin",
     "user_label": "User",
-    "read": "Mark read",
+    "read": "Read",
     "basic": "Basic",
     "standard": "Standard",
     "vip": "VIP",
@@ -390,47 +652,51 @@
     "col_role": "Role",
     "col_actions": "Actions",
     "tab_vacancies": "Vacancies",
-    "vacancy_add": "Add Vacancy",
+    "vacancy_add": "Add vacancy",
     "vacancy_delete": "Delete",
     "no_vacancies": "No vacancies"
   },
   "newsletter": {
-    "title": "Stay Updated",
+    "title": "Stay updated",
     "subtitle": "Subscribe to studio news",
-    "description": "Be the first to know about new projects, course launches, and special offers.",
+    "description": "Learn first about new projects, course launch and special offers.",
     "placeholder": "Your email",
     "btn": "Subscribe",
-    "success": "Thank you! You're now subscribed.",
+    "success": "Thank you! You subscribed to news.",
     "error": "Something went wrong. Try again later."
   },
   "blog": {
     "title": "Blog",
-    "subtitle": "Useful articles about design, branding, and presentations",
+    "subtitle": "Useful articles about design, branding and presentations",
     "read": "Read",
     "hide": "Hide",
-    "cta_text": "Want to learn more? Book a consultation!",
-    "cta_btn": "Contact us"
+    "cta_text": "Want to know more? Order a consultation!",
+    "cta_btn": "Contact us",
+    "back_to_blog": "Back to Blog",
+    "related_title": "Related Content",
+    "related_services": "Related Services",
+    "related_portfolio": "Related Portfolio Items"
   },
   "leadMagnet": {
-    "title": "Free Checklist",
-    "subtitle": "«Perfect Presentation»",
-    "description": "10 steps to a presentation that stands out. Enter your email and download the checklist now.",
+    "title": "Free checklist",
+    "subtitle": "«Ideal presentation»",
+    "description": "10 steps to a memorable presentation. Enter email — and download the checklist right now.",
     "name_placeholder": "Your name",
     "email_placeholder": "Your email",
-    "btn": "Get the Checklist",
+    "btn": "Get checklist",
     "sending": "Sending...",
-    "success": "Thank you! Click the button below to download your checklist.",
+    "success": "Thank you! Press the button below to download the checklist.",
     "download_btn": "Download PDF",
-    "error": "Something went wrong. Please try again later."
+    "error": "Something went wrong. Try again later."
   },
   "sw_update": {
-    "available": "A new version is available",
+    "available": "New version of the site is available",
     "update": "Update",
     "close": "Close"
   },
   "error": {
     "title": "Something went wrong",
     "text": "An error occurred while loading this section.",
-    "retry": "Try Again"
+    "retry": "Try again"
   }
 }

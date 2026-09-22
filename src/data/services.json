@@ -22,13 +22,5 @@
     "desc_key": "services.printing_desc",
     "price": "від $50",
     "image": "/images/services/printing.jpg"
-  },
-  {
-    "id": "epoxy",
-    "icon": "💎",
-    "title_key": "services.epoxy",
-    "desc_key": "services.epoxy_desc",
-    "price": "від $80",
-    "image": "/images/services/epoxy.jpg"
   }
 ]

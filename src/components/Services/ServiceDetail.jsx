@@ -1,5 +1,6 @@
 import { useTranslation } from '../../context/I18nContext';
 import servicesDetail from '../../data/services-detail.json';
+import Breadcrumb from '../../components/UI/Breadcrumb';
 import './ServiceDetail.css';
 
 export default function ServiceDetail({ serviceId, onBack }) {
@@ -25,6 +26,8 @@ export default function ServiceDetail({ serviceId, onBack }) {
         <button className="service-detail__back-btn" onClick={onBack}>
           ← {t('services-detail.back')}
         </button>
+
+        <Breadcrumb />
 
         {/* Hero */}
         <div className="service-detail__hero">
@@ -113,5 +116,32 @@ export default function ServiceDetail({ serviceId, onBack }) {
         </div>
       </div>
     </div>
+    {/* JSON-LD structured data for Service */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: getText(service.title),
+        description: getText(service.description[0]),
+        serviceType: getText(service.subtitle),
+        provider: {
+          '@type': 'Organization',
+          name: 'Noble Flair Design',
+          url: 'https://marybelch.github.io/noble-flair-design-site/'
+        },
+        areaServed: ['UA', 'US', 'EU'],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Услуги Noble Flair Design',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              name: getText(service.title),
+              description: getText(service.description[0])
+            }
+          ]
+        }
+      })}
+    </script>
   );
 }

@@ -318,10 +318,206 @@ export default function Course() {
               ))}
             </div>
           </div>
+
+          {/* Detailed Curriculum */}
+          <div className="course__curriculum fade-in">
+            <h3 className="course__curriculum-title">{t('course_curriculum_details.title')}</h3>
+            <p className="course__curriculum-subtitle">{t('course_curriculum_details.subtitle')}</p>
+            <div className="course__curriculum-modules">
+              {Object.keys(tp('course_curriculum_details') || {}).filter(key =>
+                key !== 'title' && key !== 'subtitle'
+              ).map((moduleKey) => {
+                const module = tp(`course_curriculum_details.${moduleKey}`) || {};
+                return (
+                  <div
+                    key={moduleKey}
+                    className="course__curriculum-module"
+                  >
+                    <h4 className="course__module-title">
+                      {module.title}
+                    </h4>
+                    <p className="course__module-description">{module.description}</p>
+
+                    <div className="course__module-objectives">
+                      <h5>{t('course.objectives')}</h5>
+                      <ul className="course__objectives-list">
+                        {(module.objectives || []).map((objective, idx) => (
+                          <li key={idx}>{objective}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="course__module-skills">
+                      <h5>{t('course.skills')}</h5>
+                      <ul className="course__skills-list">
+                        {(module.skills || []).map((skill, idx) => (
+                          <li key={idx}>{skill}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Outcomes */}
+          <div className="course__outcomes fade-in">
+            <h3 className="course__outcomes-title">{t('course_outcomes.title')}</h3>
+            <p className="course__outcomes-subtitle">{t('course_outcomes.subtitle')}</p>
+            <div className="course__outcomes-grid">
+              {(tp('course_outcomes.outcomes') || []).map((outcome, index) => (
+                <div
+                  key={index}
+                  className="course__outcome-card"
+                >
+                  <div className="course__outcome-icon">
+                    {outcome.icon}
+                  </div>
+                  <div className="course__outcome-content">
+                    <h4 className="course__outcome-title">{outcome.title}</h4>
+                    <p className="course__outcome-description">{outcome.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Conversion Elements */}
+          <div className="course__conversion fade-in">
+            <h3 className="course__conversion-title">{t('course_conversion.title')}</h3>
+            <p className="course__conversion-subtitle">{t('course_conversion.subtitle')}</p>
+
+            {/* Guarantees */}
+            <div className="course__guarantees">
+              <h4>{t('course.guarantees')}</h4>
+              <div className="course__guarantees-list">
+                {(tp('course_conversion.guarantees') || []).map((guarantee, index) => (
+                  <div
+                    key={index}
+                    className="course__guarantee-card"
+                  >
+                    <h5>{guarantee.title}</h5>
+                    <p>{guarantee.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* FAQ */}
+            <div className="course__faq">
+              <h4>{t('course.faq')}</h4>
+              <div className="course__faq-list">
+                {(tp('course_conversion.faq') || []).map((faq, index) => (
+                  <div
+                    key={index}
+                    className="course__faq-item"
+                  >
+                    <div className="course__faq-question">
+                      {faq.question}
+                    </div>
+                    <div className="course__faq-answer">
+                      {faq.answer}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Testimonials */}
+            <div className="course__testimonials">
+              <h4>{t('course.testimonials')}</h4>
+              <div className="course__testimonials-list">
+                {(tp('course_conversion.testimonials') || []).map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="course__testimonial-card"
+                  >
+                    <div className="course__testimonial-content">
+                      <p>{testimonial.text}</p>
+                    </div>
+                    <div className="course__testimonial-author">
+                      <h5>{testimonial.name}</h5>
+                      <p className="course__testimonial-role">{testimonial.role}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       </div>
     </section>
+    {/* JSON-LD structured data for Course */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        name: t('course.title'),
+        description: t('course.description'),
+        provider: {
+          '@type': 'Organization',
+          name: 'Noble Flair Design',
+          sameAs: 'https://marybelch.github.io/noble-flair-design-site/'
+        },
+        // InCourse alignment with educational framework
+        inLanguage: ['uk', 'ru', 'en'],
+        // Educational alignment
+        educationalAlignment: [
+          {
+            '@type': 'AlignmentObject',
+            alignmentType: 'educationalLevel',
+            targetName: 'Начинающие и профессионалы',
+            targetUrl: 'https://marybelch.github.io/noble-flair-design-site/course'
+          }
+        ],
+        // Course instance details
+        hasCourseInstance: [{
+          '@type': 'CourseInstance',
+          courseMode: ['part-time', 'online'],
+          duration: 'P6W', // 6 weeks
+          startDate: '2026-09-01',
+          endDate: '2026-10-15'
+        }],
+        // Offers
+        offers: [{
+          '@type': 'Offer',
+          name: 'Базовый',
+          price: 100,
+          priceCurrency: 'USD',
+          priceValidUntil: '2026-07-31',
+          availability: 'https://schema.org/InStock',
+          url: 'https://t.me/noble_flair_design_bot?start=t_bazoviy'
+        },
+        {
+          '@type': 'Offer',
+          name: 'Стандарт',
+          price: 150,
+          priceCurrency: 'USD',
+          priceValidUntil: '2026-07-31',
+          availability: 'https://schema.org/InStock',
+          url: 'https://t.me/noble_flair_design_bot?start=t_standart'
+        },
+        {
+          '@type': 'Offer',
+          name: 'ВИП',
+          price: 300,
+          priceCurrency: 'USD',
+          priceValidUntil: '2026-07-31',
+          availability: 'https://schema.org/InStock',
+          url: 'https://t.me/noble_flair_design_bot?start=t_vip'
+        }],
+        // Educational credentials
+        educationalCredentialAwarded: 'Сертификат завершения курса «Искусство презентаций»',
+        // Instructor
+        instructor: {
+          '@type': 'Person',
+          name: 'Maryna Belch',
+          jobTitle: 'Основатель и креативный директор Noble Flair Design'
+        }
+      })}
+    </script>
   );
 }

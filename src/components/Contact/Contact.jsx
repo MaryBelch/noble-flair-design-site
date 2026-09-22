@@ -240,5 +240,38 @@ export default function Contact() {
         </div>
       </div>
     </section>
+    {/* JSON-LD structured data for ContactPage */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        url: 'https://marybelch.github.io/noble-flair-design-site/contact',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: 'https://marybelch.github.io/noble-flair-design-site/contact.jpg'
+        },
+        // Contact information for the organization
+        about: {
+          '@type': 'Organization',
+          name: 'Noble Flair Design',
+          url: 'https://marybelch.github.io/noble-flair-design-site/',
+          contactPoint: [{
+            '@type': 'ContactPoint',
+            telephone: '',
+            contactType: 'customer service',
+            email: 'maryna.nfd@gmail.com',
+            areaServed: 'UA',
+            availableLanguage: ['Ukrainian', 'Russian', 'English']
+          },
+          {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            areaServed: 'Telegram',
+            availableLanguage: ['Ukrainian', 'Russian', 'English'],
+            url: 'https://t.me/noble_flair_design_bot'
+          }]
+        }
+      })}
+    </script>
   );
 }

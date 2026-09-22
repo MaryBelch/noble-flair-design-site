@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
+import { NavLink } from 'react-router-dom';
 import Button from '../UI/Button';
 import { trackEvent } from '../../lib/analytics';
 import './Hero.css';
@@ -111,12 +112,20 @@ export default function Hero() {
         <p className="hero__description hero__animate">{t('hero.description')}</p>
 
         <div className="hero__actions hero__animate">
-          <Button variant="outline-animated" href="#services" onClick={() => trackEvent('interaction', 'click', 'hero_services')}>
+          <NavLink
+            to="/services"
+            className="btn btn--outline-animated"
+            onClick={() => trackEvent('interaction', 'click', 'hero_services')}
+          >
             {t('hero.cta_services')}
-          </Button>
-          <Button variant="outline-animated" href="#portfolio" onClick={() => trackEvent('interaction', 'click', 'hero_portfolio')}>
+          </NavLink>
+          <NavLink
+            to="/portfolio"
+            className="btn btn--outline-animated"
+            onClick={() => trackEvent('interaction', 'click', 'hero_portfolio')}
+          >
             {t('hero.cta_portfolio')}
-          </Button>
+          </NavLink>
         </div>
       </div>
 

@@ -33,6 +33,10 @@
         "Third — hierarchy. Arrange information so the eye naturally flows from primary to secondary content. Fourth — typography. Use one font for headings, another for body text, and never more than two typefaces per presentation. Fifth — data visualization: replace tables with charts and icons.",
         "Follow these principles and you will create a presentation that your audience remembers. Start small — remove the clutter, add contrast, and the results will follow."
       ]
+    },
+    "related": {
+      "services": ["design"],
+      "portfolio": [1, 4]
     }
   },
   {
@@ -69,6 +73,10 @@
         "Custom typography sets a brand apart — a unique font is more memorable than any logo. Asymmetrical layouts and brutalist minimalism add character and break patterns, making a website unforgettable.",
         "Key advice: don't chase trends blindly. Choose what serves your target audience. Even the trendiest design won't save a project if it doesn't solve the user's problems."
       ]
+    },
+    "related": {
+      "services": ["websites"],
+      "portfolio": [1, 2, 5]
     }
   },
   {
@@ -105,6 +113,10 @@
         "Pricing depends on complexity and the number of touchpoints. A basic package (logo + colors + fonts) starts at $250. A full brand book with all materials starts at $500. Development takes 5 to 14 days depending on scope.",
         "A solid brand identity is an investment in customer trust. People subconsciously choose brands that look professional and cohesive. Don't skimp on the first impression — it pays off in the long run."
       ]
+    },
+    "related": {
+      "services": ["design"],
+      "portfolio": [2, 3, 5]
     }
   }
 ]

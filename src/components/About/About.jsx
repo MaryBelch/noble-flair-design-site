@@ -95,5 +95,39 @@ export default function About() {
         </div>
       </div>
     </section>
+    {/* JSON-LD structured data for AboutPage */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'AboutPage',
+        url: 'https://marybelch.github.io/noble-flair-design-site/about',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: 'https://marybelch.github.io/noble-flair-design-site/about.jpg'
+        },
+        about: {
+          '@type': 'Organization',
+          name: 'Noble Flair Design',
+          description: t('about.text1') + ' ' + t('about.text2'),
+          url: 'https://marybelch.github.io/noble-flair-design-site/',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://marybelch.github.io/noble-flair-design-site/logo.png'
+          },
+          foundingDate: '2023',
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            email: 'maryna.nfd@gmail.com',
+            areaServed: ['UA', 'US', 'EU'],
+            availableLanguage: ['Ukrainian', 'Russian', 'English']
+          },
+          sameAs: [
+            'https://www.instagram.com/maryna_design_nfd/',
+            'https://t.me/noble_flair_design_bot'
+          ]
+        }
+      })}
+    </script>
   );
 }

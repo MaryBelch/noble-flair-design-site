@@ -19,10 +19,10 @@ export default function AdminPanel() {
   const [newVacancy, setNewVacancy] = useState({ title_uk: '', title_ru: '', title_en: '', desc_uk: '', desc_ru: '', desc_en: '' });
   const [visible, setVisible] = useState(false);
 
-  // Check hash for #admin
+  // Check pathname for /admin
   useEffect(() => {
-    const onHash = () => {
-      const newVisible = window.location.hash === '#admin';
+    const onLocationChange = () => {
+      const newVisible = window.location.pathname === '/admin';
       setVisible(newVisible);
       if (newVisible) {
         loadUsers();
@@ -30,9 +30,9 @@ export default function AdminPanel() {
         loadVacancies();
       }
     };
-    onHash();
-    window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
+    onLocationChange();
+    window.addEventListener('popstate', onLocationChange);
+    return () => window.removeEventListener('popstate', onLocationChange);
   }, []);
 
   const loadUsers = useCallback(async () => {

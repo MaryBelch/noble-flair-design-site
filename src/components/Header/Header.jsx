@@ -1,18 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import { useAuth } from '../../context/AuthContext';
+import { NavLink } from 'react-router-dom';
 import AuthModal from '../Auth/AuthModal';
 import { trackEvent } from '../../lib/analytics';
 import './Header.css';
-
-/** Smooth-scroll to a section with header offset */
-function scrollToSection(href) {
-  const target = document.querySelector(href);
-  if (!target) return;
-  const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 70;
-  const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-  window.scrollTo({ top, behavior: 'smooth' });
-}
 
 export default function Header() {
   const { t, locale, changeLocale, SUPPORTED_LOCALES } = useTranslation();
@@ -26,15 +18,15 @@ export default function Header() {
   const burgerRef = useRef(null);
 
   const navItems = [
-    { key: 'home', href: '#hero' },
-    { key: 'about', href: '#about' },
-    { key: 'services', href: '#services' },
-    { key: 'portfolio', href: '#portfolio' },
-    { key: 'course', href: '#course' },
-    { key: 'testimonials', href: '#testimonials' },
-    { key: 'faq', href: '#faq' },
-    { key: 'vacancies', href: '#vacancies' },
-    { key: 'contact', href: '#contact' },
+    { key: 'home', path: '/' },
+    { key: 'about', path: '/about' },
+    { key: 'services', path: '/services' },
+    { key: 'portfolio', path: '/portfolio' },
+    { key: 'course', path: '/course' },
+    { key: 'testimonials', path: '/testimonials' },
+    { key: 'faq', path: '/faq' },
+    { key: 'vacancies', path: '/vacancies' },
+    { key: 'contact', path: '/contact' },
   ];
 
   const localeLabels = { uk: 'UA', ru: 'RU', en: 'EN' };
@@ -46,44 +38,36 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  /* ── Active nav link via IntersectionObserver ── */
+  /* ── Active nav link via URL path ── */
   useEffect(() => {
-    let observer = null;
-
-    const setupObserver = () => {
-      // Disconnect previous observer if re-setting up
-      if (observer) observer.disconnect();
-
-      const sectionEls = navItems
-        .map((item) => document.querySelector(item.href))
-        .filter(Boolean);
-
-      if (sectionEls.length === 0) return;
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(entry.target.id);
-            }
-          });
-        },
-        { threshold: 0.3, rootMargin: '-72px 0px -50% 0px' }
-      );
-
-      sectionEls.forEach((el) => observer.observe(el));
+    const updateActiveSection = () => {
+      const path = window.location.pathname;
+      // Map paths to nav item keys
+      const pathToKey = {
+        '/': 'home',
+        '/about': 'about',
+        '/services': 'services',
+        '/portfolio': 'portfolio',
+        '/course': 'course',
+        '/testimonials': 'testimonials',
+        '/faq': 'faq',
+        '/vacancies': 'vacancies',
+        '/contact': 'contact',
+      };
+      setActiveSection(pathToKey[path] || 'home');
     };
 
-    setupObserver();
+    // Initialize on mount
+    updateActiveSection();
 
-    // Watch for lazy-loaded sections appearing in the DOM
-    const mo = new MutationObserver(() => setupObserver());
-    const target = document.getElementById('main-content') || document.body;
-    mo.observe(target, { childList: true, subtree: true });
+    // Update on route changes
+    const handleLocationChange = () => {
+      updateActiveSection();
+    };
+    window.addEventListener('popstate', handleLocationChange);
 
     return () => {
-      if (observer) observer.disconnect();
-      mo.disconnect();
+      window.removeEventListener('popstate', handleLocationChange);
     };
   }, []);
 
@@ -177,15 +161,7 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    trackEvent('navigation', 'click', href.slice(1));
-    setMobileOpen(false);
-    setShowProfile(false);
-    scrollToSection(href);
-    burgerRef.current?.focus();
-  };
-
+  
   /** Calculate remaining access days */
   const getRemainingDays = () => {
     if (!userDoc?.accessExpiresAt) return null;
@@ -204,10 +180,10 @@ export default function Header() {
   return (
     <header className={`header ${scrolled ? 'header--scrolled' : ''}`} role="banner">
       <div className="container header__inner">
-        <a href="#hero" className="header__logo" onClick={(e) => { e.preventDefault(); scrollToSection('#hero'); }}>
+        <NavLink to="/" className="header__logo" end>
           <span className="header__logo-text">NFD</span>
           <span className="header__logo-dot">.</span>
-        </a>
+        </NavLink>
 
         {/* Overlay behind mobile nav */}
         <div
@@ -227,16 +203,17 @@ export default function Header() {
           role="navigation"
         >
           {navItems.map((item) => (
-            <a
+            <NavLink
               key={item.key}
-              href={item.href}
-              className={`header__link gold-border-hover ${activeSection === item.href.slice(1) ? 'header__link--active' : ''}`}
-              onClick={(e) => handleNavClick(e, item.href)}
-              aria-current={activeSection === item.href.slice(1) ? 'page' : undefined}
+              to={item.path}
+              className={({ isActive }) => `
+                header__link gold-border-hover ${isActive ? 'header__link--active' : ''}
+              `}
+              aria-current={isActive ? 'page' : undefined}
               tabIndex={mobileOpen ? 0 : undefined}
             >
               {t(`nav.${item.key}`)}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
@@ -287,7 +264,7 @@ export default function Header() {
                       <span className="header__profile-value" style={{ fontSize: '0.8rem' }}>{user.email}</span>
                     </div>
                     {isAdmin && (
-                      <a href="#admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)} role="menuitem">
+                      <a to="/admin" className="header__profile-admin-link" onClick={() => setShowProfile(false)} role="menuitem">
                         {t('profile.admin_panel')}
                       </a>
                     )}
@@ -296,9 +273,9 @@ export default function Header() {
                 )}
 
                 {isAdmin && (
-                  <a href="#admin" className="header__admin-link gold-border-hover">
+                  <NavLink to="/admin" className="header__admin-link gold-border-hover" end>
                     {t('nav.admin')}
-                  </a>
+                  </NavLink>
                 )}
                 <button className="header__logout-btn" onClick={logout} title={t('profile.logout')} aria-label={t('profile.logout')}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">

@@ -137,3 +137,18 @@
     font-size: 1rem;
   }
 }
+
+/* Стиль для ссылки на пост */
+.blog__card-title-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.blog__card-title-link:hover {
+  text-decoration: none;
+}
+
+.blog__card-title-link:active {
+  text-decoration: none;
+}

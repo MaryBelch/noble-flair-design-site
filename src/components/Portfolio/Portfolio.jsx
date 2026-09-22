@@ -1,19 +1,18 @@
 import { useRef, useState, useEffect } from 'react';
-import { useTranslation } from '../../context/I18nContext';
+import { useTranslation, useNavigate } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
 import { trackEvent } from '../../lib/analytics';
 import portfolio from '../../data/portfolio.json';
 import './Portfolio.css';
 
-const CATEGORIES = ['all', 'presentations', 'banners', 'printing', 'websites', 'epoxy'];
+const CATEGORIES = ['all', 'presentations', 'banners', 'printing', 'websites'];
 
 const GRADIENTS = {
   presentations: 'linear-gradient(135deg, #D4AF37 0%, #8B6914 50%, #3d2b0a 100%)',
   banners: 'linear-gradient(135deg, #2a1f5e 0%, #6B3FA0 50%, #2a1f5e 100%)',
   printing: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a6a 50%, #1a3a3a 100%)',
   websites: 'linear-gradient(135deg, #0a2a4a 0%, #1a6a9a 50%, #0a2a4a 100%)',
-  epoxy: 'linear-gradient(135deg, #3d0f3d 0%, #8B146A 50%, #3d0f3d 100%)',
 };
 
 const ICONS = {
@@ -21,7 +20,6 @@ const ICONS = {
   banners: '🎯',
   printing: '📄',
   websites: '🌐',
-  epoxy: '💎',
 };
 
 function PlaceholderImage({ category, title }) {
@@ -45,11 +43,17 @@ function PlaceholderImage({ category, title }) {
 
 export default function Portfolio() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const sectionRef = useScrollReveal([]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [filtered, setFiltered] = useState(portfolio);
   const [animating, setAnimating] = useState(false);
   const prevCategory = useRef('all');
+
+  const handleItemClick = (itemId) => {
+    navigate(`/portfolio/${itemId}`);
+    trackEvent('interaction', 'portfolio_item_click', `item-${itemId}`);
+  };
 
   useEffect(() => {
     // Animate out, then swap data, then animate in
@@ -107,6 +111,7 @@ export default function Portfolio() {
               key={item.id}
               className="portfolio__item"
               style={animating ? {} : { animationDelay: `${i * 0.06}s` }}
+              onClick={() => handleItemClick(item.id)}
             >
               <div className="portfolio__item-image">
                 <PlaceholderImage category={item.category} title={item.title} />

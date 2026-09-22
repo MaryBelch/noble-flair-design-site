@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from '../../context/I18nContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import SectionTitle from '../UI/SectionTitle';
+import { NavLink } from 'react-router-dom';
 import Button from '../UI/Button';
 import articles from '../../data/blog.json';
 import './Blog.css';
@@ -39,7 +40,9 @@ export default function Blog() {
                   })}
                 </time>
               </div>
-              <h3 className="blog__card-title">{getText(article.title)}</h3>
+              <NavLink to={`/blog/${article.id}`} className="blog__card-title-link">
+                <h3 className="blog__card-title">{getText(article.title)}</h3>
+              </NavLink>
               <p className="blog__card-excerpt">{getText(article.excerpt)}</p>
 
               <div className={`blog__card-content ${expandedId === article.id ? 'blog__card-content--open' : ''}`}>
@@ -65,9 +68,9 @@ export default function Blog() {
 
         <div className="blog__cta fade-in">
           <p className="blog__cta-text">{t('blog.cta_text')}</p>
-          <Button variant="gold" href="#contact">
+          <NavLink to="/contact" variant="gold" className="btn btn--gold">
             {t('blog.cta_btn')}
-          </Button>
+          </NavLink>
         </div>
       </div>
     </section>
