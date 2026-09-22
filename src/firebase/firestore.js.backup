@@ -73,31 +73,6 @@ export async function getAllLessons() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
-/** Save a lesson document */
-export async function saveLesson(lessonData) {
-  const db = await getDb();
-  const { doc, setDoc } = await import('firebase/firestore');
-  const ref = doc(db, 'lessons', lessonData.id);
-  await setDoc(ref, lessonData);
-  return ref.id;
-}
-
-/** Delete a lesson document by ID */
-export async function deleteLesson(lessonId) {
-  const db = await getDb();
-  const { doc, deleteDoc } = await import('firebase/firestore');
-  await deleteDoc(doc(db, 'lessons', lessonId));
-}
-
-/** Get lessons by module index */
-export async function getLessonsByModule(moduleIndex) {
-  const db = await getDb();
-  const { collection, getDocs, query, where } = await import('firebase/firestore');
-  const q = query(collection(db, 'lessons'), where('moduleIndex', '==', moduleIndex), orderBy('lessonIndex', 'asc'));
-  const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-}
-
 /* ── Contact messages ── */
 
 /** Save a contact form submission to Firestore */

@@ -1,7 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTranslation } from '../../context/I18nContext';
-import { getAllUsers, updateUserDoc, getAllMessages, markMessageRead, getAllVacancies, saveVacancy, deleteVacancy } from '../../firebase/firestore';
+import {
+  getAllUsers,
+  updateUserDoc,
+  getAllMessages,
+  markMessageRead,
+  getAllVacancies,
+  saveVacancy,
+  deleteVacancy,
+  getAllLessons,
+  saveLesson,
+  deleteLesson,
+  getLessonsByModule
+} from '../../firebase/firestore';
 import SectionTitle from '../UI/SectionTitle';
 import './AdminPanel.css';
 
@@ -13,10 +25,20 @@ export default function AdminPanel() {
   const [tab, setTab] = useState('users');
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState({});
   const [vacancies, setVacancies] = useState([]);
   const [newVacancy, setNewVacancy] = useState({ title_uk: '', title_ru: '', title_en: '', desc_uk: '', desc_ru: '', desc_en: '' });
+  const [newLesson, setNewLesson] = useState({
+    moduleIndex: 0,
+    lessonIndex: 0,
+    title: '',
+    content: '',
+    videoUrl: '',
+    files: []
+  });
+  const [editingLessonId, setEditingLessonId] = useState(null);
   const [visible, setVisible] = useState(false);
 
   // Check pathname for /admin
@@ -65,12 +87,22 @@ export default function AdminPanel() {
     }
   }, [isAdmin]);
 
+  const loadLessons = useCallback(async () => {
+    if (!isAdmin) return;
+    try {
+      const data = await getAllLessons();
+      setLessons(data);
+    } catch {
+      // Silent: admin operations fail gracefully
+    }
+  }, [isAdmin]);
+
   useEffect(() => {
     if (visible && isAdmin) {
       setLoading(true);
-      Promise.all([loadUsers(), loadMessages(), loadVacancies()]).finally(() => setLoading(false));
+      Promise.all([loadUsers(), loadMessages(), loadVacancies(), loadLessons()]).finally(() => setLoading(false));
     }
-  }, [visible, isAdmin, loadUsers, loadMessages, loadVacancies]);
+  }, [visible, isAdmin, loadUsers, loadMessages, loadVacancies, loadLessons]);
 
   const tConfirm = (key) => t('admin.confirm_template').replace('{action}', t(key));
 
@@ -145,6 +177,76 @@ export default function AdminPanel() {
     }
   };
 
+  /* ── Lesson actions ── */
+
+  const saveLessonHandler = async () => {
+    const lessonId = `mod-${newLesson.moduleIndex}-lesson-${newLesson.lessonIndex}`;
+    const lessonData = {
+      id: lessonId,
+      moduleIndex: newLesson.moduleIndex,
+      lessonIndex: newLesson.lessonIndex,
+      title: newLesson.title,
+      content: {
+        uk: newLesson.content,
+        ru: newLesson.content, // Default to same content for all languages
+        en: newLesson.content
+      },
+      videoUrl: newLesson.videoUrl,
+      files: newLesson.files
+    };
+
+    setSaving((s) => ({ ...s, [lessonId]: true }));
+    try {
+      await saveLesson(lessonData);
+      if (editingLessonId) {
+        // Update existing lesson
+        setLessons(prev => prev.map(l => l.id === editingLessonId ? { ...l, ...lessonData } : l));
+        setEditingLessonId(null);
+      } else {
+        // Add new lesson
+        setLessons(prev => [...prev, lessonData]);
+      }
+      // Reset form
+      setNewLesson({
+        moduleIndex: 0,
+        lessonIndex: 0,
+        title: '',
+        content: '',
+        videoUrl: '',
+        files: []
+      });
+    } catch {
+      // Silent: admin operations fail gracefully
+    } finally {
+      setSaving((s) => ({ ...s, [lessonId]: false }));
+    }
+  };
+
+  const deleteLessonHandler = async (lessonId) => {
+    if (!window.confirm(tConfirm('admin.confirm_delete'))) return;
+    setSaving((s) => ({ ...s, [lessonId]: true }));
+    try {
+      await deleteLesson(lessonId);
+      setLessons(prev => prev.filter(l => l.id !== lessonId));
+    } catch {
+      // Silent: admin operations fail gracefully
+    } finally {
+      setSaving((s) => ({ ...s, [lessonId]: false }));
+    }
+  };
+
+  const editLessonHandler = (lesson) => {
+    setEditingLessonId(lesson.id);
+    setNewLesson({
+      moduleIndex: lesson.moduleIndex,
+      lessonIndex: lesson.lessonIndex,
+      title: lesson.title,
+      content: lesson.content.uk || lesson.content.ru || lesson.content.en || '',
+      videoUrl: lesson.videoUrl || '',
+      files: lesson.files || []
+    });
+  };
+
   /* ── Message actions ── */
 
   const handleMarkRead = async (id) => {
@@ -198,6 +300,12 @@ export default function AdminPanel() {
             onClick={() => setTab('vacancies')}
           >
             {t('admin.tab_vacancies')} ({vacancies.length})
+          </button>
+          <button
+            className={`admin-panel__tab ${tab === 'lessons' ? 'admin-panel__tab--active' : ''}`}
+            onClick={() => setTab('lessons')}
+          >
+            {t('admin.tab_lessons')} ({lessons.length})
           </button>
         </div>
 
@@ -348,35 +456,187 @@ export default function AdminPanel() {
               </div>
             )}
           </div>
-        ) : (
-          /* ── Messages tab ── */
-          messages.length === 0 ? (
-            <p className="admin-panel__empty">{t('admin.no_messages')}</p>
-          ) : (
-            <div className="admin-panel__messages">
-              {messages.map((m) => (
-                <div key={m.id} className={`admin-panel__message ${!m.read ? 'admin-panel__message--unread' : ''}`}>
-                  <div className="admin-panel__message-header">
-                    <div className="admin-panel__message-from">
-                      <strong>{m.name}</strong>
-                      <span className="admin-panel__message-contact">{m.contact}</span>
+        ) : tab === 'lessons' ? (
+            /* ── Lessons tab ── */
+            lessons.length === 0 ? (
+              <p className="admin-panel__empty">{t('admin.no_lessons')}</p>
+            ) : (
+              <div className="admin-panel__lessons">
+                <div className="admin-panel__lessons-form">
+                  <h4 style={{ marginBottom: 12, color: '#D4AF37' }}>{t('admin.lesson_add')}</h4>
+                  <div className="admin-panel__lessons-grid">
+                    <div>
+                      <label>{t('admin.lesson_module')}</label>
+                      <select
+                        value={newLesson.moduleIndex}
+                        onChange={(e) => {
+                          const index = parseInt(e.target.value);
+                          setNewLesson(prev => ({ ...prev, moduleIndex: index, lessonIndex: 0 }));
+                        }}
+                      >
+                        {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
+                          <option key={i} value={i}>
+                            Module {i === 0 ? t('course.modules.0.title') : `${t('course.module_label')} ${i}`}
+                          </option>
+                        ))}
+                      </select>
                     </div>
-                    <div className="admin-panel__message-meta">
-                      <span className="admin-panel__message-date">{formatDate(m.createdAt)}</span>
-                      {!m.read && (
-                        <button className="admin-panel__message-read-btn" onClick={() => handleMarkRead(m.id)}>
-                          {t('admin.read')}
-                        </button>
-                      )}
+                    <div>
+                      <label>{t('admin.lesson_number')}</label>
+                      <select
+                        value={newLesson.lessonIndex}
+                        onChange={(e) => setNewLesson(prev => ({ ...prev, lessonIndex: parseInt(e.target.value) }))}
+                      >
+                        {[0, 1, 2, 3, 4, 5].map(i => (
+                          <option key={i} value={i}>Lesson {i + 1}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label>{t('admin.lesson_title')}</label>
+                      <input
+                        className="admin-panel__input"
+                        placeholder={t('admin.lesson_title_placeholder')}
+                        value={newLesson.title}
+                        onChange={(e) => setNewLesson(prev => ({ ...prev, title: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label>{t('admin.lesson_content')}</label>
+                      <textarea
+                        className="admin-panel__input"
+                        placeholder={t('admin.lesson_content_placeholder')}
+                        rows={5}
+                        value={newLesson.content}
+                        onChange={(e) => setNewLesson(prev => ({ ...prev, content: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label>{t('admin.lesson_video_url')}</label>
+                      <input
+                        className="admin-panel__input"
+                        placeholder={t('admin.lesson_video_url_placeholder')}
+                        value={newLesson.videoUrl}
+                        onChange={(e) => setNewLesson(prev => ({ ...prev, videoUrl: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label>{t('admin.lesson_files')}</label>
+                      <div>
+                        <p style={{ fontSize: '0.85rem', color: '#666', marginBottom: 4 }}>
+                          {t('admin.lesson_files_help')}
+                        </p>
+                        <input
+                          type="file"
+                          multiple
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files).map(file => ({
+                              name: file.name,
+                              url: URL.createObjectURL(file) // Temporary URL for preview
+                            }));
+                            setNewLesson(prev => ({ ...prev, files: files }));
+                          }}
+                          style={{ marginBottom: 8 }}
+                        />
+                        {newLesson.files.length > 0 && (
+                          <div style={{ marginTop: 8 }}>
+                            <strong>{t('admin.lesson_files_selected')}:</strong>
+                            <ul style={{ marginTop: 4, marginLeft: 20 }}>
+                              {newLesson.files.map((f, index) => (
+                                <li key={index}>
+                                  <a href={f.url} target="_blank" rel="noopener noreferrer">{f.name}</a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  {m.message && <p className="admin-panel__message-text">{m.message}</p>}
-                  {m.locale && <span className="admin-panel__message-locale">{m.locale.toUpperCase()}</span>}
+                  <div className="admin-panel__lessons-actions" style={{ marginTop: 16 }}>
+                    <button
+                      className="admin-panel__btn admin-panel__btn--grant"
+                      onClick={saveLessonHandler}
+                      disabled={Object.values(saving).some(v => v)}
+                    >
+                      {editingLessonId ? t('admin.lesson_update') : t('admin.lesson_add')}
+                    </button>
+                    {editingLessonId && (
+                      <button
+                        className="admin-panel__btn admin-panel__btn--revoke"
+                        onClick={() => {
+                          setEditingLessonId(null);
+                          setNewLesson({
+                            moduleIndex: 0,
+                            lessonIndex: 0,
+                            title: '',
+                            content: '',
+                            videoUrl: '',
+                            files: []
+                          });
+                        }}
+                      >
+                        {t('admin.lesson_cancel')}
+                      </button>
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-          )
-        )}
+
+                {/* Lessons List */}
+                <div className="admin-panel__lessons-list" style={{ marginTop: 24 }}>
+                  <h4 style={{ marginBottom: 12, color: '#D4AF37' }}>{t('admin.lesson_list')}</h4>
+                  {lessons
+                    .sort((a, b) => a.moduleIndex - b.moduleIndex || a.lessonIndex - b.lessonIndex)
+                    .map(lesson => {
+                      const moduleTitle = lesson.moduleIndex === 0
+                        ? t('course.modules.0.title')
+                        : `${t('course.module_label')} ${lesson.moduleIndex}`;
+                      return (
+                        <div key={lesson.id} className="admin-panel__lesson-item">
+                          <div className="admin-panel__lesson-header">
+                            <div className="admin-panel__lesson-info">
+                              <strong>{t('admin.lesson_full_title')} {lesson.moduleIndex + 1}.{lesson.lessonIndex + 1}</strong>
+                              <span className="admin-panel__lesson-module">{moduleTitle}</span>
+                            </div>
+                            <div className="admin-panel__lesson-actions">
+                              <button
+                                className="admin-panel__btn admin-panel__btn--small"
+                                onClick={() => editLessonHandler(lesson)}
+                              >
+                                {t('admin.edit')}
+                              </button>
+                              <button
+                                className="admin-panel__btn admin-panel__btn--small admin-panel__btn--revoke"
+                                onClick={() => deleteLessonHandler(lesson.id)}
+                                disabled={saving[lesson.id]}
+                              >
+                                {saving[lesson.id] ? '...' : t('admin.delete')}
+                              </button>
+                            </div>
+                          </div>
+                          <div className="admin-panel__lesson-details">
+                            <p><strong>{t('admin.lesson_title_label')}:</strong> {lesson.title}</p>
+                            {lesson.videoUrl && (
+                              <p>
+                                <strong>{t('admin.lesson_video_label')}:</strong>
+                                <a href={lesson.videoUrl} target="_blank" rel="noopener noreferrer">
+                                  {t('admin.lesson_video_link')}
+                                </a>
+                              </p>
+                            )}
+                            {lesson.files.length > 0 && (
+                              <p>
+                                <strong>{t('admin.lesson_files_label')}:</strong>
+                                {lesson.files.length} {t('admin.lesson_files_count')}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
+            )
+          )}
       </div>
     </section>
   );

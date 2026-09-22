@@ -145,81 +145,81 @@
     },
     "modules": [
       {
-        "title": "Introduction Module",
+        "title": "Вводный модуль",
         "lessons": [
-          "How to take the course effectively",
-          "My «Second Brain» in Obsidian",
-          "Project planning"
+          "Как пройти курс с пользой",
+          "Мой «Второй мозг» в Obsidian",
+          "Планирование проекта"
         ]
       },
       {
-        "title": "Design Basics (Theory + Software)",
+        "title": "Модуль 1. База дизайна (Теория + Софт)",
         "lessons": [
-          "Visual language. Composition, typography and hierarchy",
-          "Interface of PowerPoint / Google Slides. Working with templates",
-          "Resource base",
-          "Erudition. Pinterest, Behance, Dribbble"
+          "Визуальный язык. Композиция, типографика и иерархия",
+          "Интерфейс PowerPoint / Google Slides. Работа с шаблонами",
+          "Ресурсная база",
+          "Носмотренность. Где искать идеи (Pinterest, Behance, Dribbble) и как правильно копировать, чтобы учиться."
         ]
       },
       {
-        "title": "Element Design and Figma",
+        "title": "Модуль 2. Дизайн элементов и Figma",
         "lessons": [
-          "Title slide — the face of the project",
-          "Icons",
-          "Slide «About me» and «Team»",
-          "Slide «Before/After»",
-          "Illustration",
-          "Mockups"
+          "Титульный лист — лицо проекта",
+          "Иконки",
+          "Слайд «О себе» и «Команда»",
+          "Слайд «До/После»",
+          "Иллюстрация",
+          "Мокапы"
         ]
       },
       {
-        "title": "Data Visualization (Infographics)",
+        "title": "Модуль 3. Визуализация данных (Инфографика)",
         "lessons": [
-          "Timelines and lists",
-          "Diagrams and charts",
-          "Complex schemes (Venn diagram and others)"
+          "Таймлайны и списки",
+          "Диаграммы и графики",
+          "Сложные схемы (Диаграмма Венна и др.)"
         ]
       },
       {
-        "title": "Animation and Dynamics",
+        "title": "Модуль 4. Анимация и динамика",
         "lessons": [
-          "Basic animation",
-          "Animation",
-          "Magic Morph (Transformation)",
-          "Interactivity. Buttons, hyperlinks and navigation",
-          "Bar chart and graphs",
-          "Infographics"
+          "Базовая анимация",
+          "Анимация",
+          "Магия Morph (Трансформация)",
+          "Интерактив. Кнопки, гиперссылки и навигация внутри презентации.",
+          "Барчарт и графики",
+          "Инфографика"
         ]
       },
       {
-        "title": "Figma",
+        "title": "Модуль 5. Фигма",
         "lessons": [
-          "Interface",
-          "Plugins",
-          "Transfer to PowerPoint"
+          "Интерфейс",
+          "Плагины",
+          "Перенос в паверпоинт"
         ]
       },
       {
-        "title": "Neural Networks: Revolution in Work",
+        "title": "Модуль 6. Нейросети: Революция в работе",
         "lessons": [
-          "Working with text (ChatGPT/Gemini)",
-          "Visual generation (Adobe Firefly / Midjourney)",
-          "Background removal and upscaling"
+          "Работа с текстом (ChatGPT/Gemini)",
+          "Генерация визуала (Adobe Firefly / Midjourney)",
+          "Удаление фона и апскейл"
         ]
       },
       {
-        "title": "Niche Strategies (Special Block)",
+        "title": "Модуль 7. Нишевые стратегии (Спецблоки)",
         "lessons": [
-          "For teachers: Gamification. Quiz or game in slides",
-          "For business and marketers: Pitch deck",
-          "Performance: How to connect slides with your language"
+          "Для учителей: Геймификация. Как сделать квиз или игру прямо в слайдах.",
+          "Для бизнеса и маркетологов: Питч-дек. Слайды, которые продают идею инвестору. Как писать смыслы.",
+          "Выступление: Как связать слайды со своей речью. Техника подачи."
         ]
       },
       {
-        "title": "Personal Brand and Portfolio",
+        "title": "Модуль 8. Личный бренд и Портфолио",
         "lessons": [
-          "Instagram/LinkedIn formatting",
-          "Search for first orders / Growth in company"
+          "Оформление Instagram/LinkedIn.",
+          "Поиск первых заказов / Рост внутри компании. Как продать навык дизайна презентаций своему боссу или рынку."
         ]
       }
     ],
@@ -627,9 +627,11 @@
     "subtitle": "Access and message management",
     "tab_users": "Users",
     "tab_messages": "Messages",
+    "tab_lessons": "Lessons",
     "loading": "Loading...",
     "no_users": "No registered users",
     "no_messages": "No messages",
+    "no_lessons": "No lessons",
     "access_yes": "✓ Access granted",
     "access_no": "✗ No access",
     "admin_label": "Admin",
@@ -643,6 +645,7 @@
     "make_user": "Make user",
     "confirm_revoke": "revoke access",
     "confirm_role": "change role",
+    "confirm_delete": "delete lesson",
     "confirm_template": "Are you sure you want to {action}?",
     "col_name": "Name",
     "col_email": "Email",
@@ -654,7 +657,30 @@
     "tab_vacancies": "Vacancies",
     "vacancy_add": "Add vacancy",
     "vacancy_delete": "Delete",
-    "no_vacancies": "No vacancies"
+    "no_vacancies": "No vacancies",
+    "lesson_add": "Add lesson",
+    "lesson_update": "Update lesson",
+    "lesson_list": "Lessons list",
+    "lesson_title": "Title",
+    "lesson_number": "Lesson number",
+    "lesson_module": "Module",
+    "lesson_content": "Content",
+    "lesson_video_url": "Video URL",
+    "lesson_files": "Files",
+    "lesson_title_placeholder": "Enter lesson title",
+    "lesson_content_placeholder": "Enter lesson content",
+    "lesson_video_url_placeholder": "Enter video URL (YouTube, Vimeo, etc.)",
+    "lesson_files_help": "Select files to attach to the lesson",
+    "lesson_files_selected": "Selected files",
+    "lesson_files_count": "files",
+    "lesson_title_label": "Title",
+    "lesson_video_label": "Video",
+    "lesson_video_link": "Watch video",
+    "lesson_files_label": "Attached files",
+    "lesson_full_title": "Lesson",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "newsletter": {
     "title": "Stay updated",
